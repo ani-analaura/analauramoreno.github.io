@@ -152,7 +152,11 @@
       <p class="hero-eyebrow">Creative &amp; Strategic</p>
       <h1 class="hero-title">Design across disciplines</h1>
       <div class="hero-img-wrap">
-        <!-- Replace with: <img src="images/hero.jpg" style="width:320px;height:240px;object-fit:cover;border-radius:2px;"> -->
+       <div class="hero-img-wrap" style="position:relative; height:280px; display:flex; justify-content:center; align-items:center;">
+  <img src="images/Frame 32.jpg" style="width:220px; height:220px; object-fit:cover; border-radius:2px; position:absolute; transform:rotate(-6deg) translateX(-120px); box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+  <img src="images/Frame 33.jpg" style="width:240px; height:240px; object-fit:cover; border-radius:2px; position:absolute; transform:rotate(1deg) translateX(0px); z-index:2; box-shadow:0 6px 20px rgba(0,0,0,0.15);">
+  <img src="images/Frame 34.jpg" style="width:220px; height:220px; object-fit:cover; border-radius:2px; position:absolute; transform:rotate(5deg) translateX(120px); box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+</div>
         <div class="hero-img-placeholder">YOUR IMAGE HERE</div>
       </div>
       <p class="hero-tagline">Because design isn't just how it looks,<br>it's how it works.</p>
@@ -498,8 +502,10 @@
   var txt = b.innerText.toUpperCase();
   if(txt.includes('WORK') || txt.includes('TRABAJO') || txt.includes('CÓMO')) b.innerText = t.howWork; 
 });
-    btns.forEach(function(b){ if(b.innerText.includes('more') || b.innerText.includes('más') || b.innerText.includes('Ver') || b.innerText.includes('Ver más proyectos')) b.innerText = t.Ver; });
-
+    btns.forEach(function(b){ 
+  var txt = b.innerText.toUpperCase();
+  if(txt.includes('MORE') || txt.includes('VER') || txt.includes('SEE')) b.innerText = t.seeMore; 
+});
     // About
     document.querySelector('.about-quote em').innerText = t.aboutQuote;
     document.querySelector('.about-caption').innerText = t.aboutCaption;
