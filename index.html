@@ -494,3 +494,20 @@
           <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9efff0fff2ffebecfff2f9ffacafdef9f3fff7f2b0fdf1f3">[email&#160;protected]</a></p>
           <span class="label">Phone number</span>
           <p>+
+            52 55 60 93 13 42</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.getElementById('nav-' + id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
