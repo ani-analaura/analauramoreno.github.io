@@ -461,7 +461,7 @@
   aboutCaption: "Hola, soy Ana Laura — mucho gusto",
   aboutPinkTitle: "Diseño con propósito.",
   aboutPinkSub: "Donde el detalle define la diferencia.",
-  aboutBody1: "Diseñadora gráfica egresada de Centro, especializada en identidad de marca, packaging e interfaces digitales. Trabajo con Figma, Illustrator, Photoshop, InDesign y Procreate — y también con papel, pluma y lo que haga falta. No le huyo a lo análogo ni a la IA: uso las dos sin perder el criterio ni el toque humano. Me formé para resolver. Cada proyecto pasa por investigación real, decisiones justificadas y una ejecución que considera cómo va a vivir la pieza en el mundo — en una pantalla, en un anaquel o en las manos de alguien. Sé de producción e impresión, manejo GitHub y entiendo que el diseño no termina en el archivo final. No tengo un estilo fijo porque no creo que eso sea una virtud — creo en adaptarme a lo que cada marca necesita y en tener el criterio para saber qué le queda. Lo que sí traigo siempre es observación, consistencia y las ganas de hacer algo que no se vea promedio. Fuera del trabajo leo Orgullo y Prejuicio, hago box y colecciono paletas de color que solo existen en la naturaleza. Los perritos son bienvenidos en cualquier brief.",
+  aboutBody1: "Diseñadora gráfica egresada de Centro, especializada en identidad de marca, packaging e interfaces digitales. Trabajo con Figma, Illustrator, Photoshop, InDesign y Procreate — y también con papel, pluma y lo que haga falta. No le huyo a lo análogo ni a la IA: uso las dos sin perder el criterio ni el toque humano. Me formé para resolver. Cada proyecto pasa por investigación real, decisiones justificadas y una ejecución que considera cómo va a vivir la pieza en el mundo — en una pantalla, en un anaquel o en las manos de alguien. Sé de producción e impresión, manejo GitHub y entiendo que el diseño no termina en el archivo final. No tengo un estilo fijo porque no creo que eso sea una virtud — creo en adaptarme a lo que cada marca necesita y en tener el criterio para saber qué le queda. Lo que sí traigo siempre es observación, consistencia y las ganas de hacer algo que no se vea promedio. Fuera del trabajo leo Orgullo y Prejuicio, hago box y salgo en búsqueda de conectar con la naturaleza.",
   beyondTitle: "Los mejores proyectos empiezan con una buena conversación.",
   contact: "Escríbeme",
   servicesTitle: "Diseño todo/para todos",
@@ -494,7 +494,10 @@
     if(homeCols[0]) homeCols[0].innerText = t.col1;
     if(homeCols[1]) homeCols[1].innerText = t.col2;
     var btns = document.querySelectorAll('.btn-outline');
-    btns.forEach(function(b){ if(b.innerText.includes('work') || b.innerText.includes('trabajo')) b.innerText = t.howWork; });
+   btns.forEach(function(b){ 
+  var txt = b.innerText.toUpperCase();
+  if(txt.includes('WORK') || txt.includes('TRABAJO') || txt.includes('CÓMO')) b.innerText = t.howWork; 
+});
     btns.forEach(function(b){ if(b.innerText.includes('more') || b.innerText.includes('más') || b.innerText.includes('Ver') || b.innerText.includes('See')) b.innerText = t.seeMore; });
 
     // About
@@ -531,6 +534,13 @@ if(lang === 'es') {
   if(cards[1]) cards[1].innerText = 'Graphic Design';
   if(cards[2]) cards[2].innerText = 'UI/UX design';
 }
+  // Skill tags
+var skillsEs = ['Diseño de libros y revistas','Diseño tipográfico','Brochures','Ilustración','Diseño de carteles','Infografías','Diseño de íconos','Diseño de patrones','Ilustración decorativa','Investigación'];
+var skillsEn = ['Books & magazine design','Typography design','Brochures','Illustration','Poster design','Infographics','Icon design','Pattern design','Decorative Illustration','Research and investigation'];
+var tags = document.querySelectorAll('.skill-tag');
+tags.forEach(function(tag, i) {
+  tag.innerText = lang === 'es' ? skillsEs[i] : skillsEn[i];
+});
   }
   
 </script>
