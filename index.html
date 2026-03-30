@@ -203,7 +203,7 @@
     <div class="about-top">
       <p class="about-quote"><em>I love creating spaces where ideas find direction, where structure meets exploration, and where design becomes its own language</em></p>
       <div class="about-photo">
-        <img src="images/Frame00.jpg" style="width:820px;height:400px;object-fit:cover;border-radius:2px;">
+        <img src="images/Frame00.jpg" style="width:800px;height:600px;object-fit:cover;border-radius:2px;">
         <p class="about-caption">Nice to meet you, I'm Ana Laura</p>
       </div>
     </div>
@@ -409,5 +409,117 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
+
+  <!-- BOTÓN TRADUCTOR -->
+<button id="lang-btn" onclick="toggleLang()" style="
+  position: fixed; bottom: 28px; right: 28px; z-index: 999;
+  background: var(--brown); color: var(--cream);
+  border: none; border-radius: 40px; padding: 11px 22px;
+  font-family: 'Geist Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.14em; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transition: opacity 0.2s;">ES / EN</button>
+
+<script>
+  var lang = 'en';
+  var texts = {
+    en: {
+      topbar: "Let's work together!",
+      eyebrow: "Creative & Strategic",
+      heroTitle: "Design across disciplines",
+      tagline: "Because design isn't just how it looks,\nit's how it works.",
+      col1: "I help brands elevate their visual presence through cohesive identity, packaging and digital systems — translating business objectives into structured, scalable design.",
+      col2: "Each project is developed with precision and long-term vision, ensuring brands don't just look refined, but operate consistently across every platform.",
+      seeMore: "See more proyects",
+      howWork: "How do I work?",
+      footerTitle: "Thank You!",
+      footerSub: "Looking forward to connect with you!",
+      aboutQuote: "I love creating spaces where ideas find direction, where structure meets exploration, and where design becomes its own language",
+      aboutCaption: "Nice to meet you, I'm Ana Laura",
+      aboutPinkTitle: "AUTHENTIC design",
+      aboutPinkSub: "A passion for creating beautiful things",
+      aboutBody1: "I'm a graphic designer with advanced expertise in brand identity, packaging execution and UI/UX systems. I develop cohesive visual ecosystems that translate business objectives into structured, scalable solutions — ensuring consistency across physical and digital environments.",
+      aboutBody2: "With experience in commercially driven settings, supplier coordination and cross-functional collaboration, I design with implementation in mind. My work balances aesthetic refinement with performance, delivering solutions that meet high professional standards while achieving real impact for clients and users.",
+      beyondTitle: "Beyond Design",
+      contact: "Contact me",
+      servicesTitle: "Design everything/\nfor everyone",
+      additionalTitle: "Additional Skills",
+      projectsTitle: "All the good stuff",
+      navHome: "Home", navServices: "Services", navProjects: "Proyects", navAbout: "About"
+    },
+    es: {
+      topbar: "¡Trabajemos juntos!",
+      eyebrow: "Creativa & Estratégica",
+      heroTitle: "Diseño en todas las disciplinas",
+      tagline: "Porque el diseño no es solo cómo se ve,\nsino cómo funciona.",
+      col1: "Ayudo a las marcas a elevar su presencia visual a través de identidades cohesivas, packaging y sistemas digitales — traduciendo objetivos de negocio en diseño estructurado y escalable.",
+      col2: "Cada proyecto se desarrolla con precisión y visión a largo plazo, asegurando que las marcas no solo se vean refinadas, sino que operen de manera consistente en cada plataforma.",
+      seeMore: "Ver más proyectos",
+      howWork: "¿Cómo trabajo?",
+      footerTitle: "¡Gracias!",
+      footerSub: "¡Con gusto me pongo en contacto contigo!",
+      aboutQuote: "Me encanta crear espacios donde las ideas encuentran dirección, donde la estructura se une a la exploración y donde el diseño se convierte en su propio lenguaje",
+      aboutCaption: "Mucho gusto, soy Ana Laura",
+      aboutPinkTitle: "Diseño AUTÉNTICO",
+      aboutPinkSub: "Una pasión por crear cosas hermosas",
+      aboutBody1: "Soy diseñadora gráfica con experiencia avanzada en identidad de marca, packaging y sistemas UI/UX. Desarrollo ecosistemas visuales cohesivos que traducen los objetivos del negocio en soluciones estructuradas y escalables.",
+      aboutBody2: "Con experiencia en entornos comerciales, coordinación con proveedores y colaboración interdisciplinaria, diseño pensando en la implementación. Mi trabajo equilibra refinamiento estético con rendimiento, entregando soluciones de alto nivel con impacto real.",
+      beyondTitle: "Más allá del Diseño",
+      contact: "Contáctame",
+      servicesTitle: "Diseño todo/\npara todos",
+      additionalTitle: "Habilidades Adicionales",
+      projectsTitle: "Todo lo bueno",
+      navHome: "Inicio", navServices: "Servicios", navProjects: "Proyectos", navAbout: "Sobre mí"
+    }
+  };
+
+  function toggleLang() {
+    lang = (lang === 'en') ? 'es' : 'en';
+    var t = texts[lang];
+    document.getElementById('lang-btn').innerText = lang === 'en' ? 'ES / EN' : 'EN / ES';
+
+    // Nav
+    document.getElementById('nav-home').innerText = t.navHome;
+    document.getElementById('nav-services').innerText = t.navServices;
+    document.getElementById('nav-projects').innerText = t.navProjects;
+    document.getElementById('nav-about').innerText = t.navAbout;
+
+    // Topbar
+    document.querySelector('.topbar').innerText = t.topbar;
+
+    // Home
+    document.querySelector('.hero-eyebrow').innerText = t.eyebrow;
+    document.querySelector('.hero-title').innerText = t.heroTitle;
+    document.querySelector('.hero-tagline').innerHTML = t.tagline.replace('\n','<br>');
+    var homeCols = document.querySelectorAll('.home-col');
+    if(homeCols[0]) homeCols[0].innerText = t.col1;
+    if(homeCols[1]) homeCols[1].innerText = t.col2;
+    var btns = document.querySelectorAll('.btn-outline');
+    btns.forEach(function(b){ if(b.innerText.includes('work') || b.innerText.includes('trabajo')) b.innerText = t.howWork; });
+    btns.forEach(function(b){ if(b.innerText.includes('more') || b.innerText.includes('más') || b.innerText.includes('Ver') || b.innerText.includes('See')) b.innerText = t.seeMore; });
+
+    // About
+    document.querySelector('.about-quote em').innerText = t.aboutQuote;
+    document.querySelector('.about-caption').innerText = t.aboutCaption;
+    document.querySelector('.about-pink-title').innerText = t.aboutPinkTitle;
+    document.querySelector('.about-pink-sub').innerText = t.aboutPinkSub;
+    var bodyPs = document.querySelectorAll('.about-body p');
+    if(bodyPs[0]) bodyPs[0].innerText = t.aboutBody1;
+    if(bodyPs[1]) bodyPs[1].innerText = t.aboutBody2;
+    document.querySelector('.about-beyond-title').innerText = t.beyondTitle;
+    document.querySelector('.btn-filled').innerText = t.contact;
+
+    // Services
+    document.querySelector('.services-title').innerHTML = t.servicesTitle.replace('\n','<br>');
+    document.querySelector('.additional-title').innerText = t.additionalTitle;
+
+    // Projects
+    document.querySelector('.projects-page-title').innerText = t.projectsTitle;
+
+    // All footers
+    document.querySelectorAll('.footer-title').forEach(function(el){ el.innerText = t.footerTitle; });
+    document.querySelectorAll('.footer-sub').forEach(function(el){ el.innerText = t.footerSub; });
+  }
+  
+</script>
 </body>
 </html>
