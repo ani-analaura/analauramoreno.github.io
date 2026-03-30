@@ -446,30 +446,31 @@
       projectsTitle: "All the good stuff",
       navHome: "Home", navServices: "Services", navProjects: "Proyects", navAbout: "About"
     },
-    es: {
-      topbar: "¡Trabajemos juntos!",
-      eyebrow: "Creativa & Estratégica",
-      heroTitle: "Diseño en todas las disciplinas",
-      tagline: "Porque el diseño no es solo cómo se ve,\nsino cómo funciona.",
-      col1: "Ayudo a las marcas a elevar su presencia visual a través de identidades cohesivas, packaging y sistemas digitales — traduciendo objetivos de negocio en diseño estructurado y escalable.",
-      col2: "Cada proyecto se desarrolla con precisión y visión a largo plazo, asegurando que las marcas no solo se vean refinadas, sino que operen de manera consistente en cada plataforma.",
-      seeMore: "Ver más proyectos",
-      howWork: "¿Cómo trabajo?",
-      footerTitle: "¡Gracias!",
-      footerSub: "¡Con gusto me pongo en contacto contigo!",
-      aboutQuote: "Me encanta crear espacios donde las ideas encuentran dirección, donde la estructura se une a la exploración y donde el diseño se convierte en su propio lenguaje",
-      aboutCaption: "Mucho gusto, soy Ana Laura",
-      aboutPinkTitle: "Diseño AUTÉNTICO",
-      aboutPinkSub: "Una pasión por crear cosas hermosas",
-      aboutBody1: "Soy diseñadora gráfica con experiencia avanzada en identidad de marca, packaging y sistemas UI/UX. Desarrollo ecosistemas visuales cohesivos que traducen los objetivos del negocio en soluciones estructuradas y escalables.",
-      aboutBody2: "Con experiencia en entornos comerciales, coordinación con proveedores y colaboración interdisciplinaria, diseño pensando en la implementación. Mi trabajo equilibra refinamiento estético con rendimiento, entregando soluciones de alto nivel con impacto real.",
-      beyondTitle: "Más allá del Diseño",
-      contact: "Contáctame",
-      servicesTitle: "Diseño todo/\npara todos",
-      additionalTitle: "Habilidades Adicionales",
-      projectsTitle: "Todo lo bueno",
-      navHome: "Inicio", navServices: "Servicios", navProjects: "Proyectos", navAbout: "Sobre mí"
-    }
+   es: {
+  topbar: "¡Hagamos algo increíble juntos!",
+  eyebrow: "Creativa & Estratégica",
+  heroTitle: "Diseño que cruza fronteras",
+  tagline: "Porque el diseño no es solo lo que ves,\nes lo que sientes.",
+  col1: "Ayudo a las marcas a encontrar su voz visual — identidades que conectan, packaging que enamora y sistemas digitales que realmente funcionan.",
+  col2: "Cada proyecto nace con intención y crece con cuidado. El resultado: marcas que se ven bien, suenan bien y duran.",
+  seeMore: "Ver más proyectos",
+  howWork: "¿Cómo trabajo?",
+  footerTitle: "¡Hablemos!",
+  footerSub: "Siempre lista para un proyecto nuevo ✨",
+  aboutQuote: "Me encanta crear espacios donde las ideas toman forma, donde el orden se abraza con la exploración y el diseño se convierte en su propio idioma",
+  aboutCaption: "Hola, soy Ana Laura — mucho gusto",
+  aboutPinkTitle: "Diseño AUTÉNTICO",
+  aboutPinkSub: "Una obsesión por crear cosas hermosas",
+  aboutBody1: "Soy diseñadora gráfica especializada en identidad de marca, packaging y sistemas UI/UX. Creo ecosistemas visuales que no solo se ven bien — traducen objetivos reales en soluciones que escalan.",
+  aboutBody2: "He trabajado en entornos comerciales exigentes, coordinando con proveedores y equipos multidisciplinarios. Diseño pensando en cómo se va a implementar, no solo en cómo se va a ver.",
+  beyondTitle: "Más allá del Diseño",
+  contact: "Escríbeme",
+  servicesTitle: "Diseño todo/\npara todos",
+  additionalTitle: "Más habilidades",
+  projectsTitle: "Todo lo bueno está aquí",
+  navHome: "Inicio", navServices: "Servicios", navProjects: "Proyectos", navAbout: "Sobre mí"
+}
+  
   };
 
   function toggleLang() {
@@ -518,6 +519,19 @@
     // All footers
     document.querySelectorAll('.footer-title').forEach(function(el){ el.innerText = t.footerTitle; });
     document.querySelectorAll('.footer-sub').forEach(function(el){ el.innerText = t.footerSub; });
+
+    // Tarjetas de servicios
+if(lang === 'es') {
+  var cards = document.querySelectorAll('.service-card h3');
+  if(cards[0]) cards[0].innerText = 'Copywriting';
+  if(cards[1]) cards[1].innerText = 'Diseño Gráfico';
+  if(cards[2]) cards[2].innerText = 'Diseño UI/UX';
+} else {
+  var cards = document.querySelectorAll('.service-card h3');
+  if(cards[0]) cards[0].innerText = 'Copywriting';
+  if(cards[1]) cards[1].innerText = 'Graphic Design';
+  if(cards[2]) cards[2].innerText = 'UI/UX design';
+}
   }
   
 </script>
