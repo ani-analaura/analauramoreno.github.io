@@ -412,10 +412,10 @@
   window.scrollTo({ top: 0, behavior: 'smooth' });
   window.location.hash = id; // <-- agrega esto
 
-    if(window.location.hash) {
-  var hash = window.location.hash.replace('#','');
-  var el = document.getElementById(hash);
-  if(el) showSection(hash);
+  if(window.location.hash) {
+var hash = window.location.hash.replace('#','');
+var el = document.getElementById(hash);
+if(el) showSection(hash);
     }
   </script>
 
