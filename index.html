@@ -100,7 +100,7 @@
     .projects-top { padding: 64px 48px 48px; text-align: center; }
     .projects-page-title { font-family: 'Instrument Serif', serif; font-size: clamp(2rem, 4vw, 3.4rem); color: var(--brown); margin-bottom: 48px; }
     .projects-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 880px; margin: 0 auto; padding: 0 48px 64px; }
-    .proj-thumb { aspect-ratio: 1; border-radius: 2px; overflow: hidden; cursor: pointer; position: relative; }
+    .proj-thumb { aspect-ratio: 4/3; border-radius: 2px; overflow: hidden; cursor: pointer; position: relative; }
     .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
     .proj-thumb:hover img { transform: scale(1.05); }
     .proj-thumb-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(82,55,38,0.82); color: var(--cream); font-size: 0.6rem; letter-spacing: 0.1em; padding: 8px 12px; opacity: 0; transition: opacity 0.22s; }
@@ -334,34 +334,36 @@
 
   <script>
     var projects = [
-      { name: "Aromandia - Scentend Candles",     images: ["images/Frame 1.jpg"] },
-      { name: "Raina Kattelson",     images: ["images/Frame 2.jpg"] },
-      { name: "Astro Cold Brew",     images: ["images/Frame 3.jpg"] },
-      { name: "Mini Mordisko",       images: ["images/Frame 4.jpg"] },
-      { name: "Aromandia - Seasonalities ",           images: ["images/Frame 5.jpg"] },
-      { name: "Siete Machos",        images: ["images/Frame 6.jpg"] },
-      { name: "Shelter Studios",     images: ["images/Frame 7.jpg"] },
-      { name: "Tom Kubik Photography", images: ["images/Frame 8.jpg"] },
-      { name: "Effecty",             images: ["images/Frame 9.jpg"] },
-      { name: "Paws",                images: ["images/Frame 10.jpg"] },
-      { name: "USG",                 images: ["images/Frame 11.jpg"] },
-      { name: "Señor Mango",         images: ["images/Frame 12.jpg"] },
-      { name: "Brewing Grounds",     images: ["images/Frame 13.jpg"] },
-      { name: "Maer by Armella",     images: ["images/Frame 14.jpg"] },
-      { name: "Vita Blip",           images: ["images/Frame 15.jpg"] },
-      { name: "English Sprint",      images: ["images/Frame 16.jpg"] },
-      { name: "Nos Vemos de Noche",  images: ["images/Frame 17.jpg"] },
-      { name: "Velavita",            images: ["images/Frame 18.jpg"] },
-      { name: "Todafest",            images: ["images/Frame 19.jpg"] },
-      { name: "Sunshine Bagels",     images: ["images/Frame 20.jpg"] },
-      { name: "Garabatos",           images: ["images/Frame 21.jpg"] },
-      { name: "Triangulo de Oro",    images: ["images/Frame 22.jpg"] },
-      { name: "SUMA",        images: ["images/Frame 23.jpg"] },
-      { name: "Velavita",            images: ["images/Frame 24.jpg"] },
-      { name: "Velavita candles",   images: ["images/Frame 25.jpg"] },
-      { name: "Valentine's Edition", images: ["images/Frame 26.jpg"] },
-      { name: "Alpez",               images: ["images/Frame 27.jpg"] },
-      { name: "Oasis Decoraciones",  images: ["images/Frame 28.jpg"] }
+   var projects = [
+  { name: "Aromandia - Scentend Candles", images: ["images/Frame 35.jpg", "images/Frame 36.jpg", "images/Frame 37.jpg", "images/Frame 38.jpg", "images/Frame 39.jpg", "images/Frame 40.jpg" ] },
+  { name: "Raina Kattelson", images: ["images/Frame 2.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Astro Cold Brew", images: ["images/Frame 3.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Mini Mordisko", images: ["images/Frame 4.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Aromandia - Seasonalities", images: ["images/Frame 5.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Siete Machos", images: ["images/Frame 6.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Shelter Studios", images: ["images/Frame 7.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Tom Kubik Photography", images: ["images/Frame 8.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Effecty", images: ["images/Frame 9.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Paws", images: ["images/Frame 10.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "USG", images: ["images/Frame 11.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Señor Mango", images: ["images/Frame 12.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Brewing Grounds", images: ["images/Frame 13.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Maer by Armella", images: ["images/Frame 14.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Vita Blip", images: ["images/Frame 15.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "English Sprint", images: ["images/Frame 16.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Nos Vemos de Noche", images: ["images/Frame 17.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Velavita", images: ["images/Frame 18.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Todafest", images: ["images/Frame 19.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Sunshine Bagels", images: ["images/Frame 20.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Garabatos", images: ["images/Frame 21.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Triangulo de Oro", images: ["images/Frame 22.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "SUMA", images: ["images/Frame 23.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Velavita", images: ["images/Frame 24.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Velavita candles", images: ["images/Frame 25.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Valentine's Edition", images: ["images/Frame 26.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Alpez", images: ["images/Frame 27.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] },
+  { name: "Oasis Decoraciones", images: ["images/Frame 28.jpg", "images/AQUI-IMAGEN-DETALLE.jpg"] }
+];
     ];
 
     var currentProject = 0;
