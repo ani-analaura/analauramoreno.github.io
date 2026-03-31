@@ -501,7 +501,8 @@ document.getElementById('lang-btn').innerText = lang === 'en' ? 'Español | Engl
     var btns = document.querySelectorAll('.btn-outline');
    btns.forEach(function(b){ 
   var txt = b.innerText.toUpperCase();
-  if(txt.includes('WORK') || txt.includes('TRABAJO') || txt.includes('CÓMO')) b.innerText = t.howWork; 
+ var howBtn = document.getElementById('how-work-btn');
+if(howBtn) howBtn.innerText = t.howWork + ' →';
 });
     btns.forEach(function(b){ 
   var txt = b.innerText.toUpperCase();
@@ -547,6 +548,26 @@ var skillsEn = ['Books & magazine design','Typography design','Brochures','Illus
 var tags = document.querySelectorAll('.skill-tag');
 tags.forEach(function(tag, i) {
   tag.innerText = lang === 'es' ? skillsEs[i] : skillsEn[i];
+});
+
+    // Listas de servicios
+var serviceItems = document.querySelectorAll('.service-card ul li');
+var itemsEs = ['Sistemas de naming','Slogan de marca','Redacción','Storytelling','Identidad visual','Logotipo','Aplicaciones de marca','Packaging','Señalética','Material impreso','Interfaz de usuario','Experiencia de usuario','Material digital','Desarrollo de apps','Diseño web'];
+var itemsEn = ['Naming systems','Branding slogan','Copywriting','Storytelling','Visual identity','Logotype','Brand applications','Packaging','Signage','Printed material','User interface','User experience','Digital material','App development','Web Design'];
+serviceItems.forEach(function(item, i) {
+  item.innerText = lang === 'es' ? itemsEs[i] : itemsEn[i];
+});
+
+// Prev / Next
+var prevBtn = document.getElementById('btn-prev');
+var nextBtn = document.getElementById('btn-next');
+if(prevBtn) prevBtn.innerText = lang === 'es' ? '← PROYECTO ANTERIOR' : '← PREV PROJECT';
+if(nextBtn) nextBtn.innerText = lang === 'es' ? 'SIGUIENTE PROYECTO →' : 'NEXT PROJECT →';
+
+// Footer labels
+document.querySelectorAll('.footer-contact .label').forEach(function(el) {
+  if(el.innerText.includes('EMAIL') || el.innerText.includes('CORREO')) return;
+  el.innerText = lang === 'es' ? 'TELÉFONO' : 'PHONE NUMBER';
 });
   }
   
