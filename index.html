@@ -100,7 +100,7 @@
     .projects-top { padding: 64px 48px 48px; text-align: center; }
     .projects-page-title { font-family: 'Instrument Serif', serif; font-size: clamp(2rem, 4vw, 3.4rem); color: var(--brown); margin-bottom: 48px; }
     .projects-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 880px; margin: 0 auto; padding: 0 48px 64px; }
-    .proj-thumb { aspect-ratio: 4/3; border-radius: 2px; overflow: hidden; cursor: pointer; position: relative; }
+    .proj-thumb { aspect-ratio: 1; border-radius: 2px; overflow: hidden; cursor: pointer; position: relative; }
     .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
     .proj-thumb:hover img { transform: scale(1.05); }
     .proj-thumb-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(82,55,38,0.82); color: var(--cream); font-size: 0.6rem; letter-spacing: 0.1em; padding: 8px 12px; opacity: 0; transition: opacity 0.22s; }
@@ -109,7 +109,7 @@
     /* PROJECT DETAIL */
     .project-detail { display: none; animation: fadeIn 0.3s ease; }
     .project-detail.active { display: block; }
-    .detail-layout { display: grid; grid-template-columns: 200px 1fr; gap: 48px; padding: 64px 48px; max-width: 900px; margin: 0 auto; }
+    .detail-layout { display: grid; grid-template-columns: 160px 1fr; gap: 48px; padding: 64px 48px; max-width: 900px; margin: 0 auto; }
     .detail-title { font-family: 'Instrument Serif', serif; font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--brown); position: sticky; top: 120px; }
     .detail-images { display: flex; flex-direction: column; gap: 16px; }
     .detail-images img { width: 100%; border-radius: 2px; display: block; }
