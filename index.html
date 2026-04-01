@@ -372,7 +372,7 @@
       var div = document.createElement('div');
       div.className = 'proj-thumb';
       div.onclick = function() { openProject(i); };
-      div.innerHTML = '<img src="' + p.images[0] + '" alt="' + p.name + '"><div class="proj-thumb-label">' + p.name + '</div>';
+      div.innerHTML = '<img src="' + (p.thumbnail || p.images[0]) + '" alt="' + p.name + '"><div class="proj-thumb-label">' + p.name + '</div>';
       grid.appendChild(div);
     });
 
