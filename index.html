@@ -567,10 +567,13 @@ if(nextBtn) nextBtn.innerText = lang === 'es' ? 'SIGUIENTE PROYECTO →' : 'NEXT
 
 // Footer labels
 document.querySelectorAll('.footer-contact .label').forEach(function(el) {
-  if(el.innerText.includes('EMAIL') || el.innerText.includes('CORREO')) return;
-  el.innerText = lang === 'es' ? 'TELÉFONO' : 'PHONE NUMBER';
-});
+  var txt = el.innerText.toUpperCase();
+  if(txt.includes('EMAIL') || txt.includes('CORREO')) {
+    el.innerText = lang === 'es' ? 'EMAIL' : 'EMAIL';
+  } else {
+    el.innerText = lang === 'es' ? 'TELÉFONO' : 'PHONE NUMBER';
   }
+});
   
 </script>
 </body>
