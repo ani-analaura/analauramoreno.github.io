@@ -387,12 +387,27 @@
       document.getElementById('detail-title').innerHTML = '<h2 style="font-family:\'Instrument Serif\',serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--brown);font-weight:400;">' + p.name + '</h2>';
       var imgs = document.getElementById('detail-images');
       imgs.innerHTML = '';
-      p.images.forEach(function(src) {
-        var img = document.createElement('img');
-        img.src = src;
-        img.alt = p.name;
-        imgs.appendChild(img);
-      });
+     p.images.forEach(function(src) {
+  if(src.endsWith('.mp4')) {
+    var video = document.createElement('video');
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.style.width = '100%';
+    var source = document.createElement('source');
+    source.src = src;
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    imgs.appendChild(video);
+  } else {
+    var img = document.createElement('img');
+    img.src = src;
+    img.alt = p.name;
+    imgs.appendChild(img);
+  }
+});
+      
       document.getElementById('btn-prev').disabled = (index === 0);
       document.getElementById('btn-next').disabled = (index === projects.length - 1);
       document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
