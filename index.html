@@ -385,15 +385,10 @@
     function openProject(index) {
       currentProject = index;
       var p = projects[index];
-   var detailSection = document.getElementById('project-detail');
-if (detailSection && detailSection.classList.contains('active')) {
-  var p = projects[currentProject];
   var desc = p['desc' + (lang === 'es' ? 'Es' : 'En')] || '';
-  var titleEl = document.getElementById('detail-title');
-  titleEl.innerHTML =
-    '<h2 style="font-family:\'Instrument Serif\',serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--brown);font-weight:400;margin-bottom:24px;">' + p.name + '</h2>' +
-    (desc ? '<p style="font-size:0.92rem;line-height:1.9;color:var(--muted);margin-top:8px;">' + desc + '</p>' : '');
-}
+document.getElementById('detail-title').innerHTML =
+  '<h2 style="font-family:\'Instrument Serif\',serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--brown);font-weight:400;margin-bottom:24px;">' + p.name + '</h2>' +
+  (desc ? '<p style="font-size:0.92rem;line-height:1.9;color:var(--muted);margin-top:8px;">' + desc + '</p>' : '');
       var imgs = document.getElementById('detail-images');
       imgs.innerHTML = '';
      p.images.forEach(function(src) {
