@@ -606,6 +606,10 @@ document.querySelectorAll('.footer-contact .label').forEach(function(el) {
     el.innerText = lang === 'es' ? 'TELÉFONO' : 'PHONE NUMBER';
       }
 });
+    var detailSection = document.getElementById('project-detail');
+if (detailSection && detailSection.classList.contains('active')) {
+  openProject(currentProject);
+}
 }
 </script>
   
