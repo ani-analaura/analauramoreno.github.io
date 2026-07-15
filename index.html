@@ -53,51 +53,42 @@
     .footer-contact p { color: var(--muted); margin-bottom: 20px; }
 
     /* HOME - TODO EN UNA SECCIÓN */
-    .home-hero { background: var(--rose); padding: 0px 48px 30px; text-align: center; }
+    .home-hero { background: var(--rose); padding: 48px 48px 60px; text-align: center; }
     .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-    .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.8rem, 7vw, 5.6rem); color: var(--brown); line-height: 1.05; margin-bottom: 6px; }
-    .hero-tagline { font-family: 'Instrument Serif', serif; font-size: clamp(1.4rem, 3vw, 2.1rem); font-style: italic; color: var(--brown); line-height: 1.45; max-width: 580px; margin: 0 auto 10px; }
+    .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.8rem, 7vw, 5.6rem); color: var(--brown); line-height: 1.05; margin-bottom: 12px; }
+    .hero-tagline { font-family: 'Instrument Serif', serif; font-size: clamp(1.4rem, 3vw, 2.1rem); font-style: italic; color: var(--brown); line-height: 1.45; max-width: 580px; margin: 0 auto 30px; }
     
     /* CAROUSEL 3D SECTION */
-   .carousel-section {
-  background: var(--rose);
-  padding: 0 48px 20px;
-  margin-top: -30px;
-}
+    .carousel-section { background: var(--rose); padding: 30px 48px 60px; }
     
     /* 3D Carousel */
- .scene {
-  display: grid;
-  place-items: center;
-  perspective: 1400px;
-}
-
-.a3d {
-  place-self: center;
-  transform-style: preserve-3d;
-  animation: ry 90s linear infinite;
-  width: 100%;
-  height: 950px;
-  display: grid;
-  place-items: center;
-}
-
-.card {
-  grid-column: 1;
-  grid-row: 1;
-  width: 680px;
-  height: 830px;
-  border-radius: 12px;
-  object-fit: cover;
-  cursor: pointer;
-  transform-origin: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-}
-
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
-  filter: brightness(1.05);
-}
+    .scene { display: grid; place-items: center; perspective: 1000px; }
+    .a3d { 
+      place-self: center; 
+      transform-style: preserve-3d; 
+      animation: ry 40s linear infinite;
+      width: 100%;
+      height: 500px;
+      display: grid;
+      place-items: center;
+    }
+    
+    .card { 
+      grid-column: 1; 
+      grid-row: 1; 
+      width: 360px;
+      height: 440px;
+      border-radius: 12px;
+      object-fit: cover;
+      cursor: pointer;
+      transform-origin: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: scale(1.15);
+    }
 
     @keyframes ry {
       to { transform: rotateY(1turn); }
@@ -411,23 +402,23 @@
 
     var currentProject = 0;
 
-function initCarousel() {
-  const carousel = document.getElementById('carousel3d');
-  const numProjects = projects.length;
-  const radius = 450 / (2 * Math.tan(Math.PI / numProjects));
+    function initCarousel() {
+      const carousel = document.getElementById('carousel3d');
+      const numProjects = projects.length;
+      const radius = 500 / (2 * Math.tan(Math.PI / numProjects));
 
-  projects.forEach((p, i) => {
-    const img = document.createElement('img');
-    img.className = 'card';
-    img.src = p.thumbnail || p.images[0];
-    img.alt = p.name;
-    img.style.setProperty('--i', i);
-    img.style.setProperty('--n', numProjects);
-    img.style.transform = `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px) rotateY(180deg)`;
-    img.onclick = () => openProject(i);
-    carousel.appendChild(img);
-  });
-}
+      projects.forEach((p, i) => {
+        const img = document.createElement('img');
+        img.className = 'card';
+        img.src = p.thumbnail || p.images[0];
+        img.alt = p.name;
+        img.style.setProperty('--i', i);
+        img.style.setProperty('--n', numProjects);
+        img.style.transform = `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px)`;
+        img.onclick = () => openProject(i);
+        carousel.appendChild(img);
+      });
+    }
 
     var grid = document.getElementById('projects-grid');
     projects.forEach(function(p, i) {
