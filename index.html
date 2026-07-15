@@ -73,15 +73,15 @@
   transform-style: preserve-3d;
   animation: ry 90s linear infinite;
   width: 100%;
-  height: 950px;
+  height: 650px;
   display: grid;
   place-items: center;
 }
 
 .card {
   position: absolute;
-  width: 680px;
-  height: 830px;
+  width: 850px;
+  height: 1000px;
   border-radius: 12px;
   object-fit: cover;
   cursor: pointer;
@@ -409,7 +409,7 @@
     function initCarousel() {
       const carousel = document.getElementById('carousel3d');
       const numProjects = projects.length;
-      const radius = 900 / (2 * Math.tan(Math.PI / numProjects));
+      const radius = 600 / (2 * Math.tan(Math.PI / numProjects));
 
       projects.forEach((p, i) => {
         const img = document.createElement('img');
