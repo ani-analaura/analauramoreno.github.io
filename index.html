@@ -73,27 +73,26 @@
       place-items: center;
     }
     
-    .card { 
-      grid-column: 1; 
-      grid-row: 1; 
-      width: 500px;
-      height: 610px;
-      border-radius: 12px;
-      object-fit: cover;
-      cursor: pointer;
-      transform-origin: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-      transform: scaleX(-1);
-    }
-    
-    .card:hover {
-      transform: scaleX(-1) scale(1.15);
-    }
+   .card { 
+  grid-column: 1; 
+  grid-row: 1; 
+  width: 500px;
+  height: 610px;
+  border-radius: 12px;
+  object-fit: cover;
+  cursor: pointer;
+  transform-origin: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
 
-    @keyframes ry {
-      to { transform: rotateY(-1turn); }
-    }
+.card:hover {
+  transform: scale(1.15);
+}
+
+@keyframes ry {
+  to { transform: rotateY(1turn); }
+}
 
     .home-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 0 auto; padding: 40px 48px 0; }
     .home-col { font-size: 0.72rem; line-height: 1.9; color: var(--muted); }
