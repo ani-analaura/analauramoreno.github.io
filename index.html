@@ -65,7 +65,7 @@
     .scene {
   display: grid;
   place-items: center;
-  perspective: 1400px;
+  perspective: 2500px;
 }
 
 .a3d {
@@ -409,20 +409,22 @@
     function initCarousel() {
       const carousel = document.getElementById('carousel3d');
       const numProjects = projects.length;
-      const radius = 1200 / (2 * Math.tan(Math.PI / numProjects));
+      const radius = 600 / (2 * Math.tan(Math.PI / numProjects));
 
-      projects.forEach((p, i) => {
-        const img = document.createElement('img');
-        img.className = 'card';
-        img.src = p.thumbnail || p.images[0];
-        img.alt = p.name;
-        img.style.setProperty('--i', i);
-        img.style.setProperty('--n', numProjects);
-       const angle = (360 / numProjects) * i;
-img.style.transform = `rotateY(${angle}deg) translateZ(${radius}px) rotateY(180deg)`;
-        img.onclick = () => openProject(i);
-        carousel.appendChild(img);
-      });
+
+  projects.forEach((p, i) => {
+  const img = document.createElement('img');
+  img.className = 'card';
+  img.src = p.thumbnail || p.images[0];
+  img.alt = p.name;
+  img.style.setProperty('--i', i);
+  img.style.setProperty('--n', numProjects);
+
+  img.style.transform = `rotateY(${angle}deg) translateZ(${radius}px) rotateY(180deg)`;
+
+  img.onclick = () => openProject(i);
+  carousel.appendChild(img);
+});
     }
 
     var grid = document.getElementById('projects-grid');
