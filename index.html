@@ -62,32 +62,39 @@
     .carousel-section { background: var(--rose); padding: 0px 48px 40px; }
     
     /* 3D Carousel */
-    .scene { display: grid; place-items: center; perspective: 1800px; }
-    .a3d { 
-      place-self: center; 
-      transform-style: preserve-3d; 
-      animation: ry 90s linear infinite;
-      width: 100%;
-      height: 300px;
-      display: grid;
-      place-items: center;
-    }
-    
-    .card { 
-      grid-column: 1; 
-      grid-row: 1; 
-      width: 780px;
-      height: 930px;
-      border-radius: 12px;
-      object-fit: cover;
-      cursor: pointer;
-      transform-origin: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-    }
-    
-    .card:hover {
-      transform: scale(1.15);
+    .scene {
+  display: grid;
+  place-items: center;
+  perspective: 1400px;
+}
+
+.a3d {
+  place-self: center;
+  transform-style: preserve-3d;
+  animation: ry 90s linear infinite;
+  width: 100%;
+  height: 950px;
+  display: grid;
+  place-items: center;
+}
+
+.card {
+  grid-column: 1;
+  grid-row: 1;
+  width: 680px;
+  height: 830px;
+  border-radius: 12px;
+  object-fit: cover;
+  cursor: pointer;
+  transform-origin: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  transition: transform .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  filter: brightness(1.05);
+}
     }
 
     @keyframes ry {
@@ -405,7 +412,7 @@
     function initCarousel() {
       const carousel = document.getElementById('carousel3d');
       const numProjects = projects.length;
-      const radius = 300 / (2 * Math.tan(Math.PI / numProjects));
+      const radius = 450 / (2 * Math.tan(Math.PI / numProjects));
 
       projects.forEach((p, i) => {
         const img = document.createElement('img');
