@@ -53,22 +53,22 @@
     .footer-contact p { color: var(--muted); margin-bottom: 20px; }
 
     /* HOME - TODO EN UNA SECCIÓN */
-    .home-hero { background: var(--rose); padding: 32px 48px 20px; text-align: center; }
+    .home-hero { background: var(--rose); padding: 32px 48px 8px; text-align: center; }
     .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
     .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--brown); line-height: 1.05; margin-bottom: 0; }
     .hero-tagline { font-family: 'Instrument Serif', serif; font-size: clamp(1.1rem, 2.5vw, 1.6rem); font-style: italic; color: var(--brown); line-height: 1.35; max-width: 580px; margin: 0 auto; }
     
     /* CAROUSEL 3D SECTION */
-    .carousel-section { background: var(--rose); padding: 8px 48px 8px; }
+    .carousel-section { background: var(--rose); padding: 4px 48px 4px; }
     
     /* 3D Carousel */
     .scene { display: grid; place-items: center; perspective: 1000px; }
     .a3d { 
       place-self: center; 
       transform-style: preserve-3d; 
-      animation: ry 70s linear infinite;
+      animation: ry 90s linear infinite;
       width: 100%;
-      height: 1000px;
+      height: 1025px;
       display: grid;
       place-items: center;
     }
@@ -200,7 +200,7 @@
       <div class="scene">
         <div class="a3d" id="carousel3d"></div>
       </div>
-      <p class="hero-tagline" style="text-align:center; margin-top: 16px; margin-bottom: 24px;">Because design isn't just how it looks,<br>it's how it works.</p>
+      <p class="hero-tagline" style="text-align:center; margin-top: 4px; margin-bottom: 8px;">Because design isn't just how it looks,<br>it's how it works.</p>
     </div>
 
     <div class="home-projects-section">
@@ -405,10 +405,36 @@
 
     function initCarousel() {
       const carousel = document.getElementById('carousel3d');
+      const scene = document.querySelector('.scene');
+      const a3d = document.getElementById('carousel3d');
       const numProjects = projects.length;
-      // radius correcto: (anchoTarjeta * margenSeparacion) / (2 * tan(PI/N))
-      // 800px de tarjeta, 35% de margen para que no se toquen entre sí
-      const radius = (800 * 1.35) / (2 * Math.tan(Math.PI / numProjects));
+
+      // Determinar ancho de tarjeta según el breakpoint actual (debe
+      // coincidir con los valores usados en los media queries del CSS)
+      const w = window.innerWidth;
+      let cardWidth;
+      if (w <= 480) cardWidth = 448;
+      else if (w <= 768) cardWidth = 600;
+      else cardWidth = 800;
+
+      // Estas proporciones vienen del diseño original que YA funcionaba
+      // bien (tarjetas de 360px, numerador de radius 500, perspective
+      // 1000). Escalamos radius y perspective por el mismo factor para
+      // conservar exactamente la misma forma de carrusel, solo más grande.
+      const scaleFactor = cardWidth / 360;
+      const radiusNumerator = 500 * scaleFactor;
+      const perspective = 1000 * scaleFactor;
+
+      // La altura del contenedor NO debe salir de esa misma fórmula
+      // proporcional (eso no tiene relación real con el tamaño de la
+      // imagen). Debe medir lo que mide la tarjeta real, con un margen
+      // pequeño — así no queda espacio vacío de sobra.
+      const cardHeight = cardWidth * (976 / 800);
+      const containerHeight = cardHeight * 1.05;
+
+      const radius = radiusNumerator / (2 * Math.tan(Math.PI / numProjects));
+      scene.style.perspective = perspective + 'px';
+      a3d.style.height = containerHeight + 'px';
 
       projects.forEach((p, i) => {
         const img = document.createElement('img');
