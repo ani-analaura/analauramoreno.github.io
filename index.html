@@ -62,10 +62,10 @@
     .carousel-section { background: var(--rose); padding: 0px 48px 40px; }
     
     /* 3D Carousel */
-    .scene {
+   .scene {
   display: grid;
   place-items: center;
-  perspective: 2500px;
+  perspective: 1400px;
 }
 
 .a3d {
@@ -73,20 +73,18 @@
   transform-style: preserve-3d;
   animation: ry 90s linear infinite;
   width: 100%;
-  height: 650px;
+  height: 950px;
   display: grid;
   place-items: center;
 }
 
 .card {
   position: absolute;
-  width: 850px;
-  height: 1000px;
+  width: 680px;
+  height: 830px;
   border-radius: 12px;
   object-fit: cover;
   cursor: pointer;
-  transform-origin: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 
 .card:hover {
@@ -406,26 +404,25 @@
 
     var currentProject = 0;
 
-    function initCarousel() {
-      const carousel = document.getElementById('carousel3d');
-      const numProjects = projects.length;
-      const radius = 600 / (2 * Math.tan(Math.PI / numProjects));
-
+function initCarousel() {
+  const carousel = document.getElementById('carousel3d');
+  const numProjects = projects.length;
+  const radius = 450 / (2 * Math.tan(Math.PI / numProjects));
 
   projects.forEach((p, i) => {
-  const img = document.createElement('img');
-  img.className = 'card';
-  img.src = p.thumbnail || p.images[0];
-  img.alt = p.name;
-  img.style.setProperty('--i', i);
-  img.style.setProperty('--n', numProjects);
+    const img = document.createElement('img');
+    img.className = 'card';
+    img.src = p.thumbnail || p.images[0];
+    img.alt = p.name;
 
-  img.style.transform = `rotateY(${angle}deg) translateZ(${radius}px) rotateY(180deg)`;
+    const angle = (360 / numProjects) * i;
 
-  img.onclick = () => openProject(i);
-  carousel.appendChild(img);
-});
-    }
+    img.style.transform = `rotateY(${angle}deg) translateZ(${radius}px) rotateY(180deg)`;
+
+    img.onclick = () => openProject(i);
+    carousel.appendChild(img);
+  });
+}
 
     var grid = document.getElementById('projects-grid');
     projects.forEach(function(p, i) {
