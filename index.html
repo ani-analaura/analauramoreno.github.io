@@ -62,14 +62,14 @@
     .carousel-section { background: var(--rose); padding: 0px 48px 40px; }
     
     /* 3D Carousel */
-   .scene {
+ .scene {
   display: grid;
   place-items: center;
-   perspective: 3000 px;
+  perspective: 1400px;
 }
 
 .a3d {
-  position: relative;
+  place-self: center;
   transform-style: preserve-3d;
   animation: ry 90s linear infinite;
   width: 100%;
@@ -79,12 +79,15 @@
 }
 
 .card {
-  position: absolute;
+  grid-column: 1;
+  grid-row: 1;
   width: 680px;
   height: 830px;
   border-radius: 12px;
   object-fit: cover;
   cursor: pointer;
+  transform-origin: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 
 .card:hover {
@@ -407,18 +410,16 @@
 function initCarousel() {
   const carousel = document.getElementById('carousel3d');
   const numProjects = projects.length;
-  const radius = 900 / (2 * Math.tan(Math.PI / numProjects));
+  const radius = 450 / (2 * Math.tan(Math.PI / numProjects));
 
   projects.forEach((p, i) => {
     const img = document.createElement('img');
     img.className = 'card';
     img.src = p.thumbnail || p.images[0];
     img.alt = p.name;
-
-    const angle = (360 / numProjects) * i;
-
-    img.style.transform = `rotateY(${angle}deg) translateZ(${radius}px) rotateY(180deg)`;
-
+    img.style.setProperty('--i', i);
+    img.style.setProperty('--n', numProjects);
+    img.style.transform = `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px) rotateY(180deg)`;
     img.onclick = () => openProject(i);
     carousel.appendChild(img);
   });
