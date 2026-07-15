@@ -62,7 +62,7 @@
     .carousel-section { background: var(--rose); padding: 0px 48px 40px; }
     
     /* 3D Carousel */
-    .scene { display: grid; place-items: center; perspective: 1000px; }
+    .scene { display: grid; place-items: center; perspective: 1800px; }
     .a3d { 
       place-self: center; 
       transform-style: preserve-3d; 
@@ -405,7 +405,7 @@
     function initCarousel() {
       const carousel = document.getElementById('carousel3d');
       const numProjects = projects.length;
-      const radius = 1100 / (2 * Math.tan(Math.PI / numProjects));
+      const radius = 300 / (2 * Math.tan(Math.PI / numProjects));
 
       projects.forEach((p, i) => {
         const img = document.createElement('img');
