@@ -407,7 +407,14 @@
       const carousel = document.getElementById('carousel3d');
       const scene = document.querySelector('.scene');
       const a3d = document.getElementById('carousel3d');
-      const numProjects = projects.length;
+
+      // El carrusel giratorio de home NO muestra los 30 proyectos —
+      // solo una selección de 10, distribuidos a lo largo de la lista,
+      // para que el círculo sea de un tamaño manejable. Los 30 completos
+      // siguen disponibles en "See all projects".
+      const carouselCount = 10;
+      const carouselIndices = Array.from({ length: carouselCount },
+        (_, i) => Math.floor(i * projects.length / carouselCount));
 
       // Determinar ancho de tarjeta según el breakpoint actual (debe
       // coincidir con los valores usados en los media queries del CSS)
@@ -417,34 +424,35 @@
       else if (w <= 768) cardWidth = 600;
       else cardWidth = 800;
 
-      // Estas proporciones vienen del diseño original que YA funcionaba
-      // bien (tarjetas de 360px, numerador de radius 500, perspective
-      // 1000). Escalamos radius y perspective por el mismo factor para
-      // conservar exactamente la misma forma de carrusel, solo más grande.
-      const scaleFactor = cardWidth / 360;
-      const radiusNumerator = 500 * scaleFactor;
-      const perspective = 1000 * scaleFactor;
-
-      // La altura del contenedor NO debe salir de esa misma fórmula
-      // proporcional (eso no tiene relación real con el tamaño de la
-      // imagen). Debe medir lo que mide la tarjeta real, con un margen
-      // pequeño — así no queda espacio vacío de sobra.
       const cardHeight = cardWidth * (976 / 800);
-      const containerHeight = cardHeight * 1.05;
 
-      const radius = radiusNumerator / (2 * Math.tan(Math.PI / numProjects));
+      // radius: separación entre tarjetas para que no se toquen
+      // (margen del 35% sobre el ancho de tarjeta)
+      const radiusNumerator = cardWidth * 1.35;
+      const radius = radiusNumerator / (2 * Math.tan(Math.PI / carouselCount));
+
+      // CRÍTICO: perspective debe ser var veces mayor al radius.
+      // Si perspective <= radius, la tarjeta que pasa justo de frente
+      // (translateZ = radius) se vuelve invisible o se distorsiona
+      // (factor de escala negativo). Con perspective = radius * 3,
+      // la tarjeta de frente solo se infla 1.5x — visible siempre,
+      // nunca se rompe.
+      const perspective = radius * 3;
+      const frontScale = perspective / (perspective - radius); // = 1.5
+
       scene.style.perspective = perspective + 'px';
-      a3d.style.height = containerHeight + 'px';
+      a3d.style.height = (cardHeight * frontScale * 1.05) + 'px';
 
-      projects.forEach((p, i) => {
+      carouselIndices.forEach((projIndex, i) => {
+        const p = projects[projIndex];
         const img = document.createElement('img');
         img.className = 'card';
         img.src = p.thumbnail || p.images[0];
         img.alt = p.name;
         img.style.setProperty('--i', i);
-        img.style.setProperty('--n', numProjects);
+        img.style.setProperty('--n', carouselCount);
         img.style.transform = `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px) rotateY(180deg)`;
-        img.onclick = () => openProject(i);
+        img.onclick = () => openProject(projIndex);
         carousel.appendChild(img);
       });
     }
