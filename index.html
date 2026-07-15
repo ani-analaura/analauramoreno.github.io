@@ -84,7 +84,6 @@
       transform-origin: center;
       box-shadow: 0 20px 60px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
-      backface-visibility: hidden;
     }
     
     .card:hover {
@@ -415,7 +414,7 @@
         img.alt = p.name;
         img.style.setProperty('--i', i);
         img.style.setProperty('--n', numProjects);
-        img.style.transform = `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px)`;
+        img.style.transform = `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px) rotateY(180deg)`;
         img.onclick = () => openProject(i);
         carousel.appendChild(img);
       });
