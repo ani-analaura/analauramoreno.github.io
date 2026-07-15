@@ -414,7 +414,7 @@
         img.alt = p.name;
         img.style.setProperty('--i', i);
         img.style.setProperty('--n', numProjects);
-        img.style.transform = `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px) rotateY(180deg)`; `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px)`;
+        img.style.transform = `rotateY(calc(360deg / var(--n) * var(--i))) translateZ(${radius}px) rotateY(180deg)`; 
         img.onclick = () => openProject(i);
         carousel.appendChild(img);
       });
