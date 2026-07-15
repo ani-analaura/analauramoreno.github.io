@@ -76,8 +76,8 @@
     .card { 
       grid-column: 1; 
       grid-row: 1; 
-      width: 580px;
-      height: 730px;
+      width: 780px;
+      height: 930px;
       border-radius: 12px;
       object-fit: cover;
       cursor: pointer;
@@ -405,7 +405,7 @@
     function initCarousel() {
       const carousel = document.getElementById('carousel3d');
       const numProjects = projects.length;
-      const radius = 500 / (2 * Math.tan(Math.PI / numProjects));
+      const radius = 1100 / (2 * Math.tan(Math.PI / numProjects));
 
       projects.forEach((p, i) => {
         const img = document.createElement('img');
