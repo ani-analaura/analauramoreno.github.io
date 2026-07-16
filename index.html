@@ -52,108 +52,47 @@
     .footer-contact .label { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; display: block; margin-bottom: 4px; font-weight: 500; }
     .footer-contact p { color: var(--muted); margin-bottom: 20px; }
 
-    /* ============ HOME — INSPIRADO EN IN-PRO.CO.JP ============ */
-
-    /* Hero: banner con texto grande en marquee (loop horizontal) */
-    .hero-marquee-wrap { background: var(--rose); padding: 56px 0 40px; overflow: hidden; }
-    .hero-marquee-track {
+    /* HOME - TODO EN UNA SECCIÓN */
+    .home-hero { background: var(--rose); padding: 32px 48px 8px; text-align: center; }
+    .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--brown); line-height: 1.05; margin-bottom: 0; }
+    .hero-tagline { font-family: 'Instrument Serif', serif; font-size: clamp(1.1rem, 2.5vw, 1.6rem); font-style: italic; color: var(--brown); line-height: 1.35; max-width: 580px; margin: 0 auto; }
+    
+    /* CAROUSEL 3D SECTION */
+    .carousel-section { background: var(--rose); padding: 4px 0 4px; overflow: hidden; }
+    
+    /* CARRUSEL HORIZONTAL SIMPLE — sin 3D, sin perspective, sin rotación */
+    .marquee-wrap { width: 100%; overflow: hidden; }
+    .marquee-track {
       display: flex;
-      gap: 48px;
+      gap: 20px;
       width: max-content;
-      animation: heroScroll 26s linear infinite;
+      animation: scrollX 70s linear infinite;
     }
-    .hero-marquee-item {
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
-      font-size: clamp(2.6rem, 7vw, 5.2rem);
-      color: var(--brown);
-      white-space: nowrap;
-      line-height: 1;
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-card {
+      flex: 0 0 auto;
+      width: 440px;
+      height: 540px;
+      border-radius: 12px;
+      object-fit: cover;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
     }
-    .hero-marquee-item.plain { font-style: normal; opacity: 0.35; }
-    @keyframes heroScroll {
+    .marquee-card:hover {
+      transform: scale(1.05);
+    }
+    @keyframes scrollX {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
-    .hero-sub { background: var(--rose); text-align: center; padding: 0 24px 44px; }
-    .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-    .hero-tagline { font-family: 'Instrument Serif', serif; font-size: clamp(1.05rem, 2.2vw, 1.35rem); font-style: italic; color: var(--brown); line-height: 1.4; }
 
-    /* Lista vertical de proyectos (estilo "Works" de in-pro.co.jp) */
-    .works-list { max-width: 1100px; margin: 0 auto; padding: 8px 48px 0; }
-    .works-head { display: flex; justify-content: space-between; align-items: baseline; padding: 28px 0 18px; border-bottom: 1px solid rgba(82,55,38,0.18); }
-    .works-head h2 { font-family: 'Instrument Serif', serif; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--brown); font-weight: 400; }
-    .works-count { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+    .home-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 0 auto; padding: 40px 48px 0; }
+    .home-col { font-size: 0.72rem; line-height: 1.9; color: var(--muted); }
 
-    .work-row {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      padding: 22px 0;
-      border-bottom: 1px solid rgba(82,55,38,0.12);
-      cursor: pointer;
-      position: relative;
-    }
-    .work-index { font-size: 0.68rem; color: var(--muted); width: 28px; flex-shrink: 0; }
-    .work-name {
-      font-family: 'Instrument Serif', serif;
-      font-size: clamp(1.15rem, 2.4vw, 1.7rem);
-      color: var(--brown);
-      flex: 1;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-    }
-    .work-tag {
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      flex-shrink: 0;
-      display: none;
-    }
-    .work-arrow { font-size: 0.9rem; color: var(--brown); flex-shrink: 0; opacity: 0; transition: opacity 0.25s ease, transform 0.25s ease; transform: translateX(-6px); }
-
-    .work-thumb {
-      position: absolute;
-      right: 60px;
-      top: 50%;
-      width: 210px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 16px 34px rgba(0,0,0,0.22);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-50%) scale(0.92);
-      transition: opacity 0.28s ease, transform 0.28s ease;
-      z-index: 5;
-    }
-
-    .work-row:hover { background: rgba(82,55,38,0.03); }
-    .work-row:hover .work-name { transform: translateX(10px); }
-    .work-row:hover .work-arrow { opacity: 1; transform: translateX(0); }
-    .work-row:hover .work-thumb { opacity: 1; transform: translateY(-50%) scale(1); }
-
-    .works-more { text-align: center; padding: 44px 0 64px; }
-
-    @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      .nav-links { gap: 20px; }
-      .hero-marquee-wrap { padding: 40px 0 28px; }
-      .works-list { padding: 8px 20px 0; }
-      .work-thumb { display: none; }
-      .work-name { font-size: 1.1rem; }
-      .services-cards { grid-template-columns: 1fr 1fr; }
-      .projects-grid-full { grid-template-columns: 1fr 1fr; padding: 0 20px 48px; }
-      .detail-layout { grid-template-columns: 1fr; gap: 24px; padding: 40px 20px; }
-      .detail-title { position: static; }
-      .footer { padding: 48px 20px 36px; }
-    }
-
-    @media (max-width: 480px) {
-      .work-row { padding: 16px 0; gap: 12px; }
-      .work-index { width: 20px; }
-      .projects-grid-full { grid-template-columns: 1fr; }
-    }
+    .home-projects-section { padding: 40px 48px 0; max-width: 900px; margin: 0 auto; }
+    .see-more-wrap { text-align: center; padding: 0 0 64px; }
 
     /* ABOUT */
     .about-top { background: var(--warm); padding: 64px 48px 56px; text-align: center; }
@@ -202,6 +141,29 @@
     .detail-nav-btn { background: none; border: none; cursor: pointer; font-family: 'Geist Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; color: var(--brown); display: flex; align-items: center; gap: 8px; transition: opacity 0.2s; }
     .detail-nav-btn:hover { opacity: 0.5; }
     .detail-nav-btn:disabled { opacity: 0.2; cursor: default; }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 20px; }
+      .home-hero { padding: 24px 20px 12px; }
+      .carousel-section { padding: 8px 0 8px; }
+      .marquee-card { width: 320px; height: 392px; }
+      .home-cols { padding: 30px 20px 0; grid-template-columns: 1fr; }
+      .services-cards { grid-template-columns: 1fr 1fr; }
+      .projects-grid-full { grid-template-columns: 1fr 1fr; padding: 0 20px 48px; }
+      .detail-layout { grid-template-columns: 1fr; gap: 24px; padding: 40px 20px; }
+      .detail-title { position: static; }
+      .footer { padding: 48px 20px 36px; }
+    }
+
+    @media (max-width: 480px) {
+      .home-hero { padding: 20px 16px 10px; }
+      .hero-tagline { margin: 0 auto; }
+      .carousel-section { padding: 8px 0 8px; }
+      .marquee-card { width: 230px; height: 282px; }
+      .home-cols { padding: 25px 16px 0; }
+      .projects-grid-full { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -219,28 +181,34 @@
 
   <!-- HOME -->
   <section id="home" class="active">
-
-    <!-- HERO MARQUEE (inspirado en in-pro.co.jp) -->
-    <div class="hero-marquee-wrap">
-      <div class="hero-marquee-track" id="heroMarquee"></div>
-    </div>
-    <div class="hero-sub">
+    <div class="home-hero">
       <p class="hero-eyebrow">Creative &amp; Strategic</p>
-      <p class="hero-tagline">Because design isn't just how it looks, it's how it works.</p>
+      <h1 class="hero-title">Design across disciplines</h1>
     </div>
 
-    <!-- WORKS LIST (inspirado en in-pro.co.jp) -->
-    <div class="works-list">
-      <div class="works-head">
-        <h2>Selected Works</h2>
-        <span class="works-count" id="worksCount"></span>
+    <!-- CARRUSEL HORIZONTAL SIMPLE (sin 3D) -->
+    <div class="carousel-section">
+      <div class="marquee-wrap">
+        <div class="marquee-track" id="marqueeTrack"></div>
       </div>
-      <div id="worksList"></div>
-      <div class="works-more">
+      <p class="hero-tagline" style="text-align:center; margin-top: 4px; margin-bottom: 8px;">Because design isn't just how it looks,<br>it's how it works.</p>
+    </div>
+
+    <div class="home-projects-section">
+      <div class="see-more-wrap">
         <span class="btn-outline" onclick="showSection('projects')">See all projects</span>
       </div>
     </div>
+    
+    <div style="text-align:center; padding-top:24px; padding-bottom: 40px;">
+      <span onclick="showSection('about')" id="how-work-btn" style="font-family:'Instrument Serif',serif; font-size:clamp(1.1rem,2.5vw,1.6rem); font-style:italic; color:var(--brown); cursor:pointer; opacity:0.75; transition:opacity 0.2s; display:inline-block;">How do I work? →</span>
+    </div>
 
+    <div class="home-cols">
+      <p class="home-col">I help brands elevate their visual presence through cohesive identity, packaging and digital systems — translating business objectives into structured, scalable design.</p>
+      <p class="home-col">Each project is developed with precision and long-term vision, ensuring brands don't just look refined, but operate consistently across every platform.</p>
+    </div>
+     
     <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
     <div class="footer">
       <p class="footer-title">Thank You!</p>
@@ -426,59 +394,23 @@
 
     var currentProject = 0;
 
-    // ===== HERO MARQUEE (texto grande en loop, tipo in-pro.co.jp) =====
-    function initHeroMarquee() {
-      const track = document.getElementById('heroMarquee');
-      const words = ["Design", "Branding", "Packaging", "UI/UX", "Strategy"];
-      // Se repite dos veces seguidas para el loop continuo (translateX 0 a -50%)
-      const sequence = [...words, ...words];
-      sequence.forEach((w) => {
-        const item = document.createElement('span');
-        item.className = 'hero-marquee-item';
-        item.textContent = w;
-        track.appendChild(item);
+    function initCarousel() {
+      const track = document.getElementById('marqueeTrack');
 
-        const dash = document.createElement('span');
-        dash.className = 'hero-marquee-item plain';
-        dash.textContent = '—';
-        track.appendChild(dash);
-      });
-    }
+      // Carrusel horizontal simple: todos los proyectos, duplicados
+      // UNA vez (misma lista dos veces seguidas) para que el loop de
+      // la animación (translateX de 0% a -50%) sea perfectamente
+      // continuo, sin salto visible. Nada de 3D, nada de rotación,
+      // nada de radius/perspective — solo un scroll horizontal.
+      const sequence = [...projects, ...projects];
 
-    // ===== WORKS LIST (lista vertical, tipo in-pro.co.jp) =====
-    function initWorksList() {
-      const list = document.getElementById('worksList');
-      const countEl = document.getElementById('worksCount');
-      countEl.textContent = projects.length + ' projects';
-
-      projects.forEach((p, i) => {
-        const row = document.createElement('div');
-        row.className = 'work-row';
-        row.onclick = () => openProject(i);
-
-        const index = document.createElement('span');
-        index.className = 'work-index';
-        index.textContent = String(i + 1).padStart(2, '0');
-
-        const name = document.createElement('span');
-        name.className = 'work-name';
-        name.textContent = p.name;
-
-        const arrow = document.createElement('span');
-        arrow.className = 'work-arrow';
-        arrow.textContent = '→';
-
-        const thumb = document.createElement('img');
-        thumb.className = 'work-thumb';
-        thumb.src = p.thumbnail || p.images[0];
-        thumb.alt = p.name;
-        thumb.loading = 'lazy';
-
-        row.appendChild(index);
-        row.appendChild(name);
-        row.appendChild(arrow);
-        row.appendChild(thumb);
-        list.appendChild(row);
+      sequence.forEach((p, i) => {
+        const img = document.createElement('img');
+        img.className = 'marquee-card';
+        img.src = p.thumbnail || p.images[0];
+        img.alt = p.name;
+        img.onclick = () => openProject(i % projects.length);
+        track.appendChild(img);
       });
     }
 
@@ -554,8 +486,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    initHeroMarquee();
-    initWorksList();
+    initCarousel();
   </script>
 
   <!-- DEVICE INDICATOR -->
@@ -569,8 +500,8 @@
   <script>
     var lang = 'en';
     var texts = {
-      en: { topbar: "Let's work together!", eyebrow: "Creative & Strategic", tagline: "Because design isn't just how it looks, it's how it works.", navHome: "Home", navServices: "Services", navAbout: "About", footerTitle: "Thank You!", footerSub: "Looking forward to connect with you!" },
-      es: { topbar: "¡Hagamos algo increíble juntos!", eyebrow: "Creativa & Estratégica", tagline: "Porque detrás de cada gran marca hay decisiones de diseño muy bien tomadas.", navHome: "Inicio", navServices: "Servicios", navAbout: "Info", footerTitle: "¡Hablemos!", footerSub: "Siempre lista para un proyecto nuevo ✨" }
+      en: { topbar: "Let's work together!", eyebrow: "Creative & Strategic", heroTitle: "Design across disciplines", tagline: "Because design isn't just how it looks,\nit's how it works.", col1: "I help brands elevate their visual presence through cohesive identity, packaging and digital systems.", col2: "Each project is developed with precision and long-term vision, ensuring consistent performance.", seeMore: "See all projects", howWork: "How do I work?", footerTitle: "Thank You!", footerSub: "Looking forward to connect with you!", navHome: "Home", navServices: "Services", navAbout: "About" },
+      es: { topbar: "¡Hagamos algo increíble juntos!", eyebrow: "Creativa & Estratégica", heroTitle: "Diseño que habla por sí solo", tagline: "Porque detrás de cada gran marca hay decisiones de diseño muy bien tomadas", col1: "Desarrollo sistemas visuales completos para marcas que buscan destacar.", col2: "Trabajo con visión a largo plazo: cada decisión importa.", seeMore: "Ver todos los proyectos", howWork: "¿Cómo trabajo?", footerTitle: "¡Hablemos!", footerSub: "Siempre lista para un proyecto nuevo ✨", navHome: "Inicio", navServices: "Servicios", navAbout: "Info" }
     };
 
     function toggleLang() {
@@ -582,7 +513,12 @@
       document.getElementById('nav-about').innerText = t.navAbout;
       document.querySelector('.topbar').innerText = t.topbar;
       document.querySelector('.hero-eyebrow').innerText = t.eyebrow;
-      document.querySelector('.hero-tagline').innerText = t.tagline;
+      document.querySelector('.hero-title').innerText = t.heroTitle;
+      document.querySelector('.hero-tagline').innerHTML = t.tagline.replace('\n','<br>');
+      var homeCols = document.querySelectorAll('.home-col');
+      if(homeCols[0]) homeCols[0].innerText = t.col1;
+      if(homeCols[1]) homeCols[1].innerText = t.col2;
+      document.getElementById('how-work-btn').innerText = t.howWork + ' →';
       document.querySelectorAll('.footer-title').forEach(function(el){ el.innerText = t.footerTitle; });
       document.querySelectorAll('.footer-sub').forEach(function(el){ el.innerText = t.footerSub; });
     }
