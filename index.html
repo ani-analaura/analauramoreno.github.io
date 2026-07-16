@@ -66,7 +66,7 @@
 }
     
     /* CARRUSEL HORIZONTAL SIMPLE — sin 3D, sin perspective, sin rotación */
-    .marquee-wrap { width: 100%; overflow: hidden; }
+    .marquee-wrap { width: 100%; overflow: visible; }
     .marquee-track {
       display: flex;
       gap: 40px;
@@ -83,9 +83,12 @@
       cursor: pointer;
       box-shadow: 0 12px 30px rgba(0,0,0,0.15);
       transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
     .marquee-card:hover {
       transform: scale(1.05);
+      z-index: 10;
     }
     @keyframes scrollX {
       from { transform: translateX(0); }
