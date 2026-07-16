@@ -33,13 +33,33 @@
     section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-    .btn-outline { display: inline-block; border: 1.5px solid var(--brown); color: var(--brown); padding: 11px 28px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 40px; font-family: 'Geist Mono', monospace; cursor: pointer; background: transparent; transition: background 0.22s, color 0.22s; }
+    .btn-outline { display: inline-block; border: 1.5px solid var(--brown); color: var(--brown); padding: 14px 32px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 40px; font-family: 'Geist Mono', monospace; cursor: pointer; background: transparent; transition: background 0.22s, color 0.22s; }
     .btn-outline:hover { background: var(--brown); color: var(--cream); }
     .btn-filled { display: inline-block; background: var(--brown); color: var(--cream); padding: 13px 36px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 40px; text-decoration: none; font-family: 'Geist Mono', monospace; cursor: pointer; border: none; transition: opacity 0.2s; }
     .btn-filled:hover { opacity: 0.78; }
 
     .wave-top { width: 100%; overflow: hidden; line-height: 0; display: block; margin-bottom: -1px; }
     .wave-top svg { display: block; width: 100%; height: 41px; }
+
+    .values-section { padding: 60px 48px 80px; background: var(--cream); }
+    .values-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--brown); margin-bottom: 60px; text-align: center; line-height: 1.1; position: relative; z-index: 1; }
+    .values-title::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0%; height: 80%; background: #f4dae8; border-radius: 8px; transform: translate(-50%, -50%); z-index: -1; animation: highlightReveal 1.5s ease-out forwards; animation-play-state: paused; }
+    .values-title.in-view::after { animation-play-state: running; }
+    @keyframes highlightReveal { from { width: 0%; } to { width: 27%; } }
+    .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; max-width: 1200px; margin: 0 auto; }
+    .value-card { }
+    .value-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.2rem; color: var(--brown); margin-bottom: 16px; font-weight: 400; }
+    .value-card p { font-size: 0.8rem; line-height: 1.6; color: var(--muted); }
+    @media (max-width: 1024px) {
+      .values-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .values-section { padding: 60px 20px; }
+    }
+    @media (max-width: 640px) {
+      .values-grid { grid-template-columns: 1fr; gap: 24px; }
+      .values-section { padding: 48px 20px; }
+      .values-title::after { height: 65%; animation: highlightReveal 1.5s ease-out forwards; animation-play-state: paused; }
+      .services-cards { grid-template-columns: 1fr; gap: 12px; }
+    }
 
     .footer { background: var(--purple); padding: 56px 48px 48px; }
     .footer-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.6rem, 6vw, 4.4rem); color: var(--brown); margin-bottom: 8px; }
@@ -95,7 +115,7 @@
       to { transform: translateX(-50%); }
     }
 
-    .home-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 0 auto; padding: 40px 48px 80px; }
+    .home-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 0 auto; padding: 32px 48px 48px; }
     .home-col { font-size: 0.95rem; line-height: 1.9; color: var(--muted); }
 
     .home-projects-section { padding: 40px 48px 0; max-width: 900px; margin: 0 auto; }
@@ -149,12 +169,12 @@
     .detail-nav-btn:hover { opacity: 0.5; }
     .detail-nav-btn:disabled { opacity: 0.2; cursor: default; }
 
-    @media (max-width: 768px) {
+    @media (max-width: 641px) {
       nav { padding: 14px 20px; }
       .nav-links { gap: 20px; }
       .home-hero { padding: 24px 20px 12px; }
       .carousel-section { padding: 8px 0 8px; }
-      .marquee-card { width: 252px; height: 306px; }
+      .marquee-card { width: 280px; height: 340px; }
       .marquee-track { gap: 30px; }
       .home-cols { padding: 30px 20px 60px; grid-template-columns: 1fr; }
       .services-cards { grid-template-columns: 1fr 1fr; }
@@ -162,17 +182,26 @@
       .detail-layout { grid-template-columns: 1fr; gap: 24px; padding: 40px 20px; }
       .detail-title { position: static; }
       .footer { padding: 48px 20px 36px; }
+      .values-title::after { height: 50%; }
+    }
+
+    @media (max-width: 640px) {
+      .services-cards { grid-template-columns: 1fr; gap: 12px; }
+      .values-title::after { height: 65%; animation: highlightReveal 1.5s ease-out forwards; animation-play-state: paused; }
     }
 
     @media (max-width: 480px) {
       .home-hero { padding: 20px 16px 10px; }
       .hero-tagline { margin: 0 auto; }
       .carousel-section { padding: 8px 0 8px; }
-      .marquee-card { width: 180px; height: 220px; }
+      .marquee-card { width: 200px; height: 245px; }
       .marquee-track { gap: 25px; }
       .home-cols { padding: 25px 16px 60px; }
       .projects-grid-full { grid-template-columns: 1fr; }
+      .values-title::after { width: 0%; animation: highlightRevealMobile 0.9s ease-out 0.2s forwards; }
     }
+    
+    @keyframes highlightRevealMobile { from { width: 0%; } to { width: 25%; } }
   </style>
 </head>
 <body>
@@ -192,7 +221,7 @@
   <section id="home" class="active">
     <div class="home-hero">
       <p class="hero-eyebrow">Creative &amp; Strategic</p>
-      <h1 class="hero-title">Design across disciplines</h1>
+      <h1 class="hero-title">Your story, beautifully told</h1>
     </div>
 
     <!-- CARRUSEL HORIZONTAL SIMPLE (sin 3D) -->
@@ -201,8 +230,8 @@
         <div class="marquee-track" id="marqueeTrack"></div>
       </div>
      <p class="hero-tagline" style="text-align:center; margin-top: 60px; margin-bottom: 20px;">
-  Because design isn't just how it looks,<br>
-  it's how it works.
+  Every beautiful story begins with understanding.<br>
+  Design is how I bring yours to life.
 </p>
     </div>
 
@@ -213,14 +242,37 @@
     </div>
     
     <div style="text-align:center; padding-top:24px; padding-bottom: 40px;">
-      <span onclick="showSection('about')" id="how-work-btn" style="font-family:'Instrument Serif',serif; font-size:clamp(1.4rem,3.5vw,2.2rem); font-style:italic; color:var(--brown); cursor:pointer; opacity:0.75; transition:opacity 0.2s; display:inline-block;">How do I work? →</span>
+      <span onclick="showSection('about')" id="how-work-btn" style="font-family:'Instrument Serif',serif; font-size:clamp(1.4rem,3.5vw,2.2rem); font-style:italic; color:var(--brown); cursor:pointer; opacity:0.75; transition:opacity 0.2s; display:inline-block; padding: 16px 0;">How do I work? →</span>
     </div>
 
     <div class="home-cols">
-      <p class="home-col">I help brands elevate their visual presence through cohesive identity, packaging and digital systems — translating business objectives into structured, scalable design.</p>
-      <p class="home-col">Each project is developed with precision and long-term vision, ensuring brands don't just look refined, but operate consistently across every platform.</p>
+      <p class="home-col">I start by understanding your story. Where you come from, where you're going, what matters to you. Because real design isn't just about aesthetics, it's about empathy and connection.</p>
+      <p class="home-col">From there, we build visual systems that reflect who you are and where you want to go. Every decision is intentional, every detail serves a purpose. Design that's built to last.</p>
     </div>
      
+    <!-- OUR VALUES SECTION -->
+    <div class="values-section">
+      <h2 class="values-title">My Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <h3>Designed to endure</h3>
+          <p>Every pixel, every color, every curve has a reason. We obsess over longevity because good design should work as hard as you do without needing a refresh every season.</p>
+        </div>
+        <div class="value-card">
+          <h3>Beyond trends</h3>
+          <p>The moment something becomes cool, it's already becoming old. We work with timeless principles, strategic thinking, and real intention not Instagram aesthetics.</p>
+        </div>
+        <div class="value-card">
+          <h3>Built to last</h3>
+          <p>Your brand isn't a one-hit wonder. We create systems that scale, evolve, and grow with you, design that's solid enough to carry your business forward for years.</p>
+        </div>
+        <div class="value-card">
+          <h3>Strategy first</h3>
+          <p>Beautiful is only half the battle. Every design decision is rooted in strategy, research, and real business objectives making sure form follows function, always.</p>
+        </div>
+      </div>
+    </div>
+    
     <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
     <div class="footer">
       <p class="footer-title">Thank You!</p>
@@ -372,12 +424,18 @@
 
   <script>
     var projects = [
-  { name: "Raina Kattelson", thumbnail: "images/Frame 2.jpg", descEn: "Raina Kattelson is a New York-based prop and interior stylist who has worked with numerous notable people and recognized brands, creating rich and human visual worlds. The project involved building an identity that evokes her personality and highlights her work, connecting with new audiences.<br><br>Raina's vision was to refresh her image to have a more recognizable and consistent brand, showcasing her projects and character in an organic and contemporary way. The logo combines a \"handwritten\" typeface with an imperfect enclosing shape, evoking her curiosity, creativity and sense of freedom.<br><br>The logo is accompanied by a graphic system that picks up tones recurring throughout her work and interact in a harmonious and balanced way, along with a more experimental typographic approach — combining two very different typefaces and replacing the word \"and\" with \"&\" in all instances. Other elements such as rules, color blocks and the use of the shape are carried through to formalize the graphic outputs.<br><br>With that system in place, the look & feel of her website, promotional postcards, and presentations for creative briefs came together. The result is an interesting, organic and modern brand.", descEs: "Raina Kattelson es una estilista de utilería e interiores basada en Nueva York que ha trabajado con numerosas personas notables y marcas reconocidas, creando mundos visuales ricos y humanos. El proyecto consistió en construir una identidad que evoca su personalidad y resalta su trabajo, conectando con nuevas audiencias.<br><br>La visión de Raina era refrescar su imagen para tener una marca más reconocible y consistente, mostrando sus proyectos y carácter de manera orgánica y contemporánea. El logo combina una tipografía \"manual\" con una plasta envolvente imperfecta, evocando su curiosidad, creatividad y sentido de libertad.<br><br>El logo se acompaña de un sistema gráfico que retoma tonos que se repiten en su trabajo e interactúan de manera armoniosa y balanceada, junto con una aplicación tipográfica más experimental — combinando dos tipografías muy distintas y reemplazando la palabra \"y\" por el \"&\" en todas las instancias. Otros recursos como plecas, bloques de color y el uso de la plasta se retoman para formalizar las salidas gráficas.<br><br>Con ese sistema establecido, se desarrolló el look & feel de su página web, postales promocionales y presentaciones para briefs creativos. El resultado es una marca interesante, orgánica y moderna.", images: ["images/Frame 41.jpg", "images/Frame 42.jpg", "images/Frame 43.jpg", "images/Frame 44.jpg", "images/Frame 45.jpg", "images/Frame 46.jpg"] },
-  { name: "Astro Cold Brew", thumbnail: "images/Frame 3.jpg", descEn: "Astro Cold Brew was born as part of the Shake Shack family in Mexico — an innovative, energizing drink in a can designed to inspire and fuel its consumers. The project covered everything from strategic foundation to visual execution.<br><br>The process began by defining the core concepts guiding the brand: the quality of the drink, its role as a companion to new consumers, the pleasure of an indulgent moment, and the energy that keeps you moving toward your goals. From these pillars, the name Astro Cold Brew was developed — a drink that elevates the good, recharges you, and lets you launch toward your objectives.<br><br>The communication aligned with an \"out of this world\" narrative, with messaging like \"we are a comet of quality, flavor and energy\" — striking a friendly and dynamic tone. This universe translated visually through a bold, approachable logo, paired with equally strong typography, vivid and disruptive colors, and an illustration system that positions the brand as a fun ally in the cold brew adventure.", descEs: "Astro Cold Brew nació como parte de la familia Shake Shack en México — una bebida innovadora y energizante en lata, diseñada para inspirar y motivar a sus consumidores. El proyecto abarcó desde la estrategia hasta la ejecución visual.<br><br>El proceso inició definiendo los conceptos clave que guían la marca: la calidad de la bebida, su rol como acompañante de nuevos consumidores, el disfrute de un momento de indulgencia y la energía que impulsa a continuar con las metas del día. A partir de estos pilares se desarrolló el nombre Astro Cold Brew — una bebida que eleva lo bueno, te recarga y te permite despegar hacia tus objetivos.<br><br>La comunicación se alineó con una narrativa \"fuera de este mundo\", con mensajes como \"somos un cometa de calidad, sabor y energía\" — un tono amigable y dinámico. Este universo se tradujo visualmente en un logo bold y cercano, tipografías igual de fuertes, colores vivos y disruptivos, y un sistema de ilustraciones que posiciona a la marca como un aliado divertido en la aventura del cold brew.", images: ["images/frame 236 13.42.44.mp4", "images/Frame 47.jpg", "images/Frame 48.jpg", "images/Frame 49.jpg", "images/Frame 50.jpg", "images/Frame 51.jpg"] },
-  { name: "Shelter Studios", thumbnail: "images/Frame 7.jpg", descEn: "Shelter Studios was created as an initiative to promote both emerging and established artists through audiovisual production — building community and an intimate space for audiences to truly know them. The project involved developing the name and full identity for the program.<br><br>The vision was to create a space for concerts and interviews with musicians in a warm, home-like setting — humanizing them and opening a dialogue between music lovers. From the beginning, the team envisioned a program diverse in genres, origins, and styles: a platform for discovering the most exciting music happening in Mexico.<br><br>From these concepts, Shelter Studios was born — a name that captures the essence of the project: a warm refuge for music. This translated visually into the logotype, where an armchair serves as the primary icon and brand identifier. The symbol also carried through into the set design, with each recording always featuring a different armchair or sofa. The broader visual territory is built on silhouettes — the armchair alongside domestic living room elements and musical instruments becomes an enveloping frame for imagery, completed by expressive typography that creates a flexible, contemporary, and compelling visual system.", descEs: "Shelter Studios nació como una iniciativa para promover a artistas emergentes y establecidos a través de la producción audiovisual — construyendo comunidad y un espacio íntimo para conocerlos de verdad. El proyecto implicó desarrollar el nombre y la identidad completa del programa.<br><br>La visión era crear un espacio para conciertos y entrevistas con músicos en un entorno hogareño e íntimo — humanizándolos y abriendo un diálogo entre melómanos. Desde el inicio, el equipo concibió un programa diverso en géneros, orígenes y estilos: una plataforma para descubrir lo más novedoso de la música en México.<br><br>De estos conceptos nació Shelter Studios — un nombre que captura la esencia del proyecto: un refugio cálido para la música. Esto se tradujo visualmente en el logotipo, donde un sillón funciona como ícono principal e identificador de la marca. El símbolo también se incorporó en la escenografía, grabando siempre en un sillón o sofá distinto con cada artista. El territorio visual se construye a partir de siluetas — el sillón junto con elementos domésticos e instrumentos musicales se convierte en un marco envolvente para las imágenes, complementado con tipografía expresiva que da lugar a un sistema visual flexible, contemporáneo y atractivo.", images: ["images/Frame 71.jpg", "images/Frame 72.jpg", "images/Frame 73.jpg", "images/Frame 74.jpg", "images/Frame 75.jpg", "images/Frame 76.jpg"] },
-  { name: "Siete Machos", thumbnail: "images/Frame 6.jpg", descEn: "Siete Machos is a nationally recognized brand with decades of history, perfuming generations of Mexican households. The project involved refreshing their web presence — for both the cosmetics and spirits lines — and redesigning the tequila label to connect with younger audiences.<br><br>The project began with the tequila packaging redesign, where key elements such as the goats, agave plants, and logotype needed to be preserved. Drawing from the celebration at the heart of the drink, an illustration was crafted featuring seven dancing billy goats alongside other festive elements, turning the label into a communal celebration.<br><br>With the tequila's new visual style established, the look and feel was translated to the spirits website — incorporating illustrative elements for iconography, a warm and elegant updated palette, and more contemporary typography. For the cosmetics site, the focus was on preserving the brand's essence by highlighting the ritualistic and esoteric qualities of the products, modernizing typography, bringing consistency to the photographic style, and carefully crafting the user experience as they explore the world of Siete Machos.", descEs: "Siete Machos es una marca de reconocimiento nacional con décadas de historia, perfumando a generaciones de hogares mexicanos. El proyecto implicó refrescar su presencia web — tanto para la línea de cosméticos como para la de destilados — y rediseñar la etiqueta del tequila para conectar con audiencias más jóvenes.<br><br>El proyecto inició con el rediseño del empaque del tequila, donde debían preservarse elementos clave como las cabras, los magueyes y el logotipo. Partiendo de la celebración que está en el corazón de la bebida, se creó una ilustración protagonizada por siete machos cabríos bailando junto con otros elementos festivos, convirtiendo la etiqueta en una fiesta comunal.<br><br>Con el nuevo estilo visual del tequila establecido, el look & feel se tradujo al sitio de destilados — incorporando elementos ilustrativos para la iconografía, una paleta cálida y elegante actualizada y tipografías más contemporáneas. Para el sitio de cosméticos, el foco estuvo en preservar la esencia de la marca resaltando las cualidades rituales y esotéricas de los productos, modernizando las tipografías, aportando consistencia al estilo fotográfico y cuidando la experiencia del usuario al explorar el mundo de Siete Machos.", images: ["images/Frame 65.jpg", "images/Frame 66.jpg", "images/Frame 67.jpg", "images/Frame 68.jpg", "images/Frame 69.jpg", "images/Frame 70.jpg"] },
-  { name: "Aromandia", thumbnail: "images/Frame 245.jpg", descEn: "A UX/UI design project for Aromandia — an e-commerce experience built around the ritual of scent, reimagining how a modern candle brand connects with its customers online.<br><br>The process was research-driven from the start: user interviews were conducted to understand how people discover and shop for aromatic products, what builds trust during the purchase journey, and where existing e-commerce flows create unnecessary friction. Those insights shaped every design decision that followed.<br><br>The result is a mobile-first interface that feels as intentional as the products it showcases — modern and sophisticated, with a seamless checkout experience that turns browsing into buying.", descEs: "Un proyecto de diseño UX/UI para Aromandia — una experiencia de e-commerce construida alrededor del ritual del aroma, reimaginando cómo una marca moderna de velas aromáticas se conecta con sus clientes en línea.<br><br>El proceso fue impulsado por investigación desde el inicio: se realizaron entrevistas con usuarios para entender cómo descubren y compran productos aromáticos, qué genera confianza durante el proceso de compra y dónde los flujos de e-commerce existentes crean fricción innecesaria. Esos hallazgos dieron forma a cada decisión de diseño.<br><br>El resultado es una interfaz mobile-first que se siente tan intencional como los productos que presenta — moderna y sofisticada, con una experiencia de checkout fluida que convierte el explorar en comprar.", images: ["images/Frame 240.jpg", "images/Frame 241.jpg", "images/Frame 242.jpg", "images/Frame 243.jpg", "images/Frame 244.jpg"] },
-  { name: "Velavita", thumbnail: "images/Frame 24.jpg", descEn: "Velavita is a candle brand built around the idea that a candle can do more than fill a room with scent — it can mark a moment. The project involved developing the brand identity and packaging, creating a visual world as considered and intentional as the product itself.<br><br>The design approach is warm, refined, and sensorial — communicating the quality of the product through every detail. Typography, color, and material choices work together to position Velavita as a brand that belongs in the homes of people who care about the way things feel.", descEs: "Velavita es una marca de velas construida alrededor de la idea de que una vela puede hacer más que llenar un cuarto de aroma — puede marcar un momento. El proyecto implicó desarrollar la identidad de marca y el packaging, creando un mundo visual tan considerado e intencional como el producto mismo.<br><br>El enfoque de diseño es cálido, refinado y sensorial — comunicando la calidad del producto a través de cada detalle. La tipografía, el color y la selección de materiales trabajan juntos para posicionar a Velavita como una marca que pertenece a los hogares de personas que se preocupan por cómo se sienten las cosas.", images: ["images/Frame 196.jpg", "images/Frame 197.jpg", "images/Frame 198.jpg", "images/Frame 199.jpg", "images/Frame 200.jpg", "images/Frame 201.jpg"] },
+  { name: "Raina Kattelson", thumbnail: "images/Frame 2.jpg",
+    descEn: "Raina Kattelson is a New York-based prop and interior stylist who has worked with numerous notable people and recognized brands, creating rich and human visual worlds. The project involved building an identity that evokes her personality and highlights her work, connecting with new audiences.<br><br>Raina's vision was to refresh her image to have a more recognizable and consistent brand, showcasing her projects and character in an organic and contemporary way. The logo combines a \"handwritten\" typeface with an imperfect enclosing shape, evoking her curiosity, creativity and sense of freedom.<br><br>The logo is accompanied by a graphic system that picks up tones recurring throughout her work and interact in a harmonious and balanced way, along with a more experimental typographic approach — combining two very different typefaces and replacing the word \"and\" with \"&\" in all instances. Other elements such as rules, color blocks and the use of the shape are carried through to formalize the graphic outputs.<br><br>With that system in place, the look & feel of her website, promotional postcards, and presentations for creative briefs came together. The result is an interesting, organic and modern brand.",
+    descEs: "Raina Kattelson es una estilista de utilería e interiores basada en Nueva York que ha trabajado con numerosas personas notables y marcas reconocidas, creando mundos visuales ricos y humanos. El proyecto consistió en construir una identidad que evoca su personalidad y resalta su trabajo, conectando con nuevas audiencias.<br><br>La visión de Raina era refrescar su imagen para tener una marca más reconocible y consistente, mostrando sus proyectos y carácter de manera orgánica y contemporánea. El logo combina una tipografía \"manual\" con una plasta envolvente imperfecta, evocando su curiosidad, creatividad y sentido de libertad.<br><br>El logo se acompaña de un sistema gráfico que retoma tonos que se repiten en su trabajo e interactúan de manera armoniosa y balanceada, junto con una aplicación tipográfica más experimental — combinando dos tipografías muy distintas y reemplazando la palabra \"y\" por el \"&\" en todas las instancias. Otros recursos como plecas, bloques de color y el uso de la plasta se retoman para formalizar las salidas gráficas.<br><br>Con ese sistema establecido, se desarrolló el look & feel de su página web, postales promocionales y presentaciones para briefs creativos. El resultado es una marca interesante, orgánica y moderna.",
+    images: ["images/Frame 41.jpg", "images/Frame 42.jpg", "images/Frame 43.jpg", "images/Frame 44.jpg", "images/Frame 45.jpg", "images/Frame 46.jpg"] },
+  { name: "Astro Cold Brew", thumbnail: "images/Frame 3.jpg",
+    descEn: "Astro Cold Brew was born as part of the Shake Shack family in Mexico — an innovative, energizing drink in a can designed to inspire and fuel its consumers. The project covered everything from strategic foundation to visual execution.<br><br>The process began by defining the core concepts guiding the brand: the quality of the drink, its role as a companion to new consumers, the pleasure of an indulgent moment, and the energy that keeps you moving toward your goals. From these pillars, the name Astro Cold Brew was developed — a drink that elevates the good, recharges you, and lets you launch toward your objectives.<br><br>The communication aligned with an \"out of this world\" narrative, with messaging like \"we are a comet of quality, flavor and energy\" — striking a friendly and dynamic tone. This universe translated visually through a bold, approachable logo, paired with equally strong typography, vivid and disruptive colors, and an illustration system that positions the brand as a fun ally in the cold brew adventure.",
+    descEs: "Astro Cold Brew nació como parte de la familia Shake Shack en México — una bebida innovadora y energizante en lata, diseñada para inspirar y motivar a sus consumidores. El proyecto abarcó desde la estrategia hasta la ejecución visual.<br><br>El proceso inició definiendo los conceptos clave que guían la marca: la calidad de la bebida, su rol como acompañante de nuevos consumidores, el disfrute de un momento de indulgencia y la energía que impulsa a continuar con las metas del día. A partir de estos pilares se desarrolló el nombre Astro Cold Brew — una bebida que eleva lo bueno, te recarga y te permite despegar hacia tus objetivos.<br><br>La comunicación se alineó con una narrativa \"fuera de este mundo\", con mensajes como \"somos un cometa de calidad, sabor y energía\" — un tono amigable y dinámico. Este universo se tradujo visualmente en un logo bold y cercano, tipografías igual de fuertes, colores vivos y disruptivos, y un sistema de ilustraciones que posiciona a la marca como un aliado divertido en la aventura del cold brew.",
+    images: ["images/frame 236 13.42.44.mp4", "images/Frame 47.jpg", "images/Frame 48.jpg", "images/Frame 49.jpg", "images/Frame 50.jpg", "images/Frame 51.jpg"] },
+  { name: "Shelter Studios", thumbnail: "images/Frame 7.jpg", descEn: "Shelter Studios was created to promote emerging and established artists.", descEs: "Shelter Studios nació como una iniciativa para promover a artistas.", images: ["images/Frame 71.jpg", "images/Frame 72.jpg", "images/Frame 73.jpg", "images/Frame 74.jpg", "images/Frame 75.jpg", "images/Frame 76.jpg"] },
+  { name: "Siete Machos", thumbnail: "images/Frame 6.jpg", descEn: "Siete Machos is a nationally recognized brand with decades of history.", descEs: "Siete Machos es una marca de reconocimiento nacional.", images: ["images/Frame 65.jpg", "images/Frame 66.jpg", "images/Frame 67.jpg", "images/Frame 68.jpg", "images/Frame 69.jpg", "images/Frame 70.jpg"] },
+  { name: "Aromandia", thumbnail: "images/Frame 245.jpg", descEn: "A UX/UI design project for Aromandia e-commerce.", descEs: "Un proyecto de diseño UX/UI para Aromandia.", images: ["images/Frame 240.jpg", "images/Frame 241.jpg", "images/Frame 242.jpg", "images/Frame 243.jpg", "images/Frame 244.jpg"] },
+  { name: "Velavita", thumbnail: "images/Frame 24.jpg", descEn: "Velavita is a candle brand built around the ritual of scent.", descEs: "Velavita es una marca de velas construida alrededor del ritual.", images: ["images/Frame 196.jpg", "images/Frame 197.jpg", "images/Frame 198.jpg", "images/Frame 199.jpg", "images/Frame 200.jpg", "images/Frame 201.jpg"] },
   { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg", descEn: "Oasis Decoraciones is a candle brand expanding into fragrances.", descEs: "Oasis Decoraciones es una marca de velas con mira a fragancias.", images: ["images/Frame 59.jpg", "images/Frame 60.jpg", "images/Frame 61.jpg", "images/Frame 62.jpg", "images/Frame 63.jpg", "images/Frame 64.jpg"] },
   { name: "Level Home Investment", thumbnail: "images/Frame 230.png", descEn: "Level Home Investment was building its real estate business.", descEs: "Level Home Investment estaba construyendo su negocio inmobiliario.", images: ["images/Frame 230.png", "images/Frame 232.jpeg", "images/Frame 233.mp4", "images/Frame 235.jpg"] },
   { name: "Blockbuster App", thumbnail: "images/Frame 223.png", descEn: "A UX design project reimagining Blockbuster as a modern app.", descEs: "Un proyecto de diseño UX que reimagina a Blockbuster.", images: ["images/Frame 224.jpg", "images/Frame 225.jpg", "images/Frame 226.jpg", "images/Frame 227.jpg", "images/Frame 228.jpg", "images/Frame 229.jpg"] },
@@ -553,6 +611,20 @@
 
     window.addEventListener('resize', updateDeviceIndicator);
     updateDeviceIndicator();
+
+    // Intersection Observer para animar el highlighter cuando llegas a My Values
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const valuesTitle = document.querySelector('.values-title');
+    if (valuesTitle) {
+      observer.observe(valuesTitle);
+    }
   </script>
   
 </body>
