@@ -53,14 +53,14 @@
     .footer-contact p { color: var(--muted); margin-bottom: 20px; }
 
     /* HOME - TODO EN UNA SECCIÓN */
-    .home-hero { background: var(--rose); padding: 32px 48px 8px; text-align: center; }
+    .home-hero { background: #fae9b7; padding: 32px 48px 8px; text-align: center; }
     .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
     .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--brown); line-height: 1.05; margin-bottom: 0; }
-    .hero-tagline { font-family: 'Instrument Serif', serif; font-size: clamp(1.1rem, 2.5vw, 1.6rem); font-style: italic; color: var(--brown); line-height: 1.35; max-width: 580px; margin: 0 auto; }
+    .hero-tagline { font-family: 'Instrument Serif', serif; font-size: clamp(1.4rem, 3.5vw, 2rem); font-style: italic; color: var(--brown); line-height: 1.35; max-width: 580px; margin: 0 auto; }
     
     /* CAROUSEL 3D SECTION */
     .carousel-section { 
-  background: var(--rose); 
+  background: #fae9b7; 
   padding: 60px 0; 
   overflow: hidden; 
 }
@@ -69,15 +69,15 @@
     .marquee-wrap { width: 100%; overflow: hidden; }
     .marquee-track {
       display: flex;
-      gap: 20px;
+      gap: 40px;
       width: max-content;
       animation: scrollX 70s linear infinite;
     }
     .marquee-track:hover { animation-play-state: paused; }
     .marquee-card {
       flex: 0 0 auto;
-      width: 440px;
-      height: 540px;
+      width: 360px;
+      height: 440px;
       border-radius: 12px;
       object-fit: cover;
       cursor: pointer;
@@ -92,14 +92,14 @@
       to { transform: translateX(-50%); }
     }
 
-    .home-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 0 auto; padding: 40px 48px 0; }
-    .home-col { font-size: 0.72rem; line-height: 1.9; color: var(--muted); }
+    .home-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 0 auto; padding: 40px 48px 80px; }
+    .home-col { font-size: 0.95rem; line-height: 1.9; color: var(--muted); }
 
     .home-projects-section { padding: 40px 48px 0; max-width: 900px; margin: 0 auto; }
     .see-more-wrap { text-align: center; padding: 0 0 64px; }
 
     /* ABOUT */
-    .about-top { background: var(--warm); padding: 64px 48px 56px; text-align: center; }
+    .about-top { background: #fae9b7; padding: 64px 48px 56px; text-align: center; }
     .about-quote { font-family: 'Instrument Serif', serif; font-size: clamp(1.3rem, 3vw, 2rem); font-style: italic; color: var(--brown); line-height: 1.55; max-width: 600px; margin: 0 auto 48px; }
     .about-photo { display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .about-photo img { border-radius: 2px; }
@@ -116,7 +116,7 @@
     .services-top { padding: 72px 48px 56px; text-align: center; }
     .services-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 5vw, 4.2rem); color: var(--brown); margin-bottom: 48px; line-height: 1.1; }
     .services-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 820px; margin: 0 auto; }
-    .service-card { background: var(--warm); border-radius: 4px; padding: 36px 24px; text-align: center; }
+    .service-card { background: #fae9b7; border-radius: 4px; padding: 36px 24px; text-align: center; }
     .service-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.35rem; color: var(--brown); margin-bottom: 24px; }
     .service-card ul { list-style: none; font-size: 0.68rem; line-height: 2.2; color: var(--muted); }
     .additional-section { padding: 72px 48px 64px; text-align: center; }
@@ -151,8 +151,9 @@
       .nav-links { gap: 20px; }
       .home-hero { padding: 24px 20px 12px; }
       .carousel-section { padding: 8px 0 8px; }
-      .marquee-card { width: 320px; height: 392px; }
-      .home-cols { padding: 30px 20px 0; grid-template-columns: 1fr; }
+      .marquee-card { width: 280px; height: 340px; }
+      .marquee-track { gap: 30px; }
+      .home-cols { padding: 30px 20px 60px; grid-template-columns: 1fr; }
       .services-cards { grid-template-columns: 1fr 1fr; }
       .projects-grid-full { grid-template-columns: 1fr 1fr; padding: 0 20px 48px; }
       .detail-layout { grid-template-columns: 1fr; gap: 24px; padding: 40px 20px; }
@@ -164,8 +165,9 @@
       .home-hero { padding: 20px 16px 10px; }
       .hero-tagline { margin: 0 auto; }
       .carousel-section { padding: 8px 0 8px; }
-      .marquee-card { width: 230px; height: 282px; }
-      .home-cols { padding: 25px 16px 0; }
+      .marquee-card { width: 200px; height: 245px; }
+      .marquee-track { gap: 25px; }
+      .home-cols { padding: 25px 16px 60px; }
       .projects-grid-full { grid-template-columns: 1fr; }
     }
   </style>
@@ -208,7 +210,7 @@
     </div>
     
     <div style="text-align:center; padding-top:24px; padding-bottom: 40px;">
-      <span onclick="showSection('about')" id="how-work-btn" style="font-family:'Instrument Serif',serif; font-size:clamp(1.1rem,2.5vw,1.6rem); font-style:italic; color:var(--brown); cursor:pointer; opacity:0.75; transition:opacity 0.2s; display:inline-block;">How do I work? →</span>
+      <span onclick="showSection('about')" id="how-work-btn" style="font-family:'Instrument Serif',serif; font-size:clamp(1.4rem,3.5vw,2.2rem); font-style:italic; color:var(--brown); cursor:pointer; opacity:0.75; transition:opacity 0.2s; display:inline-block;">How do I work? →</span>
     </div>
 
     <div class="home-cols">
@@ -347,7 +349,7 @@
       <button class="detail-nav-btn" id="btn-prev" onclick="navigateProject(-1)">← PREV PROJECT</button>
       <button class="detail-nav-btn" id="btn-next" onclick="navigateProject(1)">NEXT PROJECT →</button>
     </div>
-    <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
+    <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
     <div class="footer">
       <p class="footer-title">Thank You!</p>
       <p class="footer-sub">Looking forward to connect with you!</p>
@@ -367,36 +369,36 @@
 
   <script>
     var projects = [
-      { name: "Raina Kattelson", thumbnail: "images/Frame 2.jpg", descEn: "Raina Kattelson is a New York-based prop and interior stylist.", descEs: "Raina Kattelson es una estilista de utilería e interiores basada en Nueva York.", images: ["images/Frame 41.jpg", "images/Frame 42.jpg"] },
-      { name: "Astro Cold Brew", thumbnail: "images/Frame 3.jpg", descEn: "Astro Cold Brew was born as part of the Shake Shack family.", descEs: "Astro Cold Brew nació como parte de la familia Shake Shack en México.", images: ["images/Frame 47.jpg", "images/Frame 48.jpg"] },
-      { name: "Shelter Studios", thumbnail: "images/Frame 7.jpg", descEn: "Shelter Studios was created to promote emerging and established artists.", descEs: "Shelter Studios nació como una iniciativa para promover a artistas.", images: ["images/Frame 71.jpg", "images/Frame 72.jpg"] },
-      { name: "Siete Machos", thumbnail: "images/Frame 6.jpg", descEn: "Siete Machos is a nationally recognized brand with decades of history.", descEs: "Siete Machos es una marca de reconocimiento nacional.", images: ["images/Frame 65.jpg", "images/Frame 66.jpg"] },
-      { name: "Aromandia", thumbnail: "images/Frame 245.jpg", descEn: "A UX/UI design project for Aromandia e-commerce.", descEs: "Un proyecto de diseño UX/UI para Aromandia.", images: ["images/Frame 240.jpg", "images/Frame 241.jpg"] },
-      { name: "Velavita", thumbnail: "images/Frame 24.jpg", descEn: "Velavita is a candle brand built around the ritual of scent.", descEs: "Velavita es una marca de velas construida alrededor del ritual.", images: ["images/Frame 196.jpg", "images/Frame 197.jpg"] },
-      { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg", descEn: "Oasis Decoraciones is a candle brand expanding into fragrances.", descEs: "Oasis Decoraciones es una marca de velas con mira a fragancias.", images: ["images/Frame 59.jpg", "images/Frame 60.jpg"] },
-      { name: "Level Home Investment", thumbnail: "images/Frame 230.png", descEn: "Level Home Investment was building its real estate business.", descEs: "Level Home Investment estaba construyendo su negocio inmobiliario.", images: ["images/Frame 230.png", "images/Frame 232.jpeg"] },
-      { name: "Blockbuster App", thumbnail: "images/Frame 223.png", descEn: "A UX design project reimagining Blockbuster as a modern app.", descEs: "Un proyecto de diseño UX que reimagina a Blockbuster.", images: ["images/Frame 224.jpg", "images/Frame 225.jpg"] },
-      { name: "Aer by Armella", thumbnail: "images/Frame 14.jpg", descEn: "Aer by Armella sells air conditioning products.", descEs: "Aer by Armella vende aires acondicionados.", images: ["images/Frame 168.jpg", "images/Frame 169.jpg"] },
-      { name: "Mordisko", thumbnail: "images/Frame 4.jpg", descEn: "Mordisko is one of Mexico's most iconic brands.", descEs: "Mordisko es una de las marcas más emblemáticas de México.", images: ["images/Frame 53.jpg", "images/Frame 54.jpg"] },
-      { name: "Aromandia - Seasonalities", thumbnail: "images/Frame 5.jpg", descEn: "The Seasonalities collection is Aromandia's seasonal chapter.", descEs: "La colección Seasonalities es el capítulo estacional.", images: ["images/Frame 147.jpg", "images/Frame 148.jpg"] },
-      { name: "Aromandia - Scented Candles", thumbnail: "images/Frame 1.jpg", descEn: "Aromandia is a premium candle brand with attention to detail.", descEs: "Aromandia es una marca de velas premium.", images: ["images/Frame 35.jpg", "images/Frame 36.jpg"] },
-      { name: "Tom Kubik Photography", thumbnail: "images/Frame 8.jpg", descEn: "Tom Kubik is a photographer whose practice centers on authentic images.", descEs: "Tom Kubik es un fotógrafo basado en Los Ángeles.", images: ["images/Frame 77.jpg", "images/Frame 78.jpg"] },
-      { name: "Effecty", thumbnail: "images/Frame 9.jpg", descEn: "Effecty is a digital telehealth platform.", descEs: "Effecty es una plataforma digital de telehealth.", images: ["images/Frame 83.jpg", "images/Frame 84.jpg"] },
-      { name: "Paws", thumbnail: "images/Frame 10.jpg", descEn: "Paws is a line designed for Petco.", descEs: "Paws es una línea diseñada para Petco.", images: ["images/Frame 89.jpg", "images/Frame 90.jpg"] },
-      { name: "USG", thumbnail: "images/Frame 11.jpg", descEn: "USG is a leading construction materials brand.", descEs: "USG es una marca líder de materiales de construcción.", images: ["images/Frame 95.jpg", "images/Frame 105.jpg"] },
-      { name: "Señor Mango", thumbnail: "images/Frame 12.jpg", descEn: "Señor Mango is a dried mango brand.", descEs: "Señor Mango es una marca de mango deshidratado.", images: ["images/Frame 96.jpg", "images/Frame 106.jpg"] },
-      { name: "Grace Sepulveda", thumbnail: "images/Frame 26.png", descEn: "Grace Sepúlveda channeled her hospitality expertise.", descEs: "Grace Sepúlveda decidió canalizar su experiencia en la hotelería.", images: ["images/Frame 211.jpg", "images/Frame 212.jpg"] },
-      { name: "Vita Blip", thumbnail: "images/Frame 15.jpg", descEn: "Vita Blip is a vitamin brand with personality.", descEs: "Vita Blip es una marca de vitaminas con carácter.", images: ["images/Frame 160.jpg", "images/Frame 161.jpg"] },
-      { name: "English Sprint", thumbnail: "images/Frame 16.jpg", descEn: "English Sprint is a learning platform for English.", descEs: "English Sprint es una plataforma de aprendizaje de inglés.", images: ["images/Frame 174.jpg", "images/Frame 175.jpg"] },
-      { name: "Nos Vemos de Noche", thumbnail: "images/Frame 17.jpg", descEn: "Nos Vemos de Noche is an artistic project.", descEs: "Nos Vemos de Noche es un proyecto artístico.", images: ["images/Frame_157.jpg", "images/Frame_158.jpg"] },
-      { name: "Debajo de un ciruelo", thumbnail: "images/Frame 18.jpg", descEn: "Debajo de un Ciruelo was a real exhibition.", descEs: "Debajo de un Ciruelo fue una exposición real.", images: ["images/Frame 162.jpg", "images/Frame 163.jpg"] },
-      { name: "Toda Fest", thumbnail: "images/Frame 179.jpg", descEn: "Toda Fest was a music festival with female lineup.", descEs: "Toda Fest fue un festival de música con línea femenina.", images: ["images/Frame 179.jpg", "images/Frame 180.jpg"] },
-      { name: "Sunshine Bagels", thumbnail: "images/Frame 20.jpg", descEn: "Sunshine Bagels is a bagel brand with personality.", descEs: "Sunshine Bagels es una marca de bagels con personalidad.", images: ["images/Frame 165.jpg", "images/Frame 166.jpg"] },
-      { name: "Garabatos", thumbnail: "images/Frame 189.jpg", descEn: "Garabatos is a beloved Mexican restaurant brand.", descEs: "Garabatos es una querida marca de restaurantes mexicana.", images: ["images/Frame 189.jpg", "images/Frame 190.jpg"] },
-      { name: "Triangulo de Oro", thumbnail: "images/Frame 22.jpg", descEn: "Triángulo de Oro is a Costa Rican brand.", descEs: "Triángulo de Oro es una marca costarricense.", images: ["images/Frame 185.jpg", "images/Frame 186.jpg"] },
-      { name: "SUMA", thumbnail: "images/Frame 23.jpg", descEn: "SUMA is a collective and community platform.", descEs: "SUMA es una plataforma colectiva y comunitaria.", images: ["images/Frame 192.jpg", "images/Frame 193.jpg"] },
-      { name: "Velavita candles", thumbnail: "images/Frame 25.jpg", descEn: "This collection focuses on Velavita's seasonal releases.", descEs: "Esta colección se enfoca en los lanzamientos estacionales.", images: ["images/Frame 217.jpg", "images/Frame 218.jpg"] },
-      { name: "Alpez", thumbnail: "images/Frame 27.jpg", descEn: "Alpez is an energy and gas distribution company.", descEs: "Alpez es una empresa distribuidora de energía y gas.", images: ["images/Frame 202.jpg", "images/Frame 203.jpg"] }
+  { name: "Raina Kattelson", thumbnail: "images/Frame 2.jpg", descEn: "Raina Kattelson is a New York-based prop and interior stylist.", descEs: "Raina Kattelson es una estilista de utilería e interiores basada en Nueva York.", images: ["images/Frame 41.jpg", "images/Frame 42.jpg", "images/Frame 43.jpg", "images/Frame 44.jpg", "images/Frame 45.jpg", "images/Frame 46.jpg"] },
+  { name: "Astro Cold Brew", thumbnail: "images/Frame 3.jpg", descEn: "Astro Cold Brew was born as part of the Shake Shack family.", descEs: "Astro Cold Brew nació como parte de la familia Shake Shack en México.", images: ["images/frame 236 13.42.44.mp4", "images/Frame 47.jpg", "images/Frame 48.jpg", "images/Frame 49.jpg", "images/Frame 50.jpg", "images/Frame 51.jpg"] },
+  { name: "Shelter Studios", thumbnail: "images/Frame 7.jpg", descEn: "Shelter Studios was created to promote emerging and established artists.", descEs: "Shelter Studios nació como una iniciativa para promover a artistas.", images: ["images/Frame 71.jpg", "images/Frame 72.jpg", "images/Frame 73.jpg", "images/Frame 74.jpg", "images/Frame 75.jpg", "images/Frame 76.jpg"] },
+  { name: "Siete Machos", thumbnail: "images/Frame 6.jpg", descEn: "Siete Machos is a nationally recognized brand with decades of history.", descEs: "Siete Machos es una marca de reconocimiento nacional.", images: ["images/Frame 65.jpg", "images/Frame 66.jpg", "images/Frame 67.jpg", "images/Frame 68.jpg", "images/Frame 69.jpg", "images/Frame 70.jpg"] },
+  { name: "Aromandia", thumbnail: "images/Frame 245.jpg", descEn: "A UX/UI design project for Aromandia e-commerce.", descEs: "Un proyecto de diseño UX/UI para Aromandia.", images: ["images/Frame 240.jpg", "images/Frame 241.jpg", "images/Frame 242.jpg", "images/Frame 243.jpg", "images/Frame 244.jpg"] },
+  { name: "Velavita", thumbnail: "images/Frame 24.jpg", descEn: "Velavita is a candle brand built around the ritual of scent.", descEs: "Velavita es una marca de velas construida alrededor del ritual.", images: ["images/Frame 196.jpg", "images/Frame 197.jpg", "images/Frame 198.jpg", "images/Frame 199.jpg", "images/Frame 200.jpg", "images/Frame 201.jpg"] },
+  { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg", descEn: "Oasis Decoraciones is a candle brand expanding into fragrances.", descEs: "Oasis Decoraciones es una marca de velas con mira a fragancias.", images: ["images/Frame 59.jpg", "images/Frame 60.jpg", "images/Frame 61.jpg", "images/Frame 62.jpg", "images/Frame 63.jpg", "images/Frame 64.jpg"] },
+  { name: "Level Home Investment", thumbnail: "images/Frame 230.png", descEn: "Level Home Investment was building its real estate business.", descEs: "Level Home Investment estaba construyendo su negocio inmobiliario.", images: ["images/Frame 230.png", "images/Frame 232.jpeg", "images/Frame 233.mp4", "images/Frame 235.jpg"] },
+  { name: "Blockbuster App", thumbnail: "images/Frame 223.png", descEn: "A UX design project reimagining Blockbuster as a modern app.", descEs: "Un proyecto de diseño UX que reimagina a Blockbuster.", images: ["images/Frame 224.jpg", "images/Frame 225.jpg", "images/Frame 226.jpg", "images/Frame 227.jpg", "images/Frame 228.jpg", "images/Frame 229.jpg"] },
+  { name: "Aer by Armella", thumbnail: "images/Frame 14.jpg", descEn: "Aer by Armella sells air conditioning products.", descEs: "Aer by Armella vende aires acondicionados.", images: ["images/Frame 168.jpg", "images/Frame 169.jpg", "images/Frame 170.jpg", "images/Frame 171.jpg", "images/Frame 172.jpg", "images/Frame 173.jpg"] },
+  { name: "Mordisko", thumbnail: "images/Frame 4.jpg", descEn: "Mordisko is one of Mexico's most iconic brands.", descEs: "Mordisko es una de las marcas más emblemáticas de México.", images: ["images/Frame 53.jpg", "images/Frame 54.jpg", "images/Frame 55.jpg", "images/Frame 56.jpg", "images/Frame 57.jpg", "images/Frame 58.jpg"] },
+  { name: "Aromandia - Seasonalities", thumbnail: "images/Frame 5.jpg", descEn: "The Seasonalities collection is Aromandia's seasonal chapter.", descEs: "La colección Seasonalities es el capítulo estacional.", images: ["images/Frame 147.jpg", "images/Frame 148.jpg", "images/Frame 149.jpg", "images/Frame 150.jpg", "images/Frame 151.jpg"] },
+  { name: "Aromandia - Scented Candles", thumbnail: "images/Frame 1.jpg", descEn: "Aromandia is a premium candle brand with attention to detail.", descEs: "Aromandia es una marca de velas premium.", images: ["images/Frame 35.jpg", "images/Frame 36.jpg", "images/Frame 37.jpg", "images/Frame 38.jpg", "images/Frame 39.jpg", "images/Frame 40.jpg"] },
+  { name: "Tom Kubik Photography", thumbnail: "images/Frame 8.jpg", descEn: "Tom Kubik is a photographer whose practice centers on authentic images.", descEs: "Tom Kubik es un fotógrafo basado en Los Ángeles.", images: ["images/Frame 77.jpg", "images/Frame 78.jpg", "images/Frame 79.jpg", "images/Frame 80.jpg", "images/Frame 81.jpg", "images/Frame 82.jpg"] },
+  { name: "Effecty", thumbnail: "images/Frame 9.jpg", descEn: "Effecty is a digital telehealth platform.", descEs: "Effecty es una plataforma digital de telehealth.", images: ["images/Frame 83.jpg", "images/Frame 84.jpg", "images/Frame 85.jpg", "images/Frame 86.jpg", "images/Frame 87.jpg", "images/Frame 88.jpg"] },
+  { name: "Paws", thumbnail: "images/Frame 10.jpg", descEn: "Paws is a line designed for Petco.", descEs: "Paws es una línea diseñada para Petco.", images: ["images/Frame 89.jpg", "images/Frame 90.jpg", "images/Frame 91.jpg", "images/Frame 92.jpg", "images/Frame 93.jpg", "images/Frame 94.jpg"] },
+  { name: "USG", thumbnail: "images/Frame 11.jpg", descEn: "USG is a leading construction materials brand.", descEs: "USG es una marca líder de materiales de construcción.", images: ["images/Frame 95.jpg", "images/Frame 105.jpg", "images/Frame 115.jpg", "images/Frame 125.jpg", "images/Frame 135.jpg", "images/Frame 145.jpg"] },
+  { name: "Señor Mango", thumbnail: "images/Frame 12.jpg", descEn: "Señor Mango is a dried mango brand.", descEs: "Señor Mango es una marca de mango deshidratado.", images: ["images/Frame 96.jpg", "images/Frame 106.jpg", "images/Frame 116.jpg", "images/Frame 126.jpg", "images/Frame 136.jpg", "images/Frame 146.jpg"] },
+  { name: "Grace Sepulveda", thumbnail: "images/Frame 26.png", descEn: "Grace Sepúlveda channeled her hospitality expertise.", descEs: "Grace Sepúlveda decidió canalizar su experiencia en la hotelería.", images: ["images/Frame 211.jpg", "images/Frame 212.jpg", "images/Frame 213.jpg", "images/Frame 214.jpg", "images/Frame 215.jpg", "images/Frame 216.jpg"] },
+  { name: "Vita Blip", thumbnail: "images/Frame 15.jpg", descEn: "Vita Blip is a vitamin brand with personality.", descEs: "Vita Blip es una marca de vitaminas con carácter.", images: ["images/Frame 160.jpg", "images/Frame 161.jpg"] },
+  { name: "English Sprint", thumbnail: "images/Frame 16.jpg", descEn: "English Sprint is a learning platform for English.", descEs: "English Sprint es una plataforma de aprendizaje de inglés.", images: ["images/Frame 174.jpg", "images/Frame 175.jpg", "images/Frame 176.jpg", "images/Frame 177.jpg", "images/Frame 178.jpg"] },
+  { name: "Nos Vemos de Noche", thumbnail: "images/Frame 17.jpg", descEn: "Nos Vemos de Noche is an artistic project.", descEs: "Nos Vemos de Noche es un proyecto artístico.", images: ["images/Frame_157.jpg", "images/Frame_158.jpg", "images/Frame_159.jpg"] },
+  { name: "Debajo de un ciruelo", thumbnail: "images/Frame 18.jpg", descEn: "Debajo de un Ciruelo was a real exhibition.", descEs: "Debajo de un Ciruelo fue una exposición real.", images: ["images/Frame 162.jpg", "images/Frame 163.jpg", "images/Frame 164.jpg"] },
+  { name: "Toda Fest", thumbnail: "images/Frame 179.jpg", descEn: "Toda Fest was a music festival with female lineup.", descEs: "Toda Fest fue un festival de música con línea femenina.", images: ["images/Frame 179.jpg", "images/Frame 180.jpg", "images/Frame 181.jpg", "images/Frame 182.jpg", "images/Frame 183.jpg", "images/Frame 184.jpg"] },
+  { name: "Sunshine Bagels", thumbnail: "images/Frame 20.jpg", descEn: "Sunshine Bagels is a bagel brand with personality.", descEs: "Sunshine Bagels es una marca de bagels con personalidad.", images: ["images/Frame 165.jpg", "images/Frame 166.jpg", "images/Frame 167.jpg"] },
+  { name: "Garabatos", thumbnail: "images/Frame 189.jpg", descEn: "Garabatos is a beloved Mexican restaurant brand.", descEs: "Garabatos es una querida marca de restaurantes mexicana.", images: ["images/Frame 189.jpg", "images/Frame 190.jpg", "images/Frame 191.jpg"] },
+  { name: "Triangulo de Oro", thumbnail: "images/Frame 22.jpg", descEn: "Triángulo de Oro is a Costa Rican brand.", descEs: "Triángulo de Oro es una marca costarricense.", images: ["images/Frame 185.jpg", "images/Frame 186.jpg", "images/Frame 187.jpg", "images/Frame 188.jpg"] },
+  { name: "SUMA", thumbnail: "images/Frame 23.jpg", descEn: "SUMA is a collective and community platform.", descEs: "SUMA es una plataforma colectiva y comunitaria.", images: ["images/Frame 192.jpg", "images/Frame 193.jpg", "images/Frame 194.jpg", "images/Frame 195.jpg"] },
+  { name: "Velavita candles", thumbnail: "images/Frame 25.jpg", descEn: "This collection focuses on Velavita's seasonal releases.", descEs: "Esta colección se enfoca en los lanzamientos estacionales.", images: ["images/Frame 217.jpg", "images/Frame 218.jpg", "images/Frame 219.jpg", "images/Frame 220.jpg", "images/Frame 221.jpg", "images/Frame 222.jpg"] },
+  { name: "Alpez", thumbnail: "images/Frame 27.jpg", descEn: "Alpez is an energy and gas distribution company.", descEs: "Alpez es una empresa distribuidora de energía y gas.", images: ["images/Frame 202.jpg", "images/Frame 203.jpg", "images/Frame 204.jpg"] }
     ];
 
     var currentProject = 0;
