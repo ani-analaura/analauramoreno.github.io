@@ -23,8 +23,26 @@
 
     .topbar { background: var(--brown); color: #e8d5c4; text-align: center; font-size: 0.65rem; letter-spacing: 0.14em; padding: 8px 16px; font-weight: 300; }
 
-    nav { background: var(--cream); padding: 18px 48px 14px; display: flex; flex-direction: column; align-items: center; gap: 12px; border-bottom: 1px solid rgba(82,55,38,0.1); position: sticky; top: 0; z-index: 100; }
-    .nav-logo { font-family: 'Playwrite ID', cursive; font-size: 2.8rem; font-weight: 400; color: var(--brown); text-decoration: none; cursor: pointer; }
+nav { 
+  background: var(--cream); 
+  padding: 12px 48px 10px;  /* ← Reducido de 18px/14px */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 8px;  /* ← Reducido de 12px */
+  ...
+}
+
+.nav-logo { 
+  font-family: 'Playwrite ID', cursive; 
+  font-size: 2.8rem; 
+  font-weight: 400; 
+  color: var(--brown); 
+  text-decoration: none; 
+  cursor: pointer; 
+  margin: 0;  /* ← Elimina márgenes por defecto */
+  line-height: 1;  /* ← Ajusta la altura de línea */
+}
     .nav-links { display: flex; gap: 52px; list-style: none; }
     .nav-links a { color: var(--brown); text-decoration: none; font-size: 0.88rem; letter-spacing: 0.06em; transition: opacity 0.2s; cursor: pointer; }
     .nav-links a:hover, .nav-links a.active { opacity: 0.45; }
