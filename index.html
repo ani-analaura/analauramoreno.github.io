@@ -25,12 +25,11 @@
 
 nav { 
   background: var(--cream); 
-  padding: 12px 48px 10px;  /* ← Reducido de 18px/14px */
+  padding: 12px 48px 10px;
   display: flex; 
   flex-direction: column; 
   align-items: center; 
-  gap: 8px;  /* ← Reducido de 12px */
-  ...
+  gap: 8px;
 }
 
 .nav-logo { 
@@ -40,8 +39,8 @@ nav {
   color: var(--brown); 
   text-decoration: none; 
   cursor: pointer; 
-  margin: 0;  /* ← Elimina márgenes por defecto */
-  line-height: 1;  /* ← Ajusta la altura de línea */
+  margin: 0;
+  line-height: 1;
 }
     .nav-links { display: flex; gap: 52px; list-style: none; }
     .nav-links a { color: var(--brown); text-decoration: none; font-size: 0.88rem; letter-spacing: 0.06em; transition: opacity 0.2s; cursor: pointer; }
@@ -224,22 +223,22 @@ nav {
 </head>
 <body>
 
-  <div class="topbar">Let's work together!</div>
+  <div class="topbar" data-tr="topbar"></div>
 
   <nav>
    <a href="javascript:void(0)" class="nav-logo" onclick="showSection('home')">ani</a>
     <ul class="nav-links">
-     <li><a href="javascript:void(0)" onclick="showSection('home')" id="nav-home" class="active">Home</a></li>
-<li><a href="javascript:void(0)" onclick="showSection('services')" id="nav-services">Services</a></li>
-<li><a href="javascript:void(0)" onclick="showSection('about')" id="nav-about">About</a></li>
+     <li><a href="javascript:void(0)" onclick="showSection('home')" id="nav-home" class="active" data-tr="navHome"></a></li>
+<li><a href="javascript:void(0)" onclick="showSection('services')" id="nav-services" data-tr="navServices"></a></li>
+<li><a href="javascript:void(0)" onclick="showSection('about')" id="nav-about" data-tr="navAbout"></a></li>
     </ul>
   </nav>
 
   <!-- HOME -->
   <section id="home" class="active">
     <div class="home-hero">
-      <p class="hero-eyebrow">Creative &amp; Strategic</p>
-      <h1 class="hero-title">Your story, beautifully told</h1>
+      <p class="hero-eyebrow" data-tr="eyebrow"></p>
+      <h1 class="hero-title" data-tr="heroTitle"></h1>
     </div>
 
     <!-- CARRUSEL HORIZONTAL SIMPLE (sin 3D) -->
@@ -247,62 +246,59 @@ nav {
       <div class="marquee-wrap">
         <div class="marquee-track" id="marqueeTrack"></div>
       </div>
-     <p class="hero-tagline" style="text-align:center; margin-top: 60px; margin-bottom: 20px;">
-  Every beautiful story begins with understanding.<br>
-  Design is how I bring yours to life.
-</p>
+     <p class="hero-tagline" style="text-align:center; margin-top: 60px; margin-bottom: 20px;" data-tr="tagline"></p>
     </div>
 
     <div class="home-projects-section">
       <div class="see-more-wrap">
-        <span class="btn-outline" onclick="showSection('projects')">See all projects</span>
+        <span class="btn-outline" onclick="showSection('projects')" data-tr="seeMore"></span>
       </div>
     </div>
     
     <div style="text-align:center; padding-top:24px; padding-bottom: 40px;">
-      <span onclick="showSection('about')" id="how-work-btn" style="font-family:'Helvetica Neue',helvetica,sans-serif; font-size:clamp(1.4rem,3.5vw,2.2rem); font-style:italic; font-weight:400; color:var(--brown); cursor:pointer; opacity:0.75; transition:opacity 0.2s; display:inline-block; padding: 16px 0;">How do I work? →</span>
+      <span onclick="showSection('about')" id="how-work-btn" style="font-family:'Helvetica Neue',helvetica,sans-serif; font-size:clamp(1.4rem,3.5vw,2.2rem); font-style:italic; font-weight:400; color:var(--brown); cursor:pointer; opacity:0.75; transition:opacity 0.2s; display:inline-block; padding: 16px 0;" data-tr="howWork"></span>
     </div>
 
     <div class="home-cols">
-      <p class="home-col">I start by understanding your story. Where you come from, where you're going, what matters to you. Because real design isn't just about aesthetics, it's about empathy and connection.</p>
-      <p class="home-col">From there, we build visual systems that reflect who you are and where you want to go. Every decision is intentional, every detail serves a purpose. Design that's built to last.</p>
+      <p class="home-col" data-tr="col1"></p>
+      <p class="home-col" data-tr="col2"></p>
     </div>
      
     <!-- OUR VALUES SECTION -->
     <div class="values-section">
-      <h2 class="values-title">My Values</h2>
+      <h2 class="values-title" data-tr="valuesTitle"></h2>
       <div class="values-grid">
         <div class="value-card">
-          <h3>Designed to endure</h3>
-          <p>Every pixel, every color, every curve has a reason. We obsess over longevity because good design should work as hard as you do without needing a refresh every season.</p>
+          <h3 data-tr="value1Title"></h3>
+          <p data-tr="value1Text"></p>
         </div>
         <div class="value-card">
-          <h3>Beyond trends</h3>
-          <p>The moment something becomes cool, it's already becoming old. We work with timeless principles, strategic thinking, and real intention not Instagram aesthetics.</p>
+          <h3 data-tr="value2Title"></h3>
+          <p data-tr="value2Text"></p>
         </div>
         <div class="value-card">
-          <h3>Built to last</h3>
-          <p>Your brand isn't a one-hit wonder. We create systems that scale, evolve, and grow with you, design that's solid enough to carry your business forward for years.</p>
+          <h3 data-tr="value3Title"></h3>
+          <p data-tr="value3Text"></p>
         </div>
         <div class="value-card">
-          <h3>Strategy first</h3>
-          <p>Beautiful is only half the battle. Every design decision is rooted in strategy, research, and real business objectives making sure form follows function, always.</p>
+          <h3 data-tr="value4Title"></h3>
+          <p data-tr="value4Text"></p>
         </div>
       </div>
     </div>
     
     <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
     <div class="footer">
-      <p class="footer-title">Thank You!</p>
-      <p class="footer-sub">Looking forward to connect with you!</p>
+      <p class="footer-title" data-tr="footerTitle"></p>
+      <p class="footer-sub" data-tr="footerSub"></p>
       <div class="footer-row">
         <div class="footer-social">
           <a class="social-icon" href="https://www.behance.net/analaura15" target="_blank">Be</a>
           <a class="social-icon" href="https://www.linkedin.com/in/ana-laura-moreno-lizarraga/" target="_blank">in</a>
         </div>
         <div class="footer-contact">
-        <span class="label" style="margin-top:24px;">Email</span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="font-family:'Bricolage Grotesque',monospace; font-size:0.75rem; color:var(--brown); text-decoration:none; border-bottom: 1px solid var(--brown);">analauralga21@gmail.com</a></p>
-<span class="label" style="display:block; margin-top:24px;">Phone number</span>
+        <span class="label" style="margin-top:24px;" data-tr="email"></span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="font-family:'Bricolage Grotesque',monospace; font-size:0.75rem; color:var(--brown); text-decoration:none; border-bottom: 1px solid var(--brown);">analauralga21@gmail.com</a></p>
+<span class="label" style="display:block; margin-top:24px;" data-tr="phone"></span>
 <p>+52 55 60 93 13 42</p>
         </div>
       </div>
@@ -312,27 +308,27 @@ nav {
   <!-- ABOUT -->
   <section id="about">
     <div class="about-top">
-      <p class="about-quote"><em>I love creating spaces where ideas find direction, where structure meets exploration, and where design becomes its own language</em></p>
+      <p class="about-quote" data-tr="aboutQuote"></p>
       <div class="about-photo">
         <img src="images/Frame00.jpg" style="width:800px;height:600px;object-fit:cover;border-radius:2px;" alt="Ana Laura">
-        <p class="about-caption">Nice to meet you, I'm Ana Laura</p>
+        <p class="about-caption" data-tr="aboutCaption"></p>
       </div>
     </div>
     <div class="about-pink">
-      <h2 class="about-pink-title">AUTHENTIC design</h2>
-      <p class="about-pink-sub">A passion for creating beautiful things</p>
+      <h2 class="about-pink-title" data-tr="aboutPinkTitle"></h2>
+      <p class="about-pink-sub" data-tr="aboutPinkSub"></p>
       <div class="about-body">
-        <p>I'm a graphic designer based in Mexico City with 5+ years of experience building visual systems across brand identity, packaging, print, and digital — from campaign key visuals to social assets, web content, and e-commerce materials. I've worked across industries and formats, always leading the creative process end-to-end: briefing, concept, execution, and supplier coordination. What I bring beyond craft is translation — the ability to take a strategic brief and turn it into visuals that actually communicate. I work closely with marketing and product teams, adapt quickly to fast-paced environments, and obsess over the details that make a brand system scalable and consistent across markets. I stay sharp by integrating emerging tools — including AI for 3D rendering — into my workflow where they add real value. Not as a shortcut, but as part of how I keep delivering at a high level. Outside design I box, do ceramics, eat everything, and fiercely protect time with the people I love. I find inspiration in everyday discoveries — that's what keeps my imagination alive. I believe design has the power to connect messages with people, and that's why every project is a chance to make something I'm truly proud of. I'm a firm believer that the brands that really connect are built with love, and I love what I do.</p>
+        <p data-tr="aboutBodyText"></p>
       </div>
     </div>
     <div class="about-beyond">
-      <h2 class="about-beyond-title">Beyond Design</h2>
-      <a class="btn-filled" href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank">Contact me</a>
+      <h2 class="about-beyond-title" data-tr="aboutBeyondTitle"></h2>
+      <a class="btn-filled" href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" data-tr="contactBtn"></a>
     </div>
     <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
     <div class="footer">
-      <p class="footer-title">Thank You!</p>
-      <p class="footer-sub">Looking forward to connect with you!</p>
+      <p class="footer-title" data-tr="footerTitle"></p>
+      <p class="footer-sub" data-tr="footerSub"></p>
       <div class="footer-row">
         <div class="footer-social">
           <a class="social-icon" href="https://behance.net" target="_blank">Be</a>
@@ -346,40 +342,40 @@ nav {
   <!-- SERVICES -->
   <section id="services">
     <div class="services-top">
-      <h1 class="services-title">Design everything/<br>for everyone</h1>
+      <h1 class="services-title" data-tr="servicesTitle"></h1>
       <div class="services-cards">
-        <div class="service-card"><h3>Copywriting</h3><ul><li>Naming systems</li><li>Branding slogan</li><li>Copywriting</li><li>Storytelling</li></ul></div>
-        <div class="service-card"><h3>Graphic Design</h3><ul><li>Visual identity</li><li>Logotype</li><li>Brand applications</li><li>Packaging</li><li>Signage</li><li>Printed material</li></ul></div>
-        <div class="service-card"><h3>UI/UX design</h3><ul><li>User interface</li><li>User experience</li><li>Digital material</li><li>App development</li><li>Web Design</li></ul></div>
+        <div class="service-card"><h3 data-tr="service1Title"></h3><ul><li data-tr="service1Item1"></li><li data-tr="service1Item2"></li><li data-tr="service1Item3"></li><li data-tr="service1Item4"></li></ul></div>
+        <div class="service-card"><h3 data-tr="service2Title"></h3><ul><li data-tr="service2Item1"></li><li data-tr="service2Item2"></li><li data-tr="service2Item3"></li><li data-tr="service2Item4"></li><li data-tr="service2Item5"></li><li data-tr="service2Item6"></li></ul></div>
+        <div class="service-card"><h3 data-tr="service3Title"></h3><ul><li data-tr="service3Item1"></li><li data-tr="service3Item2"></li><li data-tr="service3Item3"></li><li data-tr="service3Item4"></li><li data-tr="service3Item5"></li></ul></div>
       </div>
     </div>
     <div class="additional-section">
-      <h2 class="additional-title">Additional Skills</h2>
+      <h2 class="additional-title" data-tr="additionalTitle"></h2>
       <div class="skills-tags">
-        <span class="skill-tag">Books &amp; magazine design</span>
-        <span class="skill-tag">Typography design</span>
-        <span class="skill-tag">Brochures</span>
-        <span class="skill-tag">Illustration</span>
-        <span class="skill-tag">Poster design</span>
-        <span class="skill-tag">Infographics</span>
-        <span class="skill-tag">Icon design</span>
-        <span class="skill-tag">Pattern design</span>
-        <span class="skill-tag">Decorative Illustration</span>
-        <span class="skill-tag">Research and investigation</span>
+        <span class="skill-tag" data-tr="skill1"></span>
+        <span class="skill-tag" data-tr="skill2"></span>
+        <span class="skill-tag" data-tr="skill3"></span>
+        <span class="skill-tag" data-tr="skill4"></span>
+        <span class="skill-tag" data-tr="skill5"></span>
+        <span class="skill-tag" data-tr="skill6"></span>
+        <span class="skill-tag" data-tr="skill7"></span>
+        <span class="skill-tag" data-tr="skill8"></span>
+        <span class="skill-tag" data-tr="skill9"></span>
+        <span class="skill-tag" data-tr="skill10"></span>
       </div>
     </div>
     <div class="wave-top" style="margin-top:64px;"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
     <div class="footer">
-      <p class="footer-title">Thank You!</p>
-      <p class="footer-sub">Looking forward to connect with you!</p>
+      <p class="footer-title" data-tr="footerTitle"></p>
+      <p class="footer-sub" data-tr="footerSub"></p>
       <div class="footer-row">
         <div class="footer-social">
           <a class="social-icon" href="https://behance.net" target="_blank">Be</a>
           <a class="social-icon" href="https://linkedin.com" target="_blank">in</a>
         </div>
         <div class="footer-contact">
-          <span class="label" style="margin-top:24px;">Email</span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
-<span class="label" style="display:block; margin-top:24px;">Phone number</span>
+          <span class="label" style="margin-top:24px;" data-tr="email"></span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
+<span class="label" style="display:block; margin-top:24px;" data-tr="phone"></span>
 <p>+52 55 60 93 13 42</p>
         </div>
       </div>
@@ -389,23 +385,23 @@ nav {
   <!-- PROJECTS GALLERY -->
   <section id="projects">
     <div class="projects-top">
-      <h1 class="projects-page-title">All the good stuff</h1>
+      <h1 class="projects-page-title" data-tr="projectsTitle"></h1>
     </div>
     <div class="projects-grid-full" id="projects-grid">
       <!-- Generated by JS -->
     </div>
     <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
     <div class="footer">
-      <p class="footer-title">Thank You!</p>
-      <p class="footer-sub">Looking forward to connect with you!</p>
+      <p class="footer-title" data-tr="footerTitle"></p>
+      <p class="footer-sub" data-tr="footerSub"></p>
       <div class="footer-row">
         <div class="footer-social">
           <a class="social-icon" href="https://behance.net" target="_blank">Be</a>
           <a class="social-icon" href="https://linkedin.com" target="_blank">in</a>
         </div>
         <div class="footer-contact">
-      <span class="label" style="margin-top:24px;">Email</span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
-<span class="label" style="display:block; margin-top:24px;">Phone number</span>
+      <span class="label" style="margin-top:24px;" data-tr="email"></span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
+<span class="label" style="display:block; margin-top:24px;" data-tr="phone"></span>
 <p>+52 55 60 93 13 42</p>
         </div>
       </div>
@@ -419,21 +415,21 @@ nav {
       <div class="detail-images" id="detail-images"></div>
     </div>
     <div class="detail-nav">
-      <button class="detail-nav-btn" id="btn-prev" onclick="navigateProject(-1)">← PREV PROJECT</button>
-      <button class="detail-nav-btn" id="btn-next" onclick="navigateProject(1)">NEXT PROJECT →</button>
+      <button class="detail-nav-btn" id="btn-prev" onclick="navigateProject(-1)" data-tr="prevProject"></button>
+      <button class="detail-nav-btn" id="btn-next" onclick="navigateProject(1)" data-tr="nextProject"></button>
     </div>
     <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
     <div class="footer">
-      <p class="footer-title">Thank You!</p>
-      <p class="footer-sub">Looking forward to connect with you!</p>
+      <p class="footer-title" data-tr="footerTitle"></p>
+      <p class="footer-sub" data-tr="footerSub"></p>
       <div class="footer-row">
         <div class="footer-social">
           <a class="social-icon" href="https://behance.net" target="_blank">Be</a>
           <a class="social-icon" href="https://linkedin.com" target="_blank">in</a>
         </div>
         <div class="footer-contact">
-       <span class="label" style="margin-top:24px;">Email</span> <p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
-<span class="label" style="display:block; margin-top:24px;">Phone number</span>
+       <span class="label" style="margin-top:24px;" data-tr="email"></span> <p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
+<span class="label" style="display:block; margin-top:24px;" data-tr="phone"></span>
 <p>+52 55 60 93 13 42</p>
         </div>
       </div>
@@ -594,17 +590,176 @@ var projects = [
 ];
 
     var currentProject = 0;
+    var lang = 'en';
+
+    // OBJETO DE TRADUCCIONES COMPLETO
+    var texts = {
+      en: {
+        topbar: "Let's work together!",
+        eyebrow: "Creative & Strategic",
+        heroTitle: "Your story, beautifully told",
+        tagline: "Every beautiful story begins with understanding.\nDesign is how I bring yours to life.",
+        col1: "I help brands elevate their visual presence through cohesive identity, packaging and digital systems.",
+        col2: "Each project is developed with precision and long-term vision, ensuring consistent performance.",
+        valuesTitle: "My Values",
+        value1Title: "Designed to endure",
+        value1Text: "Every pixel, every color, every curve has a reason. We obsess over longevity because good design should work as hard as you do without needing a refresh every season.",
+        value2Title: "Beyond trends",
+        value2Text: "The moment something becomes cool, it's already becoming old. We work with timeless principles, strategic thinking, and real intention not Instagram aesthetics.",
+        value3Title: "Built to last",
+        value3Text: "Your brand isn't a one-hit wonder. We create systems that scale, evolve, and grow with you, design that's solid enough to carry your business forward for years.",
+        value4Title: "Strategy first",
+        value4Text: "Beautiful is only half the battle. Every design decision is rooted in strategy, research, and real business objectives making sure form follows function, always.",
+        seeMore: "See all projects",
+        howWork: "How do I work? →",
+        aboutQuote: "I love creating spaces where ideas find direction, where structure meets exploration, and where design becomes its own language",
+        aboutCaption: "Nice to meet you, I'm Ana Laura",
+        aboutPinkTitle: "AUTHENTIC design",
+        aboutPinkSub: "A passion for creating beautiful things",
+        aboutBodyText: "I'm a graphic designer based in Mexico City with 5+ years of experience building visual systems across brand identity, packaging, print, and digital — from campaign key visuals to social assets, web content, and e-commerce materials. I've worked across industries and formats, always leading the creative process end-to-end: briefing, concept, execution, and supplier coordination. What I bring beyond craft is translation — the ability to take a strategic brief and turn it into visuals that actually communicate. I work closely with marketing and product teams, adapt quickly to fast-paced environments, and obsess over the details that make a brand system scalable and consistent across markets. I stay sharp by integrating emerging tools — including AI for 3D rendering — into my workflow where they add real value. Not as a shortcut, but as part of how I keep delivering at a high level. Outside design I box, do ceramics, eat everything, and fiercely protect time with the people I love. I find inspiration in everyday discoveries — that's what keeps my imagination alive. I believe design has the power to connect messages with people, and that's why every project is a chance to make something I'm truly proud of. I'm a firm believer that the brands that really connect are built with love, and I love what I do.",
+        aboutBeyondTitle: "Beyond Design",
+        contactBtn: "Contact me",
+        servicesTitle: "Design everything/ for everyone",
+        service1Title: "Copywriting",
+        service1Item1: "Naming systems",
+        service1Item2: "Branding slogan",
+        service1Item3: "Copywriting",
+        service1Item4: "Storytelling",
+        service2Title: "Graphic Design",
+        service2Item1: "Visual identity",
+        service2Item2: "Logotype",
+        service2Item3: "Brand applications",
+        service2Item4: "Packaging",
+        service2Item5: "Signage",
+        service2Item6: "Printed material",
+        service3Title: "UI/UX design",
+        service3Item1: "User interface",
+        service3Item2: "User experience",
+        service3Item3: "Digital material",
+        service3Item4: "App development",
+        service3Item5: "Web Design",
+        additionalTitle: "Additional Skills",
+        skill1: "Books & magazine design",
+        skill2: "Typography design",
+        skill3: "Brochures",
+        skill4: "Illustration",
+        skill5: "Poster design",
+        skill6: "Infographics",
+        skill7: "Icon design",
+        skill8: "Pattern design",
+        skill9: "Decorative Illustration",
+        skill10: "Research and investigation",
+        projectsTitle: "All the good stuff",
+        footerTitle: "Thank You!",
+        footerSub: "Looking forward to connect with you!",
+        email: "Email",
+        phone: "Phone number",
+        navHome: "Home",
+        navServices: "Services",
+        navAbout: "About",
+        prevProject: "← PREV PROJECT",
+        nextProject: "NEXT PROJECT →"
+      },
+      es: {
+        topbar: "¡Hagamos algo increíble juntos!",
+        eyebrow: "Creativa & Estratégica",
+        heroTitle: "Tu historia, contada hermosamente",
+        tagline: "Toda gran historia comienza con comprensión.\nEl diseño es cómo traigo la tuya a la vida.",
+        col1: "Ayudo a marcas a elevar su presencia visual a través de sistemas de identidad, packaging y diseño digital cohesivos.",
+        col2: "Cada proyecto se desarrolla con precisión y visión a largo plazo, asegurando un desempeño consistente.",
+        valuesTitle: "Mis Valores",
+        value1Title: "Diseño para perdurar",
+        value1Text: "Cada píxel, cada color, cada curva tiene una razón. Nos obsesionamos con la longevidad porque el buen diseño debe trabajar tan duro como tú sin necesitar un cambio cada temporada.",
+        value2Title: "Más allá de tendencias",
+        value2Text: "En el momento que algo se vuelve cool, ya está envejeciendo. Trabajamos con principios atemporales, pensamiento estratégico e intención real, no estética de Instagram.",
+        value3Title: "Construido para durar",
+        value3Text: "Tu marca no es un éxito de un solo golpe. Creamos sistemas que escalan, evolucionan y crecen contigo, diseño sólido para llevar tu negocio hacia adelante durante años.",
+        value4Title: "Estrategia primero",
+        value4Text: "Lo hermoso es solo la mitad de la batalla. Cada decisión de diseño está enraizada en estrategia, investigación y objetivos comerciales reales, asegurando que la forma siempre sigue la función.",
+        seeMore: "Ver todos los proyectos",
+        howWork: "¿Cómo trabajo? →",
+        aboutQuote: "Me encanta crear espacios donde las ideas encuentran dirección, donde la estructura se encuentra con la exploración, y donde el diseño se convierte en su propio lenguaje",
+        aboutCaption: "Mucho gusto, soy Ana Laura",
+        aboutPinkTitle: "Diseño AUTÉNTICO",
+        aboutPinkSub: "Una pasión por crear cosas bellas",
+        aboutBodyText: "Soy diseñadora gráfica basada en la Ciudad de México con 5+ años de experiencia construyendo sistemas visuales en identidad de marca, packaging, impreso y digital — desde key visuals de campañas hasta assets para redes, contenido web y materiales de e-commerce. He trabajado en distintas industrias y formatos, siempre liderando el proceso creativo de principio a fin: briefing, concepto, ejecución y coordinación de proveedores. Lo que aporto más allá de la técnica es traducción — la capacidad de tomar un brief estratégico y convertirlo en visuales que realmente comuniquen. Trabajo de cerca con equipos de marketing y producto, me adapto rápidamente a ambientes dinámicos, y me obsesiono con los detalles que hacen un sistema de marca escalable y consistente en mercados distintos. Me mantengo aguda integrando herramientas emergentes — incluyendo IA para renderizado 3D — en mi flujo de trabajo donde realmente aportan valor. No como atajo, sino como parte de cómo continúo entregando a alto nivel. Fuera del diseño hago boxeo, cerámica, como todo, y protejo fieramente el tiempo con la gente que amo. Encuentro inspiración en descubrimientos cotidianos — eso es lo que mantiene viva mi imaginación. Creo que el diseño tiene el poder de conectar mensajes con personas, y por eso cada proyecto es una oportunidad de hacer algo de lo que estoy realmente orgullosa. Soy una firme creyente de que las marcas que realmente conectan se construyen con amor, y amo lo que hago.",
+        aboutBeyondTitle: "Más Allá del Diseño",
+        contactBtn: "Contáctame",
+        servicesTitle: "Diseño para todo y para todos",
+        service1Title: "Copywriting",
+        service1Item1: "Sistemas de naming",
+        service1Item2: "Eslóganes",
+        service1Item3: "Copywriting",
+        service1Item4: "Storytelling",
+        service2Title: "Diseño Gráfico",
+        service2Item1: "Identidad visual",
+        service2Item2: "Logotipo",
+        service2Item3: "Aplicaciones de marca",
+        service2Item4: "Packaging",
+        service2Item5: "Señalética",
+        service2Item6: "Materiales impresos",
+        service3Title: "Diseño UI/UX",
+        service3Item1: "Interfaz de usuario",
+        service3Item2: "Experiencia de usuario",
+        service3Item3: "Material digital",
+        service3Item4: "Desarrollo de apps",
+        service3Item5: "Diseño web",
+        additionalTitle: "Habilidades Adicionales",
+        skill1: "Diseño de libros y revistas",
+        skill2: "Diseño tipográfico",
+        skill3: "Brochures",
+        skill4: "Ilustración",
+        skill5: "Diseño de posters",
+        skill6: "Infografías",
+        skill7: "Diseño de iconos",
+        skill8: "Diseño de patrones",
+        skill9: "Ilustración decorativa",
+        skill10: "Investigación y análisis",
+        projectsTitle: "Lo mejor del portafolio",
+        footerTitle: "¡Gracias!",
+        footerSub: "¡Ansío conectar contigo!",
+        email: "Correo",
+        phone: "Teléfono",
+        navHome: "Inicio",
+        navServices: "Servicios",
+        navAbout: "Info",
+        prevProject: "← PROYECTO ANTERIOR",
+        nextProject: "SIGUIENTE PROYECTO →"
+      }
+    };
+
+    function applyTranslations() {
+      var t = texts[lang];
+      document.querySelectorAll('[data-tr]').forEach(function(el) {
+        var key = el.getAttribute('data-tr');
+        if (t[key]) {
+          if (el.tagName === 'A' && el.getAttribute('data-tr').includes('Project')) {
+            el.textContent = t[key];
+          } else {
+            el.textContent = t[key];
+          }
+        }
+      });
+      
+      // Especial para tagline que tiene salto de línea
+      var taglineEl = document.querySelector('[data-tr="tagline"]');
+      if (taglineEl && lang === 'es') {
+        taglineEl.innerHTML = texts.es.tagline.replace('\n', '<br>');
+      } else if (taglineEl) {
+        taglineEl.innerHTML = texts.en.tagline.replace('\n', '<br>');
+      }
+    }
+
+    function toggleLang() {
+      lang = (lang === 'en') ? 'es' : 'en';
+      var btn = document.getElementById('lang-btn');
+      btn.innerText = lang === 'en' ? 'Español | English' : 'English | Español';
+      applyTranslations();
+    }
 
     function initCarousel() {
       const track = document.getElementById('marqueeTrack');
-
-      // Carrusel horizontal simple: todos los proyectos, duplicados
-      // UNA vez (misma lista dos veces seguidas) para que el loop de
-      // la animación (translateX de 0% a -50%) sea perfectamente
-      // continuo, sin salto visible. Nada de 3D, nada de rotación,
-      // nada de radius/perspective — solo un scroll horizontal.
       const sequence = [...projects, ...projects];
-
       sequence.forEach((p, i) => {
         const img = document.createElement('img');
         img.className = 'marquee-card';
@@ -658,6 +813,7 @@ var projects = [
       document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
       document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
       document.getElementById('project-detail').classList.add('active');
+      applyTranslations();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -672,6 +828,7 @@ var projects = [
       document.getElementById(id).classList.add('active');
       var navEl = document.getElementById('nav-' + id);
       if (navEl) navEl.classList.add('active');
+      applyTranslations();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       history.pushState({ section: id }, '', '#' + id);
       return false;
@@ -684,10 +841,13 @@ var projects = [
       document.getElementById(id).classList.add('active');
       var navEl = document.getElementById('nav-' + id);
       if (navEl) navEl.classList.add('active');
+      applyTranslations();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // Inicializar
     initCarousel();
+    applyTranslations();
   </script>
 
   <!-- DEVICE INDICATOR -->
@@ -699,32 +859,6 @@ var projects = [
   <button id="lang-btn" onclick="toggleLang()" style="position: fixed; bottom: 15px; right: 28px; z-index: 999; background: var(--brown); color: var(--cream); border: none; border-radius: 40px; padding: 11px 22px; font-family: 'Bricolage Grotesque', monospace; font-size: 0.8rem; letter-spacing: 0.14em; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.18); transition: opacity 0.2s;">Español | English</button>
 
   <script>
-    var lang = 'en';
-    var texts = {
-      en: { topbar: "Let's work together!", eyebrow: "Creative & Strategic", heroTitle: "Design across disciplines", tagline: "Because design isn't just how it looks,\nit's how it works.", col1: "I help brands elevate their visual presence through cohesive identity, packaging and digital systems.", col2: "Each project is developed with precision and long-term vision, ensuring consistent performance.", seeMore: "See all projects", howWork: "How do I work?", footerTitle: "Thank You!", footerSub: "Looking forward to connect with you!", navHome: "Home", navServices: "Services", navProjects: "Projects", navAbout: "About" },
-      es: { topbar: "¡Hagamos algo increíble juntos!", eyebrow: "Creativa & Estratégica", heroTitle: "Diseño que habla por sí solo", tagline: "Porque detrás de cada gran marca hay decisiones de diseño muy bien tomadas", col1: "Desarrollo sistemas visuales completos para marcas que buscan destacar.", col2: "Trabajo con visión a largo plazo: cada decisión importa.", seeMore: "Ver todos los proyectos", howWork: "¿Cómo trabajo?", footerTitle: "¡Hablemos!", footerSub: "Siempre lista para un proyecto nuevo ✨", navHome: "Inicio", navServices: "Servicios", navProjects: "Proyectos", navAbout: "Info" }
-    };
-
-    function toggleLang() {
-      lang = (lang === 'en') ? 'es' : 'en';
-      var t = texts[lang];
-      document.getElementById('lang-btn').innerText = lang === 'en' ? 'Español | English' : 'English | Español';
-      document.getElementById('nav-home').innerText = t.navHome;
-      document.getElementById('nav-services').innerText = t.navServices;
-      document.getElementById('nav-projects').innerText = t.navProjects;
-      document.getElementById('nav-about').innerText = t.navAbout;
-      document.querySelector('.topbar').innerText = t.topbar;
-      document.querySelector('.hero-eyebrow').innerText = t.eyebrow;
-      document.querySelector('.hero-title').innerText = t.heroTitle;
-      document.querySelector('.hero-tagline').innerHTML = t.tagline.replace('\n','<br>');
-      var homeCols = document.querySelectorAll('.home-col');
-      if(homeCols[0]) homeCols[0].innerText = t.col1;
-      if(homeCols[1]) homeCols[1].innerText = t.col2;
-      document.getElementById('how-work-btn').innerText = t.howWork + ' →';
-      document.querySelectorAll('.footer-title').forEach(function(el){ el.innerText = t.footerTitle; });
-      document.querySelectorAll('.footer-sub').forEach(function(el){ el.innerText = t.footerSub; });
-    }
-
     // Responsive device indicator
     function updateDeviceIndicator() {
       const indicator = document.getElementById('device-indicator');
