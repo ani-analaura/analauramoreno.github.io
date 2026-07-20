@@ -744,6 +744,13 @@ var projects = [
         var text = lang === 'es' ? texts.es.tagline : texts.en.tagline;
         taglineEl.innerHTML = text;
       }
+      
+      // Actualizar descripción del proyecto si uno está abierto
+      if (document.getElementById('project-detail').classList.contains('active')) {
+        var p = projects[currentProject];
+        var desc = p['desc' + (lang === 'es' ? 'Es' : 'En')] || '';
+        document.getElementById('detail-title').innerHTML = '<h2 style="font-family:\'Bricolage Grotesque\',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--brown);font-weight:700;margin-bottom:24px;">' + p.name + '</h2>' + (desc ? '<p style="font-size:0.92rem;line-height:1.9;color:var(--muted);margin-top:8px;">' + desc + '</p>' : '');
+      }
     }
 
     function toggleLang() {
@@ -751,8 +758,6 @@ var projects = [
       var btn = document.getElementById('lang-btn');
       btn.innerText = lang === 'en' ? 'Español | English' : 'English | Español';
       applyTranslations();
-       if (document.getElementById('project-detail').classList.contains('active')) {
-    openProject(currentProject);
     }
 
     function initCarousel() {
