@@ -751,6 +751,8 @@ var projects = [
       var btn = document.getElementById('lang-btn');
       btn.innerText = lang === 'en' ? 'Español | English' : 'English | Español';
       applyTranslations();
+       if (document.getElementById('project-detail').classList.contains('active')) {
+    openProject(currentProject);
     }
 
     function initCarousel() {
