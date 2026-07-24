@@ -183,11 +183,11 @@
       overflow: hidden;
       border-bottom: 1px solid rgba(0,0,0,0.06);
       background: linear-gradient(180deg, 
-      var(--grad-color-1, #374ef7) 20%, 
-      var(--grad-color-2, #dde67a) 40%, 
-      var(--grad-color-3, #ff8212) 60%, 
-      var(--grad-color-4, #ff3b62) 110%, 
-      var(--grad-color-5, #7f22d1) 100%);
+      var(--grad-color-1, #374ef7) 25%, 
+      var(--grad-color-2, #d38fff) 50%, 
+      var(--grad-color-3, #f1addf) 75%, 
+      var(--grad-color-4, #ff3b62) 100%, 
+     
       
       background-size: 400% 400%;
       transition: background 0.6s ease;
@@ -252,6 +252,18 @@
       text-shadow: 0 1px 4px rgba(0,0,0,0.2);
     }
 
+    <!-- TEXTO ANTES DEL CARRUSEL -->
+<div class="carousel-intro">
+  <h2 class="carousel-title" data-tr="recentWork"></h2>
+</div>
+
+<!-- CAROUSEL -->
+<div class="carousel-section">
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+</div>
+    
     /* ===== CAROUSEL ===== */
     .carousel-section { 
       background: var(--secondary);
