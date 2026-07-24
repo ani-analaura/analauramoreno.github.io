@@ -6,8 +6,13 @@
   <title>ani — Ana Laura Moreno</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700&family=Playwrite+ID&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700&family=Playwrite+ID&family=Spectral:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'ZJSansDisplay';
+      src: local('Arial'), local('Helvetica Neue'), sans-serif;
+      font-weight: 400;
+    }
     :root { 
   --brown:  #523726;
   --rose:   #f4dae8;
@@ -229,7 +234,6 @@ nav {
   <nav>
    <a href="javascript:void(0)" class="nav-logo" onclick="showSection('home')">ani</a>
     <ul class="nav-links">
-     <li><a href="javascript:void(0)" onclick="showSection('home')" id="nav-home" class="active" data-tr="navHome"></a></li>
 <li><a href="javascript:void(0)" onclick="showSection('services')" id="nav-services" data-tr="navServices"></a></li>
 <li><a href="javascript:void(0)" onclick="showSection('about')" id="nav-about" data-tr="navAbout"></a></li>
     </ul>
@@ -342,42 +346,89 @@ nav {
 
   <!-- SERVICES -->
   <section id="services">
-    <div class="services-top">
-      <h1 class="services-title" data-tr="servicesTitle"></h1>
-      <div class="services-cards">
-        <div class="service-card"><h3 data-tr="service1Title"></h3><ul><li data-tr="service1Item1"></li><li data-tr="service1Item2"></li><li data-tr="service1Item3"></li><li data-tr="service1Item4"></li></ul></div>
-        <div class="service-card"><h3 data-tr="service2Title"></h3><ul><li data-tr="service2Item1"></li><li data-tr="service2Item2"></li><li data-tr="service2Item3"></li><li data-tr="service2Item4"></li><li data-tr="service2Item5"></li><li data-tr="service2Item6"></li></ul></div>
-        <div class="service-card"><h3 data-tr="service3Title"></h3><ul><li data-tr="service3Item1"></li><li data-tr="service3Item2"></li><li data-tr="service3Item3"></li><li data-tr="service3Item4"></li><li data-tr="service3Item5"></li></ul></div>
-      </div>
-    </div>
-    <div class="additional-section">
-      <h2 class="additional-title" data-tr="additionalTitle"></h2>
-      <div class="skills-tags">
-        <span class="skill-tag" data-tr="skill1"></span>
-        <span class="skill-tag" data-tr="skill2"></span>
-        <span class="skill-tag" data-tr="skill3"></span>
-        <span class="skill-tag" data-tr="skill4"></span>
-        <span class="skill-tag" data-tr="skill5"></span>
-        <span class="skill-tag" data-tr="skill6"></span>
-        <span class="skill-tag" data-tr="skill7"></span>
-        <span class="skill-tag" data-tr="skill8"></span>
-        <span class="skill-tag" data-tr="skill9"></span>
-        <span class="skill-tag" data-tr="skill10"></span>
-      </div>
-    </div>
-    <div class="wave-top" style="margin-top:64px;"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
-    <div class="footer">
-      <p class="footer-title" data-tr="footerTitle"></p>
-      <p class="footer-sub" data-tr="footerSub"></p>
-      <div class="footer-row">
-        <div class="footer-social">
-          <a class="social-icon" href="https://behance.net" target="_blank">Be</a>
-          <a class="social-icon" href="https://linkedin.com" target="_blank">in</a>
-        </div>
-        <div class="footer-contact">
-          <span class="label" style="margin-top:24px;" data-tr="email"></span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
-<span class="label" style="display:block; margin-top:24px;" data-tr="phone"></span>
-<p>+52 55 60 93 13 42</p>
+    <div style="background: #0a0a0a; padding: 80px 48px 0; text-align: center;">
+      <h1 style="font-family: 'ZJSansDisplay', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 400; letter-spacing: 0.08em; margin-bottom: 50px; color: #ffffff; text-transform: uppercase;">My Expertise</h1>
+      <p style="font-family: 'ZJSansDisplay', sans-serif; font-size: clamp(0.95rem, 1.8vw, 1.1rem); color: rgba(255,255,255,0.85); line-height: 1.8; max-width: 900px; margin: 0 auto; margin-bottom: 100px;">Across branding, packaging design, and social media strategy. My experience spans client presentations, data visualization, and full-stack UI/UX design. I've collaborated seamlessly with marketing teams and developers, leading projects from conception to final implementation. My approach emphasizes finished product quality and deep user experience understanding.</p>
+      
+      <!-- Marquee animado -->
+      <div style="overflow: hidden; width: 100%; padding: 120px 0; background: #0a0a0a;">
+        <style>
+          @keyframes marquee-services {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .services-marquee {
+            display: flex;
+            gap: 60px;
+            animation: marquee-services 35s linear infinite;
+            white-space: nowrap;
+          }
+          .service-item {
+            font-family: 'Spectral', serif;
+            font-size: clamp(5.6rem, 14vw, 9rem);
+            font-weight: 300;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+            flex-shrink: 0;
+            line-height: 1.2;
+            text-transform: uppercase;
+            padding: 0 40px;
+          }
+          .separator {
+            font-family: 'Spectral', serif;
+            font-size: clamp(5.6rem, 14vw, 9rem);
+            font-weight: 300;
+            color: #ffffff;
+            flex-shrink: 0;
+            line-height: 1.2;
+            padding: 0 20px;
+          }
+        </style>
+        <div class="services-marquee">
+          <div class="service-item">User Experience</div>
+          <div class="separator">-</div>
+          <div class="service-item">Storytelling</div>
+          <div class="separator">-</div>
+          <div class="service-item">Logotype</div>
+          <div class="separator">-</div>
+          <div class="service-item">Brand Applications</div>
+          <div class="separator">-</div>
+          <div class="service-item">Packaging</div>
+          <div class="separator">-</div>
+          <div class="service-item">Signage</div>
+          <div class="separator">-</div>
+          <div class="service-item">Printed Materials</div>
+          <div class="separator">-</div>
+          <div class="service-item">User Interface</div>
+          <div class="separator">-</div>
+          <div class="service-item">Digital Materials</div>
+          <div class="separator">-</div>
+          <div class="service-item">App Development</div>
+          <div class="separator">-</div>
+          <div class="service-item">Web Design</div>
+          <div class="separator">-</div>
+          <div class="service-item">User Experience</div>
+          <div class="separator">-</div>
+          <div class="service-item">Storytelling</div>
+          <div class="separator">-</div>
+          <div class="service-item">Logotype</div>
+          <div class="separator">-</div>
+          <div class="service-item">Brand Applications</div>
+          <div class="separator">-</div>
+          <div class="service-item">Packaging</div>
+          <div class="separator">-</div>
+          <div class="service-item">Signage</div>
+          <div class="separator">-</div>
+          <div class="service-item">Printed Materials</div>
+          <div class="separator">-</div>
+          <div class="service-item">User Interface</div>
+          <div class="separator">-</div>
+          <div class="service-item">Digital Materials</div>
+          <div class="separator">-</div>
+          <div class="service-item">App Development</div>
+          <div class="separator">-</div>
+          <div class="service-item">Web Design</div>
+          <div class="separator">-</div>
         </div>
       </div>
     </div>
