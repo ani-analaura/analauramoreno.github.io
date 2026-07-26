@@ -92,20 +92,20 @@
         /* ========== HERO SECTION ========== */
         .hero {
             position: relative;
-            width: 100vw;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
+            width: 100%;
             min-height: 80vh;
             height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: linear-gradient(135deg, #F5C3D4 0%, #FFD666 20%, #FF9500 35%, #FF5252 55%, #D32F9F 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: linear-gradient(var(--gradient-angle, 180deg), 
+                var(--grad-color-1, #374ef7) 25%, 
+                var(--grad-color-2, #d38fff) 50%, 
+                var(--grad-color-3, #f1addf) 75%, 
+                var(--grad-color-4, #ff3b62) 100%);
+            background-size: 200% 200%;
             margin-top: 0;
             padding: 4rem 2rem;
         }
@@ -166,23 +166,12 @@
             display: none !important;
         }
 
-        .hero.hidden {
-            display: none !important;
-        }
-
-        main.hidden {
-            display: none !important;
-        }
-
-        #projects-container section.hidden {
-            display: none !important;
-        }
-
         /* ========== PORTFOLIO SECTION ========== */
         .portfolio {
             padding: 6rem 0;
-            overflow: visible;
             width: 100%;
+            margin: 0;
+            overflow: visible;
         }
 
         .portfolio-title {
@@ -192,14 +181,6 @@
             font-family: 'Instrument Sans', sans-serif;
             letter-spacing: 0.5px;
             padding: 0 2rem;
-        }
-
-        .portfolio-item-description {
-            font-size: 1rem;
-            color: rgba(26, 28, 44, 0.7);
-            margin-top: 1rem;
-            line-height: 1.5;
-            font-family: 'Spectral', serif;
         }
 
         .portfolio-grid {
@@ -283,10 +264,12 @@
             text-transform: uppercase;
         }
 
-        .portfolio-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--dark-text);
+        .portfolio-item-description {
+            font-size: 1.15rem;
+            color: rgba(26, 28, 44, 0.7);
+            margin-top: 1rem;
+            line-height: 1.5;
+            font-family: 'Spectral', serif;
         }
 
         /* ========== VALUES SECTION ========== */
@@ -393,7 +376,7 @@
         }
 
         .clients-list {
-            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
             font-weight: 300;
             line-height: 1.4;
             max-width: 1000px;
@@ -461,7 +444,11 @@
             background-color: #000000;
             padding: 6rem 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
+            width: 100vw;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
         }
 
         .footer-content {
@@ -589,10 +576,6 @@
                 padding: 0 1.5rem;
             }
 
-            .portfolio-subtitle {
-                padding: 0 1.5rem;
-            }
-
             .portfolio-grid {
                 animation: slideCarousel 50s linear infinite;
                 overflow-x: hidden;
@@ -669,7 +652,7 @@
 
         <!-- VALUES SECTION -->
         <section class="values" id="about">
-            <h2 class="section-title">MY SERVICES</h2>
+            <h2 class="section-title">MY VALUES</h2>
             
             <div class="values-grid">
                 <div class="value-item">
@@ -738,14 +721,14 @@
                 <!-- Contact Info -->
                 <div class="footer-contact-info-right">
                     <a href="tel:+525560931342">+52 5560931342</a>
-                    <a href="mailto:analauralga21@gmail.com?subject=Hello%20from%20ani&body=Hi%20there!">analauralga21@gmail.com</a>
+                    <a href="mailto:analauralga21@gmail.com">analauralga21@gmail.com</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Projects data extracted from Ana Laura's portfolio
+        // Projects data
         const projects = [
             { name: "Raina Kattelson", thumbnail: "images/Frame 2.jpg", shortDesc: "Brand identity for a New York-based prop and interior stylist.", desc: "Raina Kattelson is a New York-based prop and interior stylist who has worked with numerous notable people and recognized brands, creating rich and human visual worlds. The project involved building an identity that evokes her personality and highlights her work, connecting with new audiences.<br><br>Raina's vision was to refresh her image to have a more recognizable and consistent brand, showcasing her projects and character in an organic and contemporary way. The logo combines a \"handwritten\" typeface with an imperfect enclosing shape, evoking her curiosity, creativity and sense of freedom.<br><br>The logo is accompanied by a graphic system that picks up tones recurring throughout her work and interact in a harmonious and balanced way, along with a more experimental typographic approach — combining two very different typefaces and replacing the word \"and\" with \"&\" in all instances. Other elements such as rules, color blocks and the use of the shape are carried through to formalize the graphic outputs.<br><br>With that system in place, the look & feel of her website, promotional postcards, and presentations for creative briefs came together. The result is an interesting, organic and modern brand.", images: ["images/Frame 41.jpg", "images/Frame 42.jpg", "images/Frame 43.jpg", "images/Frame 44.jpg", "images/Frame 45.jpg", "images/Frame 46.jpg"] },
             { name: "Astro Cold Brew", thumbnail: "images/Frame 3.jpg", shortDesc: "Strategic branding and packaging for an innovative cold brew drink.", desc: "Astro Cold Brew was born as part of the Shake Shack family in Mexico — an innovative, energizing drink in a can designed to inspire and fuel its consumers. The project covered everything from strategic foundation to visual execution.<br><br>The process began by defining the core concepts guiding the brand: the quality of the drink, its role as a companion to new consumers, the pleasure of an indulgent moment, and the energy that keeps you moving toward your goals. From these pillars, the name Astro Cold Brew was developed — a drink that elevates the good, recharges you, and lets you launch toward your objectives.<br><br>The communication aligned with an \"out of this world\" narrative, with messaging like \"we are a comet of quality, flavor and energy\" — striking a friendly and dynamic tone. This universe translated visually through a bold, approachable logo, paired with equally strong typography, vivid and disruptive colors, and an illustration system that positions the brand as a fun ally in the cold brew adventure.", images: ["images/Frame 47.jpg", "images/Frame 48.jpg", "images/Frame 49.jpg", "images/Frame 50.jpg", "images/Frame 51.jpg"] },
@@ -779,11 +762,9 @@
             { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg", shortDesc: "Candle brand identity for expansion into fragrances.", desc: "Oasis Decoraciones is a candle brand with its sights set on expanding into fragrances — a brand at the beginning of something. The project involved developing an identity and visual presence that could grow alongside the product line.<br><br>The design needed to feel evocative and warm, rooted in the sensorial experience the products promise. Every visual decision was made with longevity in mind: a system flexible enough to accommodate new products and categories as the brand evolves, while staying consistent and recognizable from day one.", images: ["images/Frame 59.jpg", "images/Frame 60.jpg", "images/Frame 61.jpg", "images/Frame 62.jpg", "images/Frame 63.jpg", "images/Frame 64.jpg"] }
         ];
 
-        let currentProjectIndex = 0;
-
         function initCarousel() {
             const carousel = document.getElementById('carousel-projects');
-            const sequence = [...projects, ...projects]; // Duplicado para efecto infinito
+            const sequence = [...projects, ...projects];
 
             sequence.forEach((project, idx) => {
                 const item = document.createElement('article');
@@ -799,15 +780,9 @@
         }
 
         function openProject(index) {
-            currentProjectIndex = index;
             const project = projects[index];
-            console.log('Abriendo proyecto:', project.name);
+            document.querySelectorAll('main, .hero').forEach(el => el.classList.add('hidden'));
             
-            // Ocultar home
-            document.querySelector('main').classList.add('hidden');
-            document.querySelector('.hero').classList.add('hidden');
-            
-            // Mostrar proyecto
             let projectSection = document.getElementById(`project-${index}`);
             if (!projectSection) {
                 projectSection = document.createElement('section');
@@ -830,11 +805,7 @@
         }
 
         function goHome() {
-            // Mostrar home
-            document.querySelector('main').classList.remove('hidden');
-            document.querySelector('.hero').classList.remove('hidden');
-            
-            // Ocultar todos los proyectos
+            document.querySelectorAll('main, .hero').forEach(el => el.classList.remove('hidden'));
             document.querySelectorAll('.project-detail').forEach(el => el.classList.add('hidden'));
             
             setTimeout(() => {
@@ -842,9 +813,36 @@
             }, 100);
         }
 
-        // Inicializar carrusel
-        // Menú hamburguesa
+        // Hero con gradiente que sigue al cursor
+        const hero = document.querySelector('.hero');
+        const header = document.querySelector('header');
+        const logo = document.querySelector('.logo');
         const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (hero && header) {
+            hero.addEventListener('mouseenter', () => {
+                if (logo) logo.style.color = 'white';
+                document.querySelectorAll('nav a').forEach(link => link.style.color = 'white');
+                if (menuToggle) menuToggle.style.color = 'white';
+            });
+            
+            hero.addEventListener('mouseleave', () => {
+                if (logo) logo.style.color = 'var(--dark-text)';
+                document.querySelectorAll('nav a').forEach(link => link.style.color = 'var(--dark-text)');
+                if (menuToggle) menuToggle.style.color = 'var(--dark-text)';
+            });
+            
+            hero.addEventListener('mousemove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const angle = Math.atan2(y - rect.height / 2, x - rect.width / 2) * (180 / Math.PI) + 90;
+                hero.style.setProperty('--gradient-angle', angle + 'deg');
+            });
+        }
+
+        // Menú hamburguesa
         const nav = document.querySelector('nav');
         
         if (menuToggle && nav) {
@@ -852,9 +850,7 @@
                 nav.classList.toggle('active');
             });
             
-            // Cerrar menú al hacer click en un link
-            const navLinks = nav.querySelectorAll('a');
-            navLinks.forEach(link => {
+            document.querySelectorAll('nav a').forEach(link => {
                 link.addEventListener('click', () => {
                     nav.classList.remove('active');
                 });
