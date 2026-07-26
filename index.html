@@ -1,951 +1,761 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ani — Ana Laura Moreno</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700&family=Playwrite+ID&family=Spectral:wght@200;300;400&display=swap" rel="stylesheet">
-  <style>
-    @font-face {
-      font-family: 'ZJSansDisplay';
-      src: local('Arial'), local('Helvetica Neue'), sans-serif;
-      font-weight: 400;
-    }
-    :root { 
-  --brown:  #523726;
-  --rose:   #f4dae8;
-  --cream:  #FFFEF8;
-  --purple: #E8E9F3;
-  --warm:   #babdd9; 
-  --text:   #3a2518;
-  --muted:  #7a5c48;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Bricolage Grotesque', monospace; background: var(--cream); color: var(--text); overflow-x: hidden; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ani - Visual Communicator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@200;300;400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .topbar { background: var(--brown); color: #e8d5c4; text-align: center; font-size: 0.65rem; letter-spacing: 0.14em; padding: 8px 16px; font-weight: 300; }
+        :root {
+            --primary-beige: #FCFAF3;
+            --dark-text: #1A1C2C;
+            --accent-dark: #2C2C2C;
+            --border-color: #E8E8E8;
+        }
 
-nav { 
-  background: var(--cream); 
-  padding: 12px 48px 10px;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 8px;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-.nav-logo { 
-  font-family: 'Playwrite ID', cursive; 
-  font-size: 2.8rem; 
-  font-weight: 400; 
-  color: var(--brown); 
-  text-decoration: none; 
-  cursor: pointer; 
-  margin: 0;
-  line-height: 1;
-}
-    .nav-links { display: flex; gap: 52px; list-style: none; }
-    .nav-links a { color: var(--brown); text-decoration: none; font-size: 0.88rem; letter-spacing: 0.06em; transition: opacity 0.2s; cursor: pointer; }
-    .nav-links a:hover, .nav-links a.active { opacity: 0.45; }
+        body {
+            font-family: 'Spectral', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, serif;
+            background-color: var(--primary-beige);
+            color: var(--dark-text);
+            line-height: 1.6;
+            font-weight: 300;
+        }
 
-    section { display: none; animation: fadeIn 0.3s ease; }
-    section.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        /* ========== HEADER ========== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(252, 250, 243, 0.8);
+            backdrop-filter: blur(10px);
+        }
 
-    .btn-outline { display: inline-block; border: 1.5px solid var(--brown); color: var(--brown); padding: 14px 32px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 40px; font-family: 'Bricolage Grotesque', monospace; cursor: pointer; background: transparent; transition: background 0.22s, color 0.22s; }
-    .btn-outline:hover { background: var(--brown); color: var(--cream); }
-    .btn-filled { display: inline-block; background: var(--brown); color: var(--cream); padding: 13px 36px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 40px; text-decoration: none; font-family: 'Bricolage Grotesque', monospace; cursor: pointer; border: none; transition: opacity 0.2s; }
-    .btn-filled:hover { opacity: 0.78; }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: lowercase;
+            font-family: 'Spectral', serif;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--dark-text);
+        }
 
-    .wave-top { width: 100%; overflow: hidden; line-height: 0; display: block; margin-bottom: -1px; }
-    .wave-top svg { display: block; width: 100%; height: 41px; }
+        .logo span {
+            display: block;
+            font-weight: 400;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            font-family: 'Instrument Sans', sans-serif;
+        }
 
-    .values-section { padding: 60px 48px 80px; background: var(--cream); }
-    .values-title { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--brown); margin-bottom: 60px; text-align: center; line-height: 1.1; position: relative; z-index: 1; }
-    .values-title::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0%; height: 80%; background: #f4dae8; border-radius: 8px; transform: translate(-50%, -50%); z-index: -1; animation: highlightReveal 1.5s ease-out forwards; animation-play-state: paused; }
-    .values-title.in-view::after { animation-play-state: running; }
-    @keyframes highlightReveal { from { width: 0%; } to { width: 27%; } }
-    .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; max-width: 1200px; margin: 0 auto; }
-    .value-card { }
-    .value-card h3 { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; color: var(--brown); margin-bottom: 16px; font-weight: 400; }
-    .value-card p { font-size: 0.8rem; line-height: 1.6; color: var(--muted); }
-    @media (max-width: 1024px) {
-      .values-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-      .values-section { padding: 60px 20px; }
-    }
-    @media (max-width: 640px) {
-      .values-grid { grid-template-columns: 1fr; gap: 24px; }
-      .values-section { padding: 48px 20px; }
-      .values-title::after { height: 65%; animation: highlightReveal 1.5s ease-out forwards; animation-play-state: paused; }
-      .services-cards { grid-template-columns: 1fr; gap: 12px; }
-    }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-text);
+        }
 
-    .footer { background: var(--purple); padding: 56px 48px 48px; }
-    .footer-title { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.6rem, 6vw, 4.4rem); color: var(--brown); margin-bottom: 8px; }
-    .footer-sub { font-size: 0.68rem; color: var(--muted); margin-bottom: 36px; }
-    .footer-row { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
-    .footer-social { display: flex; gap: 10px; align-items: center; }
-    .social-icon { width: 38px; height: 38px; background: var(--brown); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--cream); font-size: 0.6rem; font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
-    .social-icon:hover { opacity: 0.72; }
-    .footer-contact { font-size: 0.72rem; }
-    .footer-contact .label { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; display: block; margin-bottom: 4px; font-weight: 500; }
-    .footer-contact p { color: var(--muted); margin-bottom: 20px; }
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
 
-    /* HOME - TODO EN UNA SECCIÓN */
-    .home-hero { background: #fae9b7; padding: 32px 48px 8px; text-align: center; }
-    .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-    .hero-title { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.6rem, 6vw, 4.4rem); color: var(--brown); line-height: 1.05; margin-bottom: 0; }
-    .hero-tagline { font-family: 'Helvetica Neue', helvetica, sans-serif; font-size: clamp(1rem, 2.5vw, 1.5rem); font-style: italic; font-weight: 400; color: var(--brown); line-height: 1.35; max-width: 580px; margin: 0 auto; }
-    
-    /* CAROUSEL 3D SECTION */
-    .carousel-section { 
-  background: #fae9b7; 
-  padding: 60px 0; 
-  overflow: hidden; 
-}
-    
-    /* CARRUSEL HORIZONTAL SIMPLE — sin 3D, sin perspective, sin rotación */
-    .marquee-wrap { width: 100%; overflow: visible; }
-    .marquee-track {
-      display: flex;
-      gap: 40px;
-      width: max-content;
-      animation: scrollX 110s linear infinite;
-    }
-    .marquee-track:hover { animation-play-state: paused; }
-    .marquee-card {
-      flex: 0 0 auto;
-      width: 324px;
-      height: 396px;
-      border-radius: 16px;
-      object-fit: cover;
-      cursor: pointer;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
-      position: relative;
-      z-index: 1;
-    }
-    .marquee-card:hover {
-      transform: scale(1.05);
-      z-index: 10;
-    }
-    @keyframes scrollX {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-size: 0.95rem;
+            transition: opacity 0.3s;
+            font-family: 'Instrument Sans', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
 
-    .home-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 0 auto; padding: 32px 48px 48px; }
-    .home-col { font-size: 0.95rem; line-height: 1.9; color: var(--muted); }
+        nav a:hover {
+            opacity: 0.6;
+        }
 
-    .home-projects-section { padding: 40px 48px 0; max-width: 900px; margin: 0 auto; }
-    .see-more-wrap { text-align: center; padding: 0 0 64px; }
+        /* ========== HERO SECTION ========== */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #6B5FFF 0%, #FFE5B4 25%, #FF69B4 50%, #87CEEB 75%, #FFFACD 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            margin-top: 0;
+        }
 
-    /* ABOUT */
-    .about-top { background: #fae9b7; padding: 64px 48px 56px; text-align: center; }
-    .about-quote { font-family: 'Helvetica Neue', helvetica, sans-serif; font-size: clamp(1rem, 2.5vw, 1.3rem); font-style: italic; color: var(--brown); line-height: 1.35; max-width: 500px; margin: 0 auto 48px; }
-    .about-photo { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .about-photo img { border-radius: 2px; }
-    .about-caption { font-size: 0.85rem; color: var(--muted); font-style: italic; }
-    .about-pink { background: var(--rose); padding: 72px 48px; text-align: center; }
-    .about-pink-title { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.4rem, 5.5vw, 5rem); color: var(--brown); line-height: 1.05; margin-bottom: 16px; }
-    .about-pink-sub { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brown); margin-bottom: 44px; }
-    .about-body { max-width: 560px; margin: 0 auto; font-size: 0.75rem; line-height: 1.9; color: var(--text); text-align: left; }
-    .about-body p + p { margin-top: 20px; }
-    .about-beyond { padding: 72px 48px 64px; text-align: center; }
-    .about-beyond-title { font-family: 'Helvetica Neue', helvetica, sans-serif; font-size: clamp(2rem, 4.5vw, 3.8rem); font-style: italic; color: var(--brown); margin-bottom: 48px; }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    /* SERVICES */
-    .services-top { padding: 72px 48px 56px; text-align: center; }
-    .services-title { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.2rem, 5vw, 4.2rem); color: var(--brown); margin-bottom: 48px; line-height: 1.1; }
-    .services-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 820px; margin: 0 auto; }
-    .service-card { background: #fae9b7; border-radius: 4px; padding: 36px 24px; text-align: center; }
-    .service-card h3 { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.35rem; color: var(--brown); margin-bottom: 24px; }
-    .service-card ul { list-style: none; font-size: 0.68rem; line-height: 2.2; color: var(--muted); }
-    .additional-section { padding: 72px 48px 64px; text-align: center; }
-    .additional-title { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 4vw, 3.2rem); color: var(--brown); margin-bottom: 36px; }
-    .skills-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 760px; margin: 0 auto; }
-    .skill-tag { background: var(--rose); color: var(--brown); padding: 12px 26px; border-radius: 40px; font-size: 0.75rem; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: none;
+            opacity: 0;
+            mix-blend-mode: overlay;
+        }
 
-    /* PROJECTS GRID */
-    .projects-top { padding: 64px 48px 48px; text-align: center; }
-    .projects-page-title { font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2rem, 4vw, 3.4rem); color: var(--brown); margin-bottom: 48px; }
-    .projects-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 880px; margin: 0 auto; padding: 0 48px 64px; }
-    .proj-thumb { aspect-ratio: 1; border-radius: 2px; overflow: hidden; cursor: pointer; position: relative; }
-    .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
-    .proj-thumb:hover img { transform: scale(1.05); }
-    .proj-thumb-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(82,55,38,0.82); color: var(--cream); font-size: 0.6rem; letter-spacing: 0.1em; padding: 8px 12px; opacity: 0; transition: opacity 0.22s; }
-    .proj-thumb:hover .proj-thumb-label { opacity: 1; }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            padding: 2rem;
+        }
 
-    /* PROJECT DETAIL */
-    .project-detail { display: none; animation: fadeIn 0.3s ease; }
-    .project-detail.active { display: block; }
-    .detail-layout { display: grid; grid-template-columns: 380px 1fr; gap: 65px; padding: 48px 24px; max-width: 70%; margin: 0 auto; }
-    .detail-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--brown); position: sticky; top: 120px; }
-    .detail-images { display: flex; flex-direction: column; gap: 16px; }
-    .detail-images img { width: 100%; border-radius: 2px; display: block; }
-    .detail-images video { width: 100%; border-radius: 2px; display: block; }
-    .detail-nav { display: flex; justify-content: center; align-items: center; gap: 32px; padding: 32px 48px 48px; }
-    .detail-nav-btn { background: none; border: none; cursor: pointer; font-family: 'Bricolage Grotesque', monospace; font-size: 0.65rem; letter-spacing: 0.14em; color: var(--brown); display: flex; align-items: center; gap: 15px; transition: opacity 0.2s; }
-    .detail-nav-btn:hover { opacity: 0.5; }
-    .detail-nav-btn:disabled { opacity: 0.2; cursor: default; }
+        .hero-text {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 300;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+            font-family: 'Spectral', serif;
+            text-align: center;
+        }
 
-    @media (max-width: 641px) {
-      nav { padding: 14px 20px; }
-      .nav-links { gap: 20px; }
-      .home-hero { padding: 24px 20px 12px; }
-      .carousel-section { padding: 8px 0 8px; }
-      .marquee-card { width: 280px; height: 340px; }
-      .marquee-track { gap: 30px; }
-      .home-cols { padding: 30px 20px 60px; grid-template-columns: 1fr; }
-      .services-cards { grid-template-columns: 1fr 1fr; }
-      .projects-grid-full { grid-template-columns: 1fr 1fr; padding: 0 20px 48px; }
-      .detail-layout { grid-template-columns: 1fr; gap: 24px; padding: 40px 20px; }
-      .detail-title { position: static; }
-      .footer { padding: 48px 20px 36px; }
-      .values-title::after { height: 50%; }
-    }
+        .hero-text .light {
+            font-weight: 200;
+            font-family: 'Spectral', serif;
+        }
 
-    @media (max-width: 640px) {
-      .services-cards { grid-template-columns: 1fr; gap: 12px; }
-      .values-title::after { height: 65%; animation: highlightReveal 1.5s ease-out forwards; animation-play-state: paused; }
-    }
+        .hero-text .sans {
+            font-family: 'Instrument Sans', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
 
-    @media (max-width: 480px) {
-      .home-hero { padding: 20px 16px 10px; }
-      .hero-tagline { margin: 0 auto; }
-      .carousel-section { padding: 8px 0 8px; }
-      .marquee-card { width: 200px; height: 245px; }
-      .marquee-track { gap: 25px; }
-      .home-cols { padding: 25px 16px 60px; }
-      .projects-grid-full { grid-template-columns: 1fr; }
-      .values-title::after { width: 0%; animation: highlightRevealMobile 0.9s ease-out 0.2s forwards; }
-    }
-    
-    @keyframes highlightRevealMobile { from { width: 0%; } to { width: 25%; } }
-  </style>
+        .hero-text .light-italic {
+            font-weight: 200;
+            font-style: italic;
+            font-family: 'Spectral', serif;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        main {
+            background-color: var(--primary-beige);
+        }
+
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section.hidden {
+            display: none;
+        }
+
+        /* ========== PORTFOLIO SECTION ========== */
+        .portfolio {
+            padding: 6rem 2rem;
+            overflow: hidden;
+        }
+
+        .portfolio-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 4rem;
+            font-family: 'Instrument Sans', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .portfolio-grid {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            overflow-x: hidden;
+            width: calc(100% + 4rem);
+            animation: slideCarousel 40s linear infinite;
+            margin-left: -2rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .portfolio-grid:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes slideCarousel {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .portfolio-item {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .portfolio-item:nth-child(1) {
+            width: 280px;
+        }
+
+        .portfolio-item:nth-child(2) {
+            width: 450px;
+        }
+
+        .portfolio-item:nth-child(3) {
+            width: 280px;
+        }
+
+        .portfolio-item:nth-child(n+4) {
+            width: 280px;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            aspect-ratio: 1 / 0.8;
+            border-radius: 20px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #E0E7FF 0%, #F3E7FF 100%);
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--dark-text);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-family: 'Instrument Sans', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .portfolio-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--dark-text);
+        }
+
+        /* ========== VALUES SECTION ========== */
+        .values {
+            padding: 6rem 2rem;
+            background-color: #FAFAF8;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            align-items: stretch;
+            margin-top: 4rem;
+        }
+
+        .value-item {
+            position: relative;
+            background-color: #000000;
+            padding: 2.5rem;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 350px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .value-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .value-item:nth-child(1):hover {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 50%, #FFB3B3 100%);
+        }
+
+        .value-item:nth-child(2):hover {
+            background: linear-gradient(135deg, #00B894 0%, #1DD1A1 50%, #55EFC4 100%);
+        }
+
+        .value-item:nth-child(3):hover {
+            background: linear-gradient(135deg, #4169E1 0%, #6495ED 50%, #87CEEB 100%);
+        }
+
+        .value-item:nth-child(4):hover {
+            background: linear-gradient(135deg, #FF8C42 0%, #FFA05E 50%, #FFB87D 100%);
+        }
+
+        .value-number {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-family: 'Instrument Sans', sans-serif;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            text-transform: capitalize;
+            letter-spacing: -0.5px;
+            font-family: 'Spectral', serif;
+            color: white;
+        }
+
+        .value-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-family: 'Instrument Sans', sans-serif;
+            font-weight: 400;
+        }
+
+        /* ========== CLIENTS SECTION ========== */
+        .clients {
+            padding: 6rem 2rem;
+        }
+
+        .clients-intro {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            font-family: 'Instrument Sans', sans-serif;
+        }
+
+        .clients-list {
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-weight: 300;
+            line-height: 1.4;
+            max-width: 1000px;
+            color: var(--dark-text);
+            font-family: 'Spectral', serif;
+        }
+
+        /* ========== SECTION TITLE ========== */
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 3rem;
+            text-align: left;
+            font-family: 'Instrument Sans', sans-serif;
+        }
+
+        /* ========== PROJECT DETAIL SECTION ========== */
+        .project-detail {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-detail.hidden {
+            display: none;
+        }
+
+        .project-detail-title {
+            font-family: 'Spectral', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .project-detail-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+            margin-bottom: 3rem;
+            max-width: 800px;
+        }
+
+        .project-detail-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .project-detail-images img,
+        .project-detail-images video {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            display: block;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background-color: #000000;
+            padding: 6rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            align-items: flex-start;
+        }
+
+        .footer-contact-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: 2rem;
+        }
+
+        .footer-contact-info-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: left;
+            align-items: flex-end;
+        }
+
+        .footer-contact-info-right a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid white;
+            font-family: 'Instrument Sans', sans-serif;
+            transition: opacity 0.3s;
+        }
+
+        .footer-contact-info-right a:hover {
+            opacity: 0.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            justify-content: flex-end;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid white;
+            border-radius: 50%;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .social-links a:hover {
+            background-color: white;
+            color: #000000;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero {
+                height: 80vh;
+            }
+
+            .hero-text {
+                font-size: 1.8rem;
+            }
+
+            .portfolio-grid {
+                animation: none;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+                scroll-behavior: smooth;
+            }
+
+            .portfolio-item {
+                width: auto !important;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-contact-group {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .project-detail-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- HEADER -->
+    <header>
+        <a href="javascript:void(0)" class="logo" onclick="goHome()">ani<span>Visual communicator</span></a>
+        <nav>
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="menu-toggle">☰</button>
+    </header>
 
-  <div class="topbar" data-tr="topbar"></div>
-
-  <nav>
-   <a href="javascript:void(0)" class="nav-logo" onclick="showSection('home')">ani</a>
-    <ul class="nav-links">
-<li><a href="javascript:void(0)" onclick="showSection('services')" id="nav-services" data-tr="navServices"></a></li>
-<li><a href="javascript:void(0)" onclick="showSection('about')" id="nav-about" data-tr="navAbout"></a></li>
-    </ul>
-  </nav>
-
-  <!-- HOME -->
-  <section id="home" class="active">
-    <div class="home-hero">
-      <p class="hero-eyebrow" data-tr="eyebrow"></p>
-      <h1 class="hero-title" data-tr="heroTitle"></h1>
-    </div>
-
-    <!-- CARRUSEL HORIZONTAL SIMPLE (sin 3D) -->
-    <div class="carousel-section">
-      <div class="marquee-wrap">
-        <div class="marquee-track" id="marqueeTrack"></div>
-      </div>
-     <p class="hero-tagline" style="text-align:center; margin-top: 60px; margin-bottom: 20px;" data-tr="tagline"></p>
-    </div>
-
-    <div class="home-projects-section">
-      <div class="see-more-wrap">
-        <span class="btn-outline" onclick="showSection('projects')" data-tr="seeMore"></span>
-      </div>
-    </div>
-    
-    <div style="text-align:center; padding-top:24px; padding-bottom: 40px;">
-      <span onclick="showSection('about')" id="how-work-btn" style="font-family:'Helvetica Neue',helvetica,sans-serif; font-size:clamp(1.4rem,3.5vw,2.2rem); font-style:italic; font-weight:400; color:var(--brown); cursor:pointer; opacity:0.75; transition:opacity 0.2s; display:inline-block; padding: 16px 0;" data-tr="howWork"></span>
-    </div>
-
-    <div class="home-cols">
-      <p class="home-col" data-tr="col1"></p>
-      <p class="home-col" data-tr="col2"></p>
-    </div>
-     
-    <!-- OUR VALUES SECTION -->
-    <div class="values-section">
-      <h2 class="values-title" data-tr="valuesTitle"></h2>
-      <div class="values-grid">
-        <div class="value-card">
-          <h3 data-tr="value1Title"></h3>
-          <p data-tr="value1Text"></p>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-text">
+                <span class="light">Brands grow</span> <span class="light">when they</span> <span class="light-italic">mean more</span> <span class="sans">to the world</span>.
+            </h1>
         </div>
-        <div class="value-card">
-          <h3 data-tr="value2Title"></h3>
-          <p data-tr="value2Text"></p>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- PORTFOLIO SECTION -->
+        <section class="portfolio" id="work">
+            <h2 class="portfolio-title">Some of my recent work:</h2>
+            <div class="portfolio-grid" id="carousel-projects"></div>
+        </section>
+
+        <!-- VALUES SECTION -->
+        <section class="values" id="about">
+            <h2 class="section-title">MY VALUES</h2>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <span class="value-number">1</span>
+                    <div>
+                        <h3 class="value-title">Multicultural</h3>
+                        <p class="value-description">Where diverse voices shape honest stories that resonate.</p>
+                    </div>
+                </div>
+
+                <div class="value-item">
+                    <span class="value-number">2</span>
+                    <div>
+                        <h3 class="value-title">Borderless</h3>
+                        <p class="value-description">Ideas, teams, and markets moving in unison.</p>
+                    </div>
+                </div>
+
+                <div class="value-item">
+                    <span class="value-number">3</span>
+                    <div>
+                        <h3 class="value-title">Always-Beta</h3>
+                        <p class="value-description">Constantly evolving, adapting, and building what's next at the speed the world demands.</p>
+                    </div>
+                </div>
+
+                <div class="value-item">
+                    <span class="value-number">4</span>
+                    <div>
+                        <h3 class="value-title">Multi-Disciplinary</h3>
+                        <p class="value-description">One challenge. Multiple perspectives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLIENTS SECTION -->
+        <section class="clients">
+            <p class="clients-intro">A few of my clients</p>
+            <div class="clients-list">
+                Mordisko, Garabatos, Raina Kattelson, Tom Kubik, Siete Machos, Petco, Señor Mango, Suma, Alpez
+            </div>
+        </section>
+    </main>
+
+    <!-- PROJECT DETAIL SECTIONS (Generated by JS) -->
+    <div id="projects-container"></div>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-content">
+            <!-- Thank You Section Left -->
+            <div class="footer-section">
+                <h3 style="font-family: 'Spectral', serif; font-size: 2rem; font-weight: 400; margin-bottom: 1rem; text-transform: none; color: white;">Thank you!</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; line-height: 1.6; font-family: 'Instrument Sans', sans-serif; font-weight: 400; letter-spacing: 0.5px;">Looking forward to connect with you!</p>
+            </div>
+
+            <!-- Contact Group Right -->
+            <div class="footer-contact-group">
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">in</a>
+                    <a href="https://www.behance.net" target="_blank" title="Behance">be</a>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-contact-info-right">
+                    <a href="tel:+525560931342">+52 5560931342</a>
+                    <a href="mailto:analauralga21@gmail.com?subject=Hello%20from%20ani&body=Hi%20there!">analauralga21@gmail.com</a>
+                </div>
+            </div>
         </div>
-        <div class="value-card">
-          <h3 data-tr="value3Title"></h3>
-          <p data-tr="value3Text"></p>
-        </div>
-        <div class="value-card">
-          <h3 data-tr="value4Title"></h3>
-          <p data-tr="value4Text"></p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
-    <div class="footer">
-      <p class="footer-title" data-tr="footerTitle"></p>
-      <p class="footer-sub" data-tr="footerSub"></p>
-      <div class="footer-row">
-        <div class="footer-social">
-          <a class="social-icon" href="https://www.behance.net/analaura15" target="_blank">Be</a>
-          <a class="social-icon" href="https://www.linkedin.com/in/ana-laura-moreno-lizarraga/" target="_blank">in</a>
-        </div>
-        <div class="footer-contact">
-        <span class="label" style="margin-top:24px;" data-tr="email"></span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="font-family:'Bricolage Grotesque',monospace; font-size:0.75rem; color:var(--brown); text-decoration:none; border-bottom: 1px solid var(--brown);">analauralga21@gmail.com</a></p>
-<span class="label" style="display:block; margin-top:24px;" data-tr="phone"></span>
-<p>+52 55 60 93 13 42</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-top">
-      <p class="about-quote" data-tr="aboutQuote"></p>
-      <div class="about-photo">
-        <img src="images/Frame00.jpg" style="width:800px;height:600px;object-fit:cover;border-radius:2px;" alt="Ana Laura">
-        <p class="about-caption" data-tr="aboutCaption"></p>
-      </div>
-    </div>
-    <div class="about-pink">
-      <h2 class="about-pink-title" data-tr="aboutPinkTitle"></h2>
-      <p class="about-pink-sub" data-tr="aboutPinkSub"></p>
-      <div class="about-body">
-        <p data-tr="aboutBodyText"></p>
-      </div>
-    </div>
-    <div class="about-beyond">
-      <h2 class="about-beyond-title" data-tr="aboutBeyondTitle"></h2>
-      <a class="btn-filled" href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" data-tr="contactBtn"></a>
-    </div>
-    <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
-    <div class="footer">
-      <p class="footer-title" data-tr="footerTitle"></p>
-      <p class="footer-sub" data-tr="footerSub"></p>
-      <div class="footer-row">
-        <div class="footer-social">
-          <a class="social-icon" href="https://behance.net" target="_blank">Be</a>
-          <a class="social-icon" href="https://linkedin.com" target="_blank">in</a>
-        </div>
-        <div class="footer-contact"><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a>
-      </div>
-    </div>
-  </section>
+    <script>
+        // Projects data extracted from Ana Laura's portfolio
+        const projects = [
+            { name: "Raina Kattelson", thumbnail: "images/Frame 2.jpg", desc: "Raina Kattelson is a New York-based prop and interior stylist who has worked with numerous notable people and recognized brands, creating rich and human visual worlds. The project involved building an identity that evokes her personality and highlights her work, connecting with new audiences.<br><br>Raina's vision was to refresh her image to have a more recognizable and consistent brand, showcasing her projects and character in an organic and contemporary way. The logo combines a \"handwritten\" typeface with an imperfect enclosing shape, evoking her curiosity, creativity and sense of freedom.<br><br>The logo is accompanied by a graphic system that picks up tones recurring throughout her work and interact in a harmonious and balanced way, along with a more experimental typographic approach — combining two very different typefaces and replacing the word \"and\" with \"&\" in all instances. Other elements such as rules, color blocks and the use of the shape are carried through to formalize the graphic outputs.<br><br>With that system in place, the look & feel of her website, promotional postcards, and presentations for creative briefs came together. The result is an interesting, organic and modern brand.", images: ["images/Frame 41.jpg", "images/Frame 42.jpg", "images/Frame 43.jpg", "images/Frame 44.jpg", "images/Frame 45.jpg", "images/Frame 46.jpg"] },
+            { name: "Astro Cold Brew", thumbnail: "images/Frame 3.jpg", desc: "Astro Cold Brew was born as part of the Shake Shack family in Mexico — an innovative, energizing drink in a can designed to inspire and fuel its consumers. The project covered everything from strategic foundation to visual execution.<br><br>The process began by defining the core concepts guiding the brand: the quality of the drink, its role as a companion to new consumers, the pleasure of an indulgent moment, and the energy that keeps you moving toward your goals. From these pillars, the name Astro Cold Brew was developed — a drink that elevates the good, recharges you, and lets you launch toward your objectives.<br><br>The communication aligned with an \"out of this world\" narrative, with messaging like \"we are a comet of quality, flavor and energy\" — striking a friendly and dynamic tone. This universe translated visually through a bold, approachable logo, paired with equally strong typography, vivid and disruptive colors, and an illustration system that positions the brand as a fun ally in the cold brew adventure.", images: ["images/Frame 47.jpg", "images/Frame 48.jpg", "images/Frame 49.jpg", "images/Frame 50.jpg", "images/Frame 51.jpg"] },
+            { name: "Level Home Investment", thumbnail: "images/Frame 230.png", desc: "Level Home Investment was building its real estate business and needed a presence that reflected its ambitions — professional, credible, and built to grow. The project focused on developing a website that would elevate the brand's image and support client acquisition.<br><br>The design approach prioritized clarity and confidence: a clean, structured layout that communicates reliability and expertise at every touchpoint. Visual decisions were made with the end client in mind — someone evaluating a significant investment who needs to trust the people behind it. The result is a digital presence that positions Level Home Investment as a serious, established player ready to scale.", images: ["images/Frame 230.png", "images/Frame 232.jpeg", "images/Frame 235.jpg"] },
+            { name: "Blockbuster App", thumbnail: "images/Frame 223.png", desc: "A UX design project reimagining Blockbuster as a modern streaming and rental app — exploring what the iconic brand could look like if it made a comeback in today's digital landscape.<br><br>The process was research-driven from the start: user interviews were conducted to understand how people currently navigate streaming platforms, what frustrates them, and what they genuinely miss about the physical rental experience. Those insights shaped every design decision that followed.<br><br>The result is an interface that blends nostalgia with contemporary usability — keeping the warmth and personality of the Blockbuster brand while delivering the clarity and ease modern users expect from a digital product.", images: ["images/Frame 224.jpg", "images/Frame 225.jpg", "images/Frame 226.jpg", "images/Frame 227.jpg", "images/Frame 228.jpg", "images/Frame 229.jpg"] },
+            { name: "Aromandia", thumbnail: "images/Frame 245.jpg", desc: "A UX/UI design project for Aromandia — an e-commerce experience built around the ritual of scent, reimagining how a modern candle brand connects with its customers online.<br><br>The process was research-driven from the start: user interviews were conducted to understand how people discover and shop for aromatic products, what builds trust during the purchase journey, and where existing e-commerce flows create unnecessary friction. Those insights shaped every design decision that followed.<br><br>The result is a mobile-first interface that feels as intentional as the products it showcases — modern and sophisticated, with a seamless checkout experience that turns browsing into buying.", images: ["images/Frame 240.jpg", "images/Frame 241.jpg", "images/Frame 242.jpg", "images/Frame 243.jpg", "images/Frame 244.jpg"] },
+            { name: "Aer by Armella", thumbnail: "images/Frame 14.jpg", desc: "Aer by Armella sells air conditioning — a product category not typically associated with aspiration or beauty. The project involved building the brand from the ground up: logo, website, outdoor posters, and the full range of brand applications.<br><br>The design challenge was to elevate a utilitarian product into something that felt considered and premium. The visual identity communicates freshness, modernity, and reliability — qualities that matter to someone making a significant purchase for their home or business. The website translates that identity into a clear, confident digital experience, while the outdoor posters give the brand a strong physical presence in the city. The result is a brand that makes Aer by Armella impossible to ignore and easy to trust.", images: ["images/Frame 168.jpg", "images/Frame 169.jpg", "images/Frame 170.jpg", "images/Frame 171.jpg", "images/Frame 172.jpg", "images/Frame 173.jpg"] },
+            { name: "Mordisko", thumbnail: "images/Frame 4.jpg", desc: "Mordisko, under the Holanda umbrella, is one of Mexico's most iconic brands — recognized as the pioneer of ice cream sandwiches. Its essence is elevating consumers through innovative, refreshing combinations. The project involved working alongside advertising agency DDB to refresh its identity and maintain relevance and impact with new generations.<br><br>The main goal of this rebranding was to update Mordisko's image, which hadn't been renewed in many years and had become predictable. Its personality is fun, disruptive and dynamic, so the new identity was built to evoke exactly that — especially for Gen Z.<br><br>The logotype brings back a playful mouth inside the first \"o,\" combined with bold typography where the letters dance and escape the monotony of a uniform baseline. For the packaging, a brighter, bolder color palette was developed to stand out inside refrigerators, with waves in different tones that draw the consumer in while highlighting the mix of textures and flavors the brand is known for. Stickers were introduced as a contemporary visual language using symbols tied to positivity and enjoyment, while photography embraced the dazzling palette featuring younger consumers reveling in the Mordisko experience.", images: ["images/Frame 53.jpg", "images/Frame 54.jpg", "images/Frame 55.jpg", "images/Frame 56.jpg", "images/Frame 57.jpg", "images/Frame 58.jpg"] },
+            { name: "Siete Machos", thumbnail: "images/Frame 6.jpg", desc: "Siete Machos is a nationally recognized brand with decades of history, perfuming generations of Mexican households. The project involved refreshing their web presence — for both the cosmetics and spirits lines — and redesigning the tequila label to connect with younger audiences.<br><br>The project began with the tequila packaging redesign, where key elements such as the goats, agave plants, and logotype needed to be preserved. Drawing from the celebration at the heart of the drink, an illustration was crafted featuring seven dancing billy goats alongside other festive elements, turning the label into a communal celebration.<br><br>With the tequila's new visual style established, the look and feel was translated to the spirits website — incorporating illustrative elements for iconography, a warm and elegant updated palette, and more contemporary typography. For the cosmetics site, the focus was on preserving the brand's essence by highlighting the ritualistic and esoteric qualities of the products, modernizing typography, bringing consistency to the photographic style, and carefully crafting the user experience as they explore the world of Siete Machos.", images: ["images/Frame 65.jpg", "images/Frame 66.jpg", "images/Frame 67.jpg", "images/Frame 68.jpg", "images/Frame 69.jpg", "images/Frame 70.jpg"] },
+            { name: "Aromandia - Seasonalities", thumbnail: "images/Frame 5.jpg", desc: "The Seasonalities collection is Aromandia's seasonal chapter — limited releases designed around Mother's Day, autumn, and the holiday season. Each collection required its own visual identity while remaining cohesive with the broader brand.<br><br>Packaging design and print production management were handled throughout, ensuring each release met the premium standard Aromandia is built on. The seasonal collections give the brand a reason to show up differently at key moments in the year — creating anticipation, gifting relevance, and keeping the brand feeling alive and current across seasons.", images: ["images/Frame 147.jpg", "images/Frame 148.jpg", "images/Frame 149.jpg", "images/Frame 150.jpg", "images/Frame 151.jpg"] },
+            { name: "Aromandia - Scented Candles", thumbnail: "images/Frame 1.jpg", desc: "Aromandia is a premium candle brand set to launch this year — a project built from the ground up with the attention to detail that a product at this level demands. The work covered packaging design and full print production management for the brand's core collection, which includes the Nicho and Anthology lines, available year-round.<br><br>Every decision — from material to typography to finish — was made to reflect the premium positioning of the brand. The packaging is designed to be as much an object as the candle itself: something you want to keep, display, and give. Aromandia enters the market as a brand that already knows exactly who it is.", images: ["images/Frame 35.jpg", "images/Frame 36.jpg", "images/Frame 37.jpg", "images/Frame 38.jpg", "images/Frame 39.jpg", "images/Frame 40.jpg"] },
+            { name: "Shelter Studios", thumbnail: "images/Frame 7.jpg", desc: "Shelter Studios was created as an initiative to promote both emerging and established artists through audiovisual production — building community and an intimate space for audiences to truly know them. The project involved developing the name and full identity for the program.<br><br>The vision was to create a space for concerts and interviews with musicians in a warm, home-like setting — humanizing them and opening a dialogue between music lovers. From the beginning, the team envisioned a program diverse in genres, origins, and styles: a platform for discovering the most exciting music happening in Mexico.<br><br>From these concepts, Shelter Studios was born — a name that captures the essence of the project: a warm refuge for music. This translated visually into the logotype, where an armchair serves as the primary icon and brand identifier. The symbol also carried through into the set design, with each recording always featuring a different armchair or sofa. The broader visual territory is built on silhouettes — the armchair alongside domestic living room elements and musical instruments becomes an enveloping frame for imagery, completed by expressive typography that creates a flexible, contemporary, and compelling visual system.", images: ["images/Frame 71.jpg", "images/Frame 72.jpg", "images/Frame 73.jpg", "images/Frame 74.jpg", "images/Frame 75.jpg", "images/Frame 76.jpg"] },
+            { name: "Tom Kubik Photography", thumbnail: "images/Frame 8.jpg", desc: "Tom Kubik is a Los Angeles-based photographer whose practice centers on creating authentic images that capture the lifestyle of real people. The project involved refreshing his identity to expand his reach and grow his audience.<br><br>What makes Tom's practice so unique is the connection he builds between his lens and his subjects — a recognition that goes beyond the image. One of his core priorities is creating a space where people feel comfortable and free to share their stories and their lives.<br><br>Understanding how central authenticity is to his work, a handwritten-style logotype was chosen to function as a signature — lending a personal, intimate quality to the brand. The color palette remained neutral (black and white) to let the photographs remain the protagonists of every communication. Curved strokes coexist harmoniously with Tom's visual world, interacting with his images without overshadowing them. Business cards carry his unique tone with messaging that seeks genuine, open connection — always within a minimalist but distinctly original aesthetic.", images: ["images/Frame 77.jpg", "images/Frame 78.jpg", "images/Frame 79.jpg", "images/Frame 80.jpg", "images/Frame 81.jpg", "images/Frame 82.jpg"] },
+            { name: "Effecty", thumbnail: "images/Frame 9.jpg", desc: "Effecty is a digital telehealth platform promoting wellness through medication-assisted weight loss — helping users on their journey toward a healthier, fuller, and happier life. The project involved developing both the name and identity around the brand's key pillars: trust, companionship, and positivity.<br><br>The name Effecty was built around the concepts of quality and reliability — drawing from \"effect\" and \"effective\" to reference the positive impact of the service, softened and made approachable with the \"-y\" ending. The logotype captures that same lightness through a classic typeface with an italic accent on the \"f\" letters, creating a diagonal dynamism that speaks to progress and movement toward goals.<br><br>The identity lives within a palette of greens, blues, soft beiges, and whites — evoking peace and lightness. Photography, illustration style, and typography all work together to achieve a human, trustworthy approach that feels as good as the product promises to make you feel.", images: ["images/Frame 83.jpg", "images/Frame 84.jpg", "images/Frame 85.jpg", "images/Frame 86.jpg", "images/Frame 87.jpg", "images/Frame 88.jpg"] },
+            { name: "Paws", thumbnail: "images/Frame 10.jpg", desc: "Paws is a line designed for Petco created to address one of every pet owner's most relatable challenges: masking pet odors at home. The product line includes scented candles crafted specifically to neutralize the smells that come with sharing your space with the animals you love.<br><br>The packaging design balances warmth and playfulness — nodding to the pet owner lifestyle while feeling elevated enough to live comfortably in any home. The result is a line that feels both functional and giftable, fitting naturally within Petco's retail environment while standing out on shelf.", images: ["images/Frame 89.jpg", "images/Frame 90.jpg", "images/Frame 91.jpg", "images/Frame 92.jpg", "images/Frame 93.jpg", "images/Frame 94.jpg"] },
+            { name: "USG", thumbnail: "images/Frame 11.jpg", desc: "USG is a leading construction materials brand with a presence across Latin America. The project involved a comprehensive rebranding that touched every dimension of the brand — from digital to physical, from the warehouse to the street.<br><br>The scope was extensive: a complete brand identity manual built to work consistently across LATAM markets, covering the website, social media, transportation, uniforms, signage, and the bags used for concrete materials. Each application required careful consideration of how the identity would perform across vastly different contexts and scales — from a screen to the side of a truck.<br><br>The result is a cohesive, scalable system that gives USG the visual authority and consistency its regional presence demands, ensuring the brand communicates with the same strength whether encountered online or on a construction site.", images: ["images/Frame 95.jpg", "images/Frame 105.jpg", "images/Frame 115.jpg", "images/Frame 125.jpg", "images/Frame 135.jpg", "images/Frame 145.jpg"] },
+            { name: "Señor Mango", thumbnail: "images/Frame 12.jpg", desc: "Señor Mango is a dried mango brand determined to stand out in a market where most players look exactly alike. The project covered packaging design and management, motion graphics, and ongoing website review and improvement — all aimed at attracting new customers through design that does something different.<br><br>The packaging breaks from category conventions: bold, distinctive, and crafted to stop someone mid-aisle. Motion graphics extended the brand's personality into digital channels, adding energy and dynamism to the way the product shows up online. The website was continuously refined to improve the user experience and strengthen the brand's commercial appeal. The overall result is a brand that has carved out its own visual territory in a crowded market.", images: ["images/Frame 96.jpg", "images/Frame 106.jpg", "images/Frame 116.jpg", "images/Frame 126.jpg", "images/Frame 136.jpg", "images/Frame 146.jpg"] },
+            { name: "Grace Sepulveda", thumbnail: "images/Frame 26.png", desc: "Grace Sepúlveda, an expert with decades of experience in hospitality, decided to channel her knowledge into a consulting agency specializing in the timeshare industry. The project covered brand strategy, identity, and website — all built to reflect her professional personality and the quality of her services.<br><br>One of the most important goals was generating trust: clients needed to know they were hiring results-driven experts. The work focused on projecting Grace's innovative and creative attitude, the collaborative character of her team, and the deeply human and passionate side behind her dedication and trajectory.<br><br>A logotype was developed communicating the elegance and modernity associated with the founder — using a contemporary sans serif alongside an isotype built from the repetition of the letter S (for Sepúlveda), evoking the serenity of a sunrise and a clean, fluid aesthetic. The visual system pairs a sans serif with a high-personality serif, evoking Grace's strength and subtlety. A palette of light, airy tones and photography of spaces, landscapes, and team moments reinforce the collaborative and human nature of the brand — coming together most powerfully on the website.", images: ["images/Frame 211.jpg", "images/Frame 212.jpg", "images/Frame 213.jpg", "images/Frame 214.jpg", "images/Frame 215.jpg", "images/Frame 216.jpg"] },
+            { name: "Vita Blip", thumbnail: "images/Frame 15.jpg", desc: "Vita Blip is a vitamin brand whose identity needed to feel as good as the product promises to make you feel. The packaging design focused on creating a visual presence that is clean, vibrant, and trustworthy — communicating health and quality at a glance.<br><br>In a category crowded with clinical-looking packaging, Vita Blip was designed to feel approachable and energetic without sacrificing credibility. Every detail — from color to typography to structure — was considered to make the product feel like a daily ritual worth looking forward to.", images: ["images/Frame 160.jpg", "images/Frame 161.jpg"] },
+            { name: "English Sprint", thumbnail: "images/Frame 16.jpg", desc: "English Sprint is a learning platform and community dedicated to English language acquisition. The project involved working alongside founder Mercedes Medina to build an identity that evokes quality, warmth, and confidence — connecting with the right audience.<br><br>The platform offers expert-led lessons focused on achieving IELTS certification. To meet the brand's goals, the identity needed to communicate a friendly, reliable, professional, and accessible attitude. A logotype was created inspired by British metro signage — featuring an underlined sans serif typeface within a circular enclosure. The offset between elements transmits movement, dynamism, and agility: all essential qualities in an educational environment.<br><br>Throughout the rest of the visual system, structured grid-based elements and color blocks coexist with rounded accents and organic strokes, balancing the playful with the organized. The color palette combines neutrals (black and white) with primaries (yellow, blue, and red) for a classic, timeless, and memorable system.", images: ["images/Frame 174.jpg", "images/Frame 175.jpg", "images/Frame 176.jpg", "images/Frame 177.jpg", "images/Frame 178.jpg"] },
+            { name: "Nos Vemos de Noche", thumbnail: "images/Frame 17.jpg", desc: "Nos Vemos de Noche is the artistic project of Chilean artist Paulina Silva Hauyon. The work involved developing the full visual proposal for her project — encompassing her book design and website — creating a cohesive world that reflects her artistic voice.<br><br>The visual identity was built to feel intimate and evocative, matching the emotional register of Paulina's work. The book design treated every detail as an extension of her artistic practice, while the website creates a digital space where her audience can enter her world. The result is a visual system that doesn't just represent the project — it becomes part of it.", images: ["images/Frame_157.jpg", "images/Frame_158.jpg", "images/Frame_159.jpg"] },
+            { name: "Debajo de un ciruelo", thumbnail: "images/Frame 18.jpg", desc: "Debajo de un Ciruelo was a real exhibition held at Centro de Diseño, born from a color workshop in Oaxaca exploring natural pigments — cochineal and black bean — and their expressive possibilities.<br><br>The project sits at the intersection of research, craft, and visual experimentation. Developed from an investigation into traditional Mexican dyeing techniques, the work translated material and process into a cohesive exhibition identity that honored both the artisanal origins and the conceptual depth of the exploration. The result is a project that is as much about the act of making as it is about the final image.", images: ["images/Frame 162.jpg", "images/Frame 163.jpg", "images/Frame 164.jpg"] },
+            { name: "Toda Fest", thumbnail: "images/Frame 179.jpg", desc: "Toda Fest was conceived as a music festival with an entirely female lineup — a celebration of women in music built around the idea that this space was long overdue. Though the event was ultimately not realized, the visual identity was fully developed.<br><br>The brand needed to feel bold and celebratory without being reductive — capturing the energy of a festival while centering the intention behind it. Typography, color, and graphic elements were chosen to feel powerful, joyful, and unmistakably intentional. The identity stands as a complete vision for what the festival would have looked and felt like.", images: ["images/Frame 179.jpg", "images/Frame 180.jpg", "images/Frame 181.jpg", "images/Frame 182.jpg", "images/Frame 183.jpg", "images/Frame 184.jpg"] },
+            { name: "Sunshine Bagels", thumbnail: "images/Frame 20.jpg", desc: "Sunshine Bagels is a bagel brand based in Los Angeles with the kind of personality that belongs in your feed. The project focused on social media design — building a visual language that translates the brand's warmth and energy into content that connects.<br><br>Every piece was designed to feel consistent with the brand while staying fresh and engaging — using color, typography, and layout to create a scrollable world that makes people hungry and happy in equal measure.", images: ["images/Frame 165.jpg", "images/Frame 166.jpg", "images/Frame 167.jpg"] },
+            { name: "Garabatos", thumbnail: "images/Frame 189.jpg", desc: "Garabatos is a beloved Mexican restaurant brand whose positioning had typecast it as a place for older audiences and breakfast only. The redesign transformed uniforms, printed materials, and digital assets for the Querétaro location to reflect the brand's real personality and evoke its versatility — a change set to extend across all locations.<br><br>The project developed a new messaging and visual identity strategy communicating that Garabatos is a space for everyone, at any time of day. The logotype's legibility was refined first, then a fresh palette of whites, creams, browns, and greens was introduced — evoking freshness, cleanliness, and the organic. Classic complementary typefaces reinforce the brand's quality and refinement, while photography showcases delicious food, consumer enjoyment, and the overall Garabatos experience. Graphic elements like frames, rules, and textures using the logo monogram were added to create a memorable impact and consolidate the new positioning.", images: ["images/Frame 189.jpg", "images/Frame 190.jpg", "images/Frame 191.jpg"] },
+            { name: "Triangulo de Oro", thumbnail: "images/Frame 22.jpg", desc: "Triángulo de Oro is a Costa Rican brand looking to bring its product to Mexico — and to adapt its image to compete on Mexican supermarket shelves. The project involved packaging redesign with a clear commercial goal: to resonate with a new market without losing the brand's essence.<br><br>The work required understanding both what makes the brand distinctive and what Mexican consumers expect to see in this category. The resulting packaging adapts the brand's visual identity to meet those expectations — with the shelf presence, clarity, and appeal needed to earn a place in a new market.", images: ["images/Frame 185.jpg", "images/Frame 186.jpg", "images/Frame 187.jpg", "images/Frame 188.jpg"] },
+            { name: "SUMA", thumbnail: "images/Frame 23.jpg", desc: "SUMA is a collective and community platform built around the vision of José Ramón Ruíz — a space where art, nature, discussion, and the transcendent come together through unique shared experiences.<br><br>The name reflects the project's core idea: a whole made up of distinct parts, always adding something meaningful to the lives of its members through exploration. That adventurous spirit carried into the logotype — a lowercase typeface for approachability, paired with an icon that transforms the \"S\" into a labyrinth of layered lines, evoking the many paths and people that make up the platform.<br><br>The visual system was built from clean, adaptable typography, warm and deep colors, and an emphasis on textures, close-up imagery, and visuals that evoke the creative, spiritual, rich, and diverse universe at SUMA's core.", images: ["images/Frame 192.jpg", "images/Frame 193.jpg", "images/Frame 194.jpg", "images/Frame 195.jpg"] },
+            { name: "Velavita", thumbnail: "images/Frame 24.jpg", desc: "Velavita is a candle brand built around the idea that a candle can do more than fill a room with scent — it can mark a moment. The project involved developing the brand identity and packaging, creating a visual world as considered and intentional as the product itself.<br><br>The design approach is warm, refined, and sensorial — communicating the quality of the product through every detail. Typography, color, and material choices work together to position Velavita as a brand that belongs in the homes of people who care about the way things feel.", images: ["images/Frame 196.jpg", "images/Frame 197.jpg", "images/Frame 198.jpg", "images/Frame 199.jpg", "images/Frame 200.jpg", "images/Frame 201.jpg"] },
+            { name: "Velavita candles", thumbnail: "images/Frame 25.jpg", desc: "This collection focuses on Velavita's seasonal and special releases — a curated set of candles designed around specific moments and gifting occasions. Packaging design and print production management were handled end-to-end, ensuring the final product matched the brand's premium standards at every step.<br><br>Each seasonal release required its own visual treatment while remaining unmistakably Velavita — a balance between consistency and freshness that keeps the collection feeling new without losing brand recognition. The result is a line of objects that feel as beautiful to give as they are to own.", images: ["images/Frame 217.jpg", "images/Frame 218.jpg", "images/Frame 219.jpg", "images/Frame 220.jpg", "images/Frame 221.jpg", "images/Frame 222.jpg"] },
+            { name: "Alpez", thumbnail: "images/Frame 27.jpg", desc: "Alpez is an energy and gas distribution company operating in Mexico. The project involved developing a visual identity that communicates reliability, efficiency, and professionalism — the qualities that matter most when clients depend on you for something essential.<br><br>The brand was built to feel trustworthy and modern: clear enough to work across vehicles, uniforms, signage, and digital touchpoints, and strong enough to establish Alpez as a serious player in its category.", images: ["images/Frame 202.jpg", "images/Frame 203.jpg", "images/Frame 204.jpg"] },
+            { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg", desc: "Oasis Decoraciones is a candle brand with its sights set on expanding into fragrances — a brand at the beginning of something. The project involved developing an identity and visual presence that could grow alongside the product line.<br><br>The design needed to feel evocative and warm, rooted in the sensorial experience the products promise. Every visual decision was made with longevity in mind: a system flexible enough to accommodate new products and categories as the brand evolves, while staying consistent and recognizable from day one.", images: ["images/Frame 59.jpg", "images/Frame 60.jpg", "images/Frame 61.jpg", "images/Frame 62.jpg", "images/Frame 63.jpg", "images/Frame 64.jpg"] }
+        ];
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div style="background: #0a0a0a; padding: 80px 48px 0; text-align: center;">
-      <h1 style="font-family: 'ZJSansDisplay', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 400; letter-spacing: 0.08em; margin-bottom: 50px; color: #ffffff; text-transform: uppercase;">My Expertise</h1>
-      <p style="font-family: 'ZJSansDisplay', sans-serif; font-size: clamp(0.95rem, 1.8vw, 1.1rem); color: rgba(255,255,255,0.85); line-height: 1.8; max-width: 900px; margin: 0 auto; margin-bottom: 100px;">Across branding, packaging design, and social media strategy. My experience spans client presentations, data visualization, and full-stack UI/UX design. I've collaborated seamlessly with marketing teams and developers, leading projects from conception to final implementation. My approach emphasizes finished product quality and deep user experience understanding.</p>
-      
-      <!-- Marquee animado -->
-      <div style="overflow: hidden; width: 100%; padding: 120px 0; background: #0a0a0a;">
-        <style>
-          @keyframes marquee-services {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .services-marquee {
-            display: flex;
-            gap: 60px;
-            animation: marquee-services 35s linear infinite;
-            white-space: nowrap;
-          }
-          .service-item {
-            font-family: 'Spectral', serif;
-            font-size: clamp(5.6rem, 14vw, 9rem);
-            font-weight: 300;
-            color: #ffffff;
-            letter-spacing: -0.01em;
-            flex-shrink: 0;
-            line-height: 1.2;
-            text-transform: uppercase;
-            padding: 0 40px;
-          }
-          .separator {
-            font-family: 'Spectral', serif;
-            font-size: clamp(5.6rem, 14vw, 9rem);
-            font-weight: 300;
-            color: #ffffff;
-            flex-shrink: 0;
-            line-height: 1.2;
-            padding: 0 20px;
-          }
-        </style>
-        <div class="services-marquee">
-          <div class="service-item">User Experience</div>
-          <div class="separator">-</div>
-          <div class="service-item">Storytelling</div>
-          <div class="separator">-</div>
-          <div class="service-item">Logotype</div>
-          <div class="separator">-</div>
-          <div class="service-item">Brand Applications</div>
-          <div class="separator">-</div>
-          <div class="service-item">Packaging</div>
-          <div class="separator">-</div>
-          <div class="service-item">Signage</div>
-          <div class="separator">-</div>
-          <div class="service-item">Printed Materials</div>
-          <div class="separator">-</div>
-          <div class="service-item">User Interface</div>
-          <div class="separator">-</div>
-          <div class="service-item">Digital Materials</div>
-          <div class="separator">-</div>
-          <div class="service-item">App Development</div>
-          <div class="separator">-</div>
-          <div class="service-item">Web Design</div>
-          <div class="separator">-</div>
-          <div class="service-item">User Experience</div>
-          <div class="separator">-</div>
-          <div class="service-item">Storytelling</div>
-          <div class="separator">-</div>
-          <div class="service-item">Logotype</div>
-          <div class="separator">-</div>
-          <div class="service-item">Brand Applications</div>
-          <div class="separator">-</div>
-          <div class="service-item">Packaging</div>
-          <div class="separator">-</div>
-          <div class="service-item">Signage</div>
-          <div class="separator">-</div>
-          <div class="service-item">Printed Materials</div>
-          <div class="separator">-</div>
-          <div class="service-item">User Interface</div>
-          <div class="separator">-</div>
-          <div class="service-item">Digital Materials</div>
-          <div class="separator">-</div>
-          <div class="service-item">App Development</div>
-          <div class="separator">-</div>
-          <div class="service-item">Web Design</div>
-          <div class="separator">-</div>
-        </div>
-      </div>
-    </div>
-  </section>
+        let currentProjectIndex = 0;
 
-  <!-- PROJECTS GALLERY -->
-  <section id="projects">
-    <div class="projects-top">
-      <h1 class="projects-page-title" data-tr="projectsTitle"></h1>
-    </div>
-    <div class="projects-grid-full" id="projects-grid">
-      <!-- Generated by JS -->
-    </div>
-    <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
-    <div class="footer">
-      <p class="footer-title" data-tr="footerTitle"></p>
-      <p class="footer-sub" data-tr="footerSub"></p>
-      <div class="footer-row">
-        <div class="footer-social">
-          <a class="social-icon" href="https://behance.net" target="_blank">Be</a>
-          <a class="social-icon" href="https://linkedin.com" target="_blank">in</a>
-        </div>
-        <div class="footer-contact">
-      <span class="label" style="margin-top:24px;" data-tr="email"></span><p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
-<span class="label" style="display:block; margin-top:24px;" data-tr="phone"></span>
-<p>+52 55 60 93 13 42</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        function initCarousel() {
+            const carousel = document.getElementById('carousel-projects');
+            const sequence = [...projects, ...projects]; // Duplicado para efecto infinito
 
-  <!-- PROJECT DETAIL -->
-  <section id="project-detail">
-    <div class="detail-layout">
-      <div class="detail-title" id="detail-title"></div>
-      <div class="detail-images" id="detail-images"></div>
-    </div>
-    <div class="detail-nav">
-      <button class="detail-nav-btn" id="btn-prev" onclick="navigateProject(-1)" data-tr="prevProject"></button>
-      <button class="detail-nav-btn" id="btn-next" onclick="navigateProject(1)" data-tr="nextProject"></button>
-    </div>
-    <div class="wave-top"><svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 Q30,0 60,40 Q90,0 120,40 Q150,0 180,40 Q210,0 240,40 Q270,0 300,40 Q330,0 360,40 Q390,0 420,40 Q450,0 480,40 Q510,0 540,40 Q570,0 600,40 Q630,0 660,40 Q690,0 720,40 Q750,0 780,40 Q810,0 840,40 Q870,0 900,40 Q930,0 960,40 Q990,0 1020,40 Q1050,0 1080,40 Q1110,0 1140,40 Q1170,0 1200,40 Z" fill="#E8E9F3"/></svg></div>
-    <div class="footer">
-      <p class="footer-title" data-tr="footerTitle"></p>
-      <p class="footer-sub" data-tr="footerSub"></p>
-      <div class="footer-row">
-        <div class="footer-social">
-          <a class="social-icon" href="https://behance.net" target="_blank">Be</a>
-          <a class="social-icon" href="https://linkedin.com" target="_blank">in</a>
-        </div>
-        <div class="footer-contact">
-       <span class="label" style="margin-top:24px;" data-tr="email"></span> <p><a href="https://mail.google.com/mail/?view=cm&to=analauralga21@gmail.com" target="_blank" style="color:var(--muted); text-decoration:none; border-bottom: 1px solid var(--muted);">analauralga21@gmail.com</a></p>
-<span class="label" style="display:block; margin-top:24px;" data-tr="phone"></span>
-<p>+52 55 60 93 13 42</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-var projects = [
-  { name: "Raina Kattelson", thumbnail: "images/Frame 2.jpg",
-    descEn: "Raina Kattelson is a New York-based prop and interior stylist who has worked with numerous notable people and recognized brands, creating rich and human visual worlds. The project involved building an identity that evokes her personality and highlights her work, connecting with new audiences.<br><br>Raina's vision was to refresh her image to have a more recognizable and consistent brand, showcasing her projects and character in an organic and contemporary way. The logo combines a \"handwritten\" typeface with an imperfect enclosing shape, evoking her curiosity, creativity and sense of freedom.<br><br>The logo is accompanied by a graphic system that picks up tones recurring throughout her work and interact in a harmonious and balanced way, along with a more experimental typographic approach — combining two very different typefaces and replacing the word \"and\" with \"&\" in all instances. Other elements such as rules, color blocks and the use of the shape are carried through to formalize the graphic outputs.<br><br>With that system in place, the look & feel of her website, promotional postcards, and presentations for creative briefs came together. The result is an interesting, organic and modern brand.",
-    descEs: "Raina Kattelson es una estilista de utilería e interiores basada en Nueva York que ha trabajado con numerosas personas notables y marcas reconocidas, creando mundos visuales ricos y humanos. El proyecto consistió en construir una identidad que evoca su personalidad y resalta su trabajo, conectando con nuevas audiencias.<br><br>La visión de Raina era refrescar su imagen para tener una marca más reconocible y consistente, mostrando sus proyectos y carácter de manera orgánica y contemporánea. El logo combina una tipografía \"manual\" con una plasta envolvente imperfecta, evocando su curiosidad, creatividad y sentido de libertad.<br><br>El logo se acompaña de un sistema gráfico que retoma tonos que se repiten en su trabajo e interactúan de manera armoniosa y balanceada, junto con una aplicación tipográfica más experimental — combinando dos tipografías muy distintas y reemplazando la palabra \"y\" por el \"&\" en todas las instancias. Otros recursos como plecas, bloques de color y el uso de la plasta se retoman para formalizar las salidas gráficas.<br><br>Con ese sistema establecido, se desarrolló el look & feel de su página web, postales promocionales y presentaciones para briefs creativos. El resultado es una marca interesante, orgánica y moderna.",
-    images: ["images/Frame 41.jpg", "images/Frame 42.jpg", "images/Frame 43.jpg", "images/Frame 44.jpg", "images/Frame 45.jpg", "images/Frame 46.jpg"] },
-
-  { name: "Astro Cold Brew", thumbnail: "images/Frame 3.jpg",
-    descEn: "Astro Cold Brew was born as part of the Shake Shack family in Mexico — an innovative, energizing drink in a can designed to inspire and fuel its consumers. The project covered everything from strategic foundation to visual execution.<br><br>The process began by defining the core concepts guiding the brand: the quality of the drink, its role as a companion to new consumers, the pleasure of an indulgent moment, and the energy that keeps you moving toward your goals. From these pillars, the name Astro Cold Brew was developed — a drink that elevates the good, recharges you, and lets you launch toward your objectives.<br><br>The communication aligned with an \"out of this world\" narrative, with messaging like \"we are a comet of quality, flavor and energy\" — striking a friendly and dynamic tone. This universe translated visually through a bold, approachable logo, paired with equally strong typography, vivid and disruptive colors, and an illustration system that positions the brand as a fun ally in the cold brew adventure.",
-    descEs: "Astro Cold Brew nació como parte de la familia Shake Shack en México — una bebida innovadora y energizante en lata, diseñada para inspirar y motivar a sus consumidores. El proyecto abarcó desde la estrategia hasta la ejecución visual.<br><br>El proceso inició definiendo los conceptos clave que guían la marca: la calidad de la bebida, su rol como acompañante de nuevos consumidores, el disfrute de un momento de indulgencia y la energía que impulsa a continuar con las metas del día. A partir de estos pilares se desarrolló el nombre Astro Cold Brew — una bebida que eleva lo bueno, te recarga y te permite despegar hacia tus objetivos.<br><br>La comunicación se alineó con una narrativa \"fuera de este mundo\", con mensajes como \"somos un cometa de calidad, sabor y energía\" — un tono amigable y dinámico. Este universo se tradujo visualmente en un logo bold y cercano, tipografías igual de fuertes, colores vivos y disruptivos, y un sistema de ilustraciones que posiciona a la marca como un aliado divertido en la aventura del cold brew.",
-    images: ["images/Frame 47.jpg", "images/Frame 48.jpg", "images/Frame 49.jpg", "images/Frame 50.jpg", "images/Frame 51.jpg"] },
-
-  { name: "Level Home Investment", thumbnail: "images/Frame 230.png",
-    descEn: "Level Home Investment was building its real estate business and needed a presence that reflected its ambitions — professional, credible, and built to grow. The project focused on developing a website that would elevate the brand's image and support client acquisition.<br><br>The design approach prioritized clarity and confidence: a clean, structured layout that communicates reliability and expertise at every touchpoint. Visual decisions were made with the end client in mind — someone evaluating a significant investment who needs to trust the people behind it. The result is a digital presence that positions Level Home Investment as a serious, established player ready to scale.",
-    descEs: "Level Home Investment estaba construyendo su negocio inmobiliario y necesitaba una presencia que reflejara sus ambiciones — profesional, creíble y lista para crecer. El proyecto se centró en desarrollar un sitio web que elevara la imagen de la marca y apoyara la captación de clientes.<br><br>El enfoque de diseño priorizó claridad y confianza: una estructura limpia y ordenada que comunica confiabilidad y experiencia en cada punto de contacto. Las decisiones visuales se tomaron pensando en el cliente final — alguien evaluando una inversión importante que necesita confiar en quienes están detrás. El resultado es una presencia digital que posiciona a Level Home Investment como un jugador serio y consolidado, listo para escalar.",
-    images: ["images/Frame 230.png", "images/Frame 232.jpeg", "images/Frame 235.jpg"] },
-
-  { name: "Blockbuster App", thumbnail: "images/Frame 223.png",
-    descEn: "A UX design project reimagining Blockbuster as a modern streaming and rental app — exploring what the iconic brand could look like if it made a comeback in today's digital landscape.<br><br>The process was research-driven from the start: user interviews were conducted to understand how people currently navigate streaming platforms, what frustrates them, and what they genuinely miss about the physical rental experience. Those insights shaped every design decision that followed.<br><br>The result is an interface that blends nostalgia with contemporary usability — keeping the warmth and personality of the Blockbuster brand while delivering the clarity and ease modern users expect from a digital product.",
-    descEs: "Un proyecto de diseño UX que reimagina a Blockbuster como una app moderna de streaming y renta — explorando cómo podría verse la icónica marca si hiciera un regreso en el panorama digital actual.<br><br>El proceso fue impulsado por investigación desde el inicio: se realizaron entrevistas con usuarios para entender cómo navegan actualmente las plataformas de streaming, qué les genera fricción y qué extrañan genuinamente de la experiencia de renta física. Esos hallazgos dieron forma a cada decisión de diseño.<br><br>El resultado es una interfaz que combina nostalgia con usabilidad contemporánea — conservando la calidez y personalidad de Blockbuster mientras entrega la claridad y facilidad que los usuarios actuales esperan de un producto digital.",
-    images: ["images/Frame 224.jpg", "images/Frame 225.jpg", "images/Frame 226.jpg", "images/Frame 227.jpg", "images/Frame 228.jpg", "images/Frame 229.jpg"] },
-
- { name: "Aromandia", thumbnail: "images/Frame 245.jpg",
-  descEn: "A UX/UI design project for Aromandia — an e-commerce experience built around the ritual of scent, reimagining how a modern candle brand connects with its customers online.<br><br>The process was research-driven from the start: user interviews were conducted to understand how people discover and shop for aromatic products, what builds trust during the purchase journey, and where existing e-commerce flows create unnecessary friction. Those insights shaped every design decision that followed.<br><br>The result is a mobile-first interface that feels as intentional as the products it showcases — modern and sophisticated, with a seamless checkout experience that turns browsing into buying.",
-  descEs: "Un proyecto de diseño UX/UI para Aromandia — una experiencia de e-commerce construida alrededor del ritual del aroma, reimaginando cómo una marca moderna de velas aromáticas se conecta con sus clientes en línea.<br><br>El proceso fue impulsado por investigación desde el inicio: se realizaron entrevistas con usuarios para entender cómo descubren y compran productos aromáticos, qué genera confianza durante el proceso de compra y dónde los flujos de e-commerce existentes crean fricción innecesaria. Esos hallazgos dieron forma a cada decisión de diseño.<br><br>El resultado es una interfaz mobile-first que se siente tan intencional como los productos que presenta — moderna y sofisticada, con una experiencia de checkout fluida que convierte el explorar en comprar.",
-  images: ["images/Frame 240.jpg", "images/Frame 241.jpg", "images/Frame 242.jpg", "images/Frame 243.jpg", "images/Frame 244.jpg"] },
-
-  { name: "Aer by Armella", thumbnail: "images/Frame 14.jpg",
-    descEn: "Aer by Armella sells air conditioning — a product category not typically associated with aspiration or beauty. The project involved building the brand from the ground up: logo, website, outdoor posters, and the full range of brand applications.<br><br>The design challenge was to elevate a utilitarian product into something that felt considered and premium. The visual identity communicates freshness, modernity, and reliability — qualities that matter to someone making a significant purchase for their home or business. The website translates that identity into a clear, confident digital experience, while the outdoor posters give the brand a strong physical presence in the city. The result is a brand that makes Aer by Armella impossible to ignore and easy to trust.",
-    descEs: "Aer by Armella vende aires acondicionados — una categoría de producto que no suele asociarse con aspiración o belleza. El proyecto implicó construir la marca desde cero: logo, sitio web, posters para exteriores y todas las aplicaciones de marca.<br><br>El reto de diseño fue elevar un producto utilitario a algo que se sintiera considerado y premium. La identidad visual comunica frescura, modernidad y confiabilidad — cualidades que importan a alguien tomando una decisión de compra importante para su hogar o negocio. El sitio web traduce esa identidad en una experiencia digital clara y segura, mientras los posters exteriores le dan a la marca una presencia física fuerte en la ciudad. El resultado es una marca que hace imposible ignorar a Aer by Armella y muy fácil confiar en ella.",
-    images: ["images/Frame 168.jpg", "images/Frame 169.jpg", "images/Frame 170.jpg", "images/Frame 171.jpg", "images/Frame 172.jpg", "images/Frame 173.jpg"] },
-      
-  { name: "Mordisko", thumbnail: "images/Frame 4.jpg",
-    descEn: "Mordisko, under the Holanda umbrella, is one of Mexico's most iconic brands — recognized as the pioneer of ice cream sandwiches. Its essence is elevating consumers through innovative, refreshing combinations. The project involved working alongside advertising agency DDB to refresh its identity and maintain relevance and impact with new generations.<br><br>The main goal of this rebranding was to update Mordisko's image, which hadn't been renewed in many years and had become predictable. Its personality is fun, disruptive and dynamic, so the new identity was built to evoke exactly that — especially for Gen Z.<br><br>The logotype brings back a playful mouth inside the first \"o,\" combined with bold typography where the letters dance and escape the monotony of a uniform baseline. For the packaging, a brighter, bolder color palette was developed to stand out inside refrigerators, with waves in different tones that draw the consumer in while highlighting the mix of textures and flavors the brand is known for. Stickers were introduced as a contemporary visual language using symbols tied to positivity and enjoyment, while photography embraced the dazzling palette featuring younger consumers reveling in the Mordisko experience.",
-    descEs: "Mordisko, bajo el paraguas de Holanda, es una de las marcas más emblemáticas de México — reconocida como la pionera de los sándwiches de helado. Su esencia es elevar a los consumidores con mezclas innovadoras y refrescantes. El proyecto implicó trabajar junto a la agencia de publicidad DDB para renovar su identidad y mantener su relevancia e impacto con las nuevas generaciones.<br><br>El objetivo principal del rebranding era actualizar la imagen de Mordisko, que no se había renovado en muchos años y había comenzado a volverse predecible. Su personalidad es divertida, disruptiva y dinámica, por lo que la nueva identidad se construyó para evocar exactamente eso — especialmente para la generación Z.<br><br>El logotipo retoma la imagen juguetona de una boca dentro de la primera \"o\", combinada con tipografía bold donde las letras bailan y escapan del aburrimiento de una línea base uniforme. Para los empaques se desarrolló una paleta más brillante y llamativa para destacar dentro de los refrigeradores, con ondas en distintas tonalidades que impactan al consumidor y resaltan la mezcla de texturas y sabores de la marca. Se introdujeron stickers como lenguaje visual contemporáneo con símbolos vinculados a lo positivo y al disfrute, mientras la fotografía retoma la paleta deslumbrante mostrando a consumidores más jóvenes disfrutando la experiencia Mordisko.",
-    images: ["images/Frame 53.jpg", "images/Frame 54.jpg", "images/Frame 55.jpg", "images/Frame 56.jpg", "images/Frame 57.jpg", "images/Frame 58.jpg"] },
-
-  { name: "Siete Machos", thumbnail: "images/Frame 6.jpg",
-    descEn: "Siete Machos is a nationally recognized brand with decades of history, perfuming generations of Mexican households. The project involved refreshing their web presence — for both the cosmetics and spirits lines — and redesigning the tequila label to connect with younger audiences.<br><br>The project began with the tequila packaging redesign, where key elements such as the goats, agave plants, and logotype needed to be preserved. Drawing from the celebration at the heart of the drink, an illustration was crafted featuring seven dancing billy goats alongside other festive elements, turning the label into a communal celebration.<br><br>With the tequila's new visual style established, the look and feel was translated to the spirits website — incorporating illustrative elements for iconography, a warm and elegant updated palette, and more contemporary typography. For the cosmetics site, the focus was on preserving the brand's essence by highlighting the ritualistic and esoteric qualities of the products, modernizing typography, bringing consistency to the photographic style, and carefully crafting the user experience as they explore the world of Siete Machos.",
-    descEs: "Siete Machos es una marca de reconocimiento nacional con décadas de historia, perfumando a generaciones de hogares mexicanos. El proyecto implicó refrescar su presencia web — tanto para la línea de cosméticos como para la de destilados — y rediseñar la etiqueta del tequila para conectar con audiencias más jóvenes.<br><br>El proyecto inició con el rediseño del empaque del tequila, donde debían preservarse elementos clave como las cabras, los magueyes y el logotipo. Partiendo de la celebración que está en el corazón de la bebida, se creó una ilustración protagonizada por siete machos cabríos bailando junto con otros elementos festivos, convirtiendo la etiqueta en una fiesta comunal.<br><br>Con el nuevo estilo visual del tequila establecido, el look & feel se tradujo al sitio de destilados — incorporando elementos ilustrativos para la iconografía, una paleta cálida y elegante actualizada y tipografías más contemporáneas. Para el sitio de cosméticos, el foco estuvo en preservar la esencia de la marca resaltando las cualidades rituales y esotéricas de los productos, modernizando las tipografías, aportando consistencia al estilo fotográfico y cuidando la experiencia del usuario al explorar el mundo de Siete Machos.",
-    images: ["images/Frame 65.jpg", "images/Frame 66.jpg", "images/Frame 67.jpg", "images/Frame 68.jpg", "images/Frame 69.jpg", "images/Frame 70.jpg"] },
-
-  { name: "Aromandia - Seasonalities", thumbnail: "images/Frame 5.jpg",
-    descEn: "The Seasonalities collection is Aromandia's seasonal chapter — limited releases designed around Mother's Day, autumn, and the holiday season. Each collection required its own visual identity while remaining cohesive with the broader brand.<br><br>Packaging design and print production management were handled throughout, ensuring each release met the premium standard Aromandia is built on. The seasonal collections give the brand a reason to show up differently at key moments in the year — creating anticipation, gifting relevance, and keeping the brand feeling alive and current across seasons.",
-    descEs: "La colección Seasonalities es el capítulo estacional de Aromandia — ediciones limitadas diseñadas para el Día de las Madres, otoño y la temporada navideña. Cada colección requirió su propia identidad visual manteniéndose cohesiva con la marca en su conjunto.<br><br>El diseño de packaging y la gestión de producción impresa se trabajaron de principio a fin, asegurando que cada lanzamiento cumpliera con el estándar premium que define a Aromandia. Las colecciones estacionales le dan a la marca una razón para aparecer de manera distinta en los momentos clave del año — generando anticipación, relevancia para regalo y manteniendo la marca viva y vigente a lo largo de las temporadas.",
-    images: ["images/Frame 147.jpg", "images/Frame 148.jpg", "images/Frame 149.jpg", "images/Frame 150.jpg", "images/Frame 151.jpg"] },
-
-  { name: "Aromandia - Scented Candles", thumbnail: "images/Frame 1.jpg",
-    descEn: "Aromandia is a premium candle brand set to launch this year — a project built from the ground up with the attention to detail that a product at this level demands. The work covered packaging design and full print production management for the brand's core collection, which includes the Nicho and Anthology lines, available year-round.<br><br>Every decision — from material to typography to finish — was made to reflect the premium positioning of the brand. The packaging is designed to be as much an object as the candle itself: something you want to keep, display, and give. Aromandia enters the market as a brand that already knows exactly who it is.",
-    descEs: "Aromandia es una marca de velas premium que sale al mercado este año — un proyecto construido desde cero con el nivel de detalle que un producto de esta categoría exige. El trabajo abarcó diseño de packaging y gestión completa de producción impresa para la colección principal de la marca, que incluye las líneas Nicho y Anthology, disponibles todo el año.<br><br>Cada decisión — desde el material hasta la tipografía y los acabados — se tomó para reflejar el posicionamiento premium de la marca. El empaque está diseñado para ser un objeto en sí mismo: algo que se quiere conservar, exhibir y regalar. Aromandia llega al mercado como una marca que ya sabe exactamente quién es.",
-    images: ["images/Frame 35.jpg", "images/Frame 36.jpg", "images/Frame 37.jpg", "images/Frame 38.jpg", "images/Frame 39.jpg", "images/Frame 40.jpg"] },
-
-  { name: "Shelter Studios", thumbnail: "images/Frame 7.jpg",
-    descEn: "Shelter Studios was created as an initiative to promote both emerging and established artists through audiovisual production — building community and an intimate space for audiences to truly know them. The project involved developing the name and full identity for the program.<br><br>The vision was to create a space for concerts and interviews with musicians in a warm, home-like setting — humanizing them and opening a dialogue between music lovers. From the beginning, the team envisioned a program diverse in genres, origins, and styles: a platform for discovering the most exciting music happening in Mexico.<br><br>From these concepts, Shelter Studios was born — a name that captures the essence of the project: a warm refuge for music. This translated visually into the logotype, where an armchair serves as the primary icon and brand identifier. The symbol also carried through into the set design, with each recording always featuring a different armchair or sofa. The broader visual territory is built on silhouettes — the armchair alongside domestic living room elements and musical instruments becomes an enveloping frame for imagery, completed by expressive typography that creates a flexible, contemporary, and compelling visual system.",
-    descEs: "Shelter Studios nació como una iniciativa para promover a artistas emergentes y establecidos a través de la producción audiovisual — construyendo comunidad y un espacio íntimo para conocerlos de verdad. El proyecto implicó desarrollar el nombre y la identidad completa del programa.<br><br>La visión era crear un espacio para conciertos y entrevistas con músicos en un entorno hogareño e íntimo — humanizándolos y abriendo un diálogo entre melómanos. Desde el inicio, el equipo concibió un programa diverso en géneros, orígenes y estilos: una plataforma para descubrir lo más novedoso de la música en México.<br><br>De estos conceptos nació Shelter Studios — un nombre que captura la esencia del proyecto: un refugio cálido para la música. Esto se tradujo visualmente en el logotipo, donde un sillón funciona como ícono principal e identificador de la marca. El símbolo también se incorporó en la escenografía, grabando siempre en un sillón o sofá distinto con cada artista. El territorio visual se construye a partir de siluetas — el sillón junto con elementos domésticos e instrumentos musicales se convierte en un marco envolvente para las imágenes, complementado con tipografía expresiva que da lugar a un sistema visual flexible, contemporáneo y atractivo.",
-    images: ["images/Frame 71.jpg", "images/Frame 72.jpg", "images/Frame 73.jpg", "images/Frame 74.jpg", "images/Frame 75.jpg", "images/Frame 76.jpg"] },
-
-  { name: "Tom Kubik Photography", thumbnail: "images/Frame 8.jpg",
-    descEn: "Tom Kubik is a Los Angeles-based photographer whose practice centers on creating authentic images that capture the lifestyle of real people. The project involved refreshing his identity to expand his reach and grow his audience.<br><br>What makes Tom's practice so unique is the connection he builds between his lens and his subjects — a recognition that goes beyond the image. One of his core priorities is creating a space where people feel comfortable and free to share their stories and their lives.<br><br>Understanding how central authenticity is to his work, a handwritten-style logotype was chosen to function as a signature — lending a personal, intimate quality to the brand. The color palette remained neutral (black and white) to let the photographs remain the protagonists of every communication. Curved strokes coexist harmoniously with Tom's visual world, interacting with his images without overshadowing them. Business cards carry his unique tone with messaging that seeks genuine, open connection — always within a minimalist but distinctly original aesthetic.",
-    descEs: "Tom Kubik es un fotógrafo basado en Los Ángeles cuya práctica se centra en crear imágenes auténticas que capturan el estilo de vida de personas reales. El proyecto implicó refrescar su identidad para expandir su alcance y hacer crecer su audiencia.<br><br>Lo que hace tan única su práctica es la conexión que logra entre su lente y sus sujetos — un reconocimiento que va más allá de la imagen. Una de sus prioridades centrales es crear un espacio donde las personas se sientan cómodas y libres de compartir sus historias y sus vidas.<br><br>Entendiendo lo central que es la autenticidad en su trabajo, se eligió un logotipo de estilo manuscrito que funciona como firma — aportando una calidad personal e íntima a la marca. La paleta cromática se mantuvo neutra (blanco y negro) para dejar que las fotografías sean las protagonistas de cada comunicación. Los trazos curvos conviven armoniosamente con el mundo visual de Tom, interactuando con sus imágenes sin opacarlas. Las tarjetas de presentación mantienen su tono único con mensajes que buscan una conexión genuina y abierta — siempre dentro de una estética minimalista pero inconfundiblemente original.",
-    images: ["images/Frame 77.jpg", "images/Frame 78.jpg", "images/Frame 79.jpg", "images/Frame 80.jpg", "images/Frame 81.jpg", "images/Frame 82.jpg"] },
-
-  { name: "Effecty", thumbnail: "images/Frame 9.jpg",
-    descEn: "Effecty is a digital telehealth platform promoting wellness through medication-assisted weight loss — helping users on their journey toward a healthier, fuller, and happier life. The project involved developing both the name and identity around the brand's key pillars: trust, companionship, and positivity.<br><br>The name Effecty was built around the concepts of quality and reliability — drawing from \"effect\" and \"effective\" to reference the positive impact of the service, softened and made approachable with the \"-y\" ending. The logotype captures that same lightness through a classic typeface with an italic accent on the \"f\" letters, creating a diagonal dynamism that speaks to progress and movement toward goals.<br><br>The identity lives within a palette of greens, blues, soft beiges, and whites — evoking peace and lightness. Photography, illustration style, and typography all work together to achieve a human, trustworthy approach that feels as good as the product promises to make you feel.",
-    descEs: "Effecty es una plataforma digital de telehealth que promueve el bienestar a través de medicamentos para estimular la pérdida de peso — acompañando a sus usuarios en la búsqueda de una vida más saludable, plena y feliz. El proyecto implicó desarrollar tanto el nombre como la identidad en torno a los pilares clave de la marca: confianza, compañerismo y positivismo.<br><br>El nombre Effecty se construyó alrededor de los conceptos de calidad y confiabilidad — retomando \"effect\" y \"effective\" para referirse al impacto positivo del servicio, suavizado y hecho más cercano con la terminación \"-y\". El logotipo captura esa ligereza a través de una tipografía clásica con un acento itálico en las letras \"f\", creando un dinamismo diagonal que habla de progreso y movimiento hacia las metas.<br><br>La identidad vive dentro de una paleta de verdes, azules, beiges claros y blancos — evocando paz y levedad. El estilo fotográfico, ilustrativo y la selección tipográfica trabajan en conjunto para lograr un acercamiento humano y confiable.",
-    images: ["images/Frame 83.jpg", "images/Frame 84.jpg", "images/Frame 85.jpg", "images/Frame 86.jpg", "images/Frame 87.jpg", "images/Frame 88.jpg"] },
-
-  { name: "Paws", thumbnail: "images/Frame 10.jpg",
-    descEn: "Paws is a line designed for Petco created to address one of every pet owner's most relatable challenges: masking pet odors at home. The product line includes scented candles crafted specifically to neutralize the smells that come with sharing your space with the animals you love.<br><br>The packaging design balances warmth and playfulness — nodding to the pet owner lifestyle while feeling elevated enough to live comfortably in any home. The result is a line that feels both functional and giftable, fitting naturally within Petco's retail environment while standing out on shelf.",
-    descEs: "Paws es una línea diseñada para Petco creada para abordar uno de los desafíos más reconocibles para los dueños de mascotas: disimular los olores en casa. La línea de productos incluye velas aromáticas elaboradas específicamente para neutralizar los olores que vienen de compartir tu espacio con los animales que amas.<br><br>El diseño de packaging equilibra calidez y juego — guiñando al estilo de vida de los dueños de mascotas mientras se siente lo suficientemente elevado para vivir cómodamente en cualquier hogar. El resultado es una línea que se siente funcional y también un buen regalo, encajando naturalmente en el entorno de Petco mientras destaca en el anaquel.",
-    images: ["images/Frame 89.jpg", "images/Frame 90.jpg", "images/Frame 91.jpg", "images/Frame 92.jpg", "images/Frame 93.jpg", "images/Frame 94.jpg"] },
-
-  { name: "USG", thumbnail: "images/Frame 11.jpg",
-    descEn: "USG is a leading construction materials brand with a presence across Latin America. The project involved a comprehensive rebranding that touched every dimension of the brand — from digital to physical, from the warehouse to the street.<br><br>The scope was extensive: a complete brand identity manual built to work consistently across LATAM markets, covering the website, social media, transportation, uniforms, signage, and the bags used for concrete materials. Each application required careful consideration of how the identity would perform across vastly different contexts and scales — from a screen to the side of a truck.<br><br>The result is a cohesive, scalable system that gives USG the visual authority and consistency its regional presence demands, ensuring the brand communicates with the same strength whether encountered online or on a construction site.",
-    descEs: "USG es una marca líder de materiales de construcción con presencia en toda América Latina. El proyecto implicó un rebranding integral que tocó cada dimensión de la marca — de lo digital a lo físico, de la bodega a la calle.<br><br>El alcance fue extenso: un manual de identidad de marca completo construido para funcionar de manera consistente en los mercados de LATAM, cubriendo el sitio web, redes sociales, transporte, uniformes, señalética y las bolsas para material de concreto. Cada aplicación requirió una consideración cuidadosa de cómo la identidad funcionaría en contextos y escalas muy distintos — de una pantalla al costado de un camión.<br><br>El resultado es un sistema cohesivo y escalable que le da a USG la autoridad visual y consistencia que su presencia regional demanda, asegurando que la marca comunique con la misma fuerza ya sea en línea o en una obra de construcción.",
-    images: ["images/Frame 95.jpg", "images/Frame 105.jpg", "images/Frame 115.jpg", "images/Frame 125.jpg", "images/Frame 135.jpg", "images/Frame 145.jpg"] },
-
-  { name: "Señor Mango", thumbnail: "images/Frame 12.jpg",
-    descEn: "Señor Mango is a dried mango brand determined to stand out in a market where most players look exactly alike. The project covered packaging design and management, motion graphics, and ongoing website review and improvement — all aimed at attracting new customers through design that does something different.<br><br>The packaging breaks from category conventions: bold, distinctive, and crafted to stop someone mid-aisle. Motion graphics extended the brand's personality into digital channels, adding energy and dynamism to the way the product shows up online. The website was continuously refined to improve the user experience and strengthen the brand's commercial appeal. The overall result is a brand that has carved out its own visual territory in a crowded market.",
-    descEs: "Señor Mango es una marca de mango deshidratado decidida a destacar en un mercado donde la mayoría de los competidores se ven exactamente igual. El proyecto abarcó diseño y gestión de packaging, animaciones y revisión y mejora continua del sitio web — todo orientado a atraer nuevos clientes a través de un diseño que hace algo diferente.<br><br>El packaging rompe con las convenciones de la categoría: bold, distintivo y pensado para detener a alguien en el pasillo. Las animaciones extendieron la personalidad de la marca a los canales digitales, añadiendo energía y dinamismo a la forma en que el producto aparece en línea. El sitio web se refinó continuamente para mejorar la experiencia del usuario y fortalecer el atractivo comercial de la marca. El resultado es una marca que ha trazado su propio territorio visual en un mercado saturado.",
-    images: ["images/Frame 96.jpg", "images/Frame 106.jpg", "images/Frame 116.jpg", "images/Frame 126.jpg", "images/Frame 136.jpg", "images/Frame 146.jpg"] },
-
-  { name: "Grace Sepulveda", thumbnail: "images/Frame 26.png",
-    descEn: "Grace Sepúlveda, an expert with decades of experience in hospitality, decided to channel her knowledge into a consulting agency specializing in the timeshare industry. The project covered brand strategy, identity, and website — all built to reflect her professional personality and the quality of her services.<br><br>One of the most important goals was generating trust: clients needed to know they were hiring results-driven experts. The work focused on projecting Grace's innovative and creative attitude, the collaborative character of her team, and the deeply human and passionate side behind her dedication and trajectory.<br><br>A logotype was developed communicating the elegance and modernity associated with the founder — using a contemporary sans serif alongside an isotype built from the repetition of the letter S (for Sepúlveda), evoking the serenity of a sunrise and a clean, fluid aesthetic. The visual system pairs a sans serif with a high-personality serif, evoking Grace's strength and subtlety. A palette of light, airy tones and photography of spaces, landscapes, and team moments reinforce the collaborative and human nature of the brand — coming together most powerfully on the website.",
-    descEs: "Grace Sepúlveda, experta con décadas de experiencia en la hotelería, decidió canalizar su conocimiento en una agencia consultora especializada en la industria de los timeshares. El proyecto abarcó estrategia de marca, identidad y sitio web — todo construido para reflejar su personalidad profesional y la calidad de sus servicios.<br><br>Uno de los objetivos más importantes era generar confianza: los clientes necesitaban saber que estaban contratando a expertos orientados a resultados. El trabajo se enfocó en proyectar la actitud innovadora y creativa de Grace, el carácter colaborativo de su equipo y el lado profundamente humano y apasionado que existe detrás de su dedicación y trayectoria.<br><br>Se desarrolló un logotipo que comunica la elegancia y modernidad asociadas con la fundadora — usando una tipografía sans serif contemporánea junto con un isotipo conformado por la repetición de la letra S (de Sepúlveda), evocando la serenidad de un amanecer y una estética limpia y fluida. El sistema visual combina una sans serif con una serif de mucha personalidad, evocando la fuerza y sutileza de Grace. Una paleta de tonos claros y fotografías de espacios, paisajes y equipo refuerzan la naturaleza colaborativa y humana de la marca — todo convergiendo en el sitio web.",
-    images: ["images/Frame 211.jpg", "images/Frame 212.jpg", "images/Frame 213.jpg", "images/Frame 214.jpg", "images/Frame 215.jpg", "images/Frame 216.jpg"] },
-
-  { name: "Vita Blip", thumbnail: "images/Frame 15.jpg",
-    descEn: "Vita Blip is a vitamin brand whose identity needed to feel as good as the product promises to make you feel. The packaging design focused on creating a visual presence that is clean, vibrant, and trustworthy — communicating health and quality at a glance.<br><br>In a category crowded with clinical-looking packaging, Vita Blip was designed to feel approachable and energetic without sacrificing credibility. Every detail — from color to typography to structure — was considered to make the product feel like a daily ritual worth looking forward to.",
-    descEs: "Vita Blip es una marca de vitaminas cuya identidad necesitaba sentirse tan bien como el producto promete hacerte sentir. El diseño de packaging se enfocó en crear una presencia visual limpia, vibrante y confiable — comunicando salud y calidad de un vistazo.<br><br>En una categoría saturada de packaging de aspecto clínico, Vita Blip fue diseñado para sentirse accesible y enérgico sin sacrificar credibilidad. Cada detalle — desde el color hasta la tipografía y la estructura — fue considerado para hacer que el producto se sintiera como un ritual diario que vale la pena esperar.",
-    images: ["images/Frame 160.jpg", "images/Frame 161.jpg"] },
-
-  { name: "English Sprint", thumbnail: "images/Frame 16.jpg",
-    descEn: "English Sprint is a learning platform and community dedicated to English language acquisition. The project involved working alongside founder Mercedes Medina to build an identity that evokes quality, warmth, and confidence — connecting with the right audience.<br><br>The platform offers expert-led lessons focused on achieving IELTS certification. To meet the brand's goals, the identity needed to communicate a friendly, reliable, professional, and accessible attitude. A logotype was created inspired by British metro signage — featuring an underlined sans serif typeface within a circular enclosure. The offset between elements transmits movement, dynamism, and agility: all essential qualities in an educational environment.<br><br>Throughout the rest of the visual system, structured grid-based elements and color blocks coexist with rounded accents and organic strokes, balancing the playful with the organized. The color palette combines neutrals (black and white) with primaries (yellow, blue, and red) for a classic, timeless, and memorable system.",
-    descEs: "English Sprint es una plataforma y comunidad de aprendizaje dedicada a la adquisición del inglés. El proyecto implicó trabajar junto a la fundadora Mercedes Medina para construir una identidad que evoca calidad, cercanía y confianza — conectando con el público deseado.<br><br>La plataforma ofrece lecciones con expertos enfocadas en alcanzar la certificación IELTS. Para lograr los objetivos de la marca, la identidad necesitaba comunicar una actitud amigable, confiable, profesional y accesible. Se creó un logotipo inspirado en la señalética del metro británico — con una tipografía sans serif subrayada dentro de un envolvente circular. El desfase entre los elementos transmite movimiento, dinamismo y agilidad: cualidades esenciales en un entorno educativo.<br><br>En el resto del sistema visual, elementos estructurados en retícula y bloques de color conviven con acentos redondos y trazos más orgánicos, logrando un balance entre lo divertido y lo organizado. La paleta cromática combina neutros (blanco y negro) con primarios (amarillo, azul y rojo) para un sistema clásico, atemporal y memorable.",
-    images: ["images/Frame 174.jpg", "images/Frame 175.jpg", "images/Frame 176.jpg", "images/Frame 177.jpg", "images/Frame 178.jpg"] },
-
-  { name: "Nos Vemos de Noche", thumbnail: "images/Frame 17.jpg",
-    descEn: "Nos Vemos de Noche is the artistic project of Chilean artist Paulina Silva Hauyon. The work involved developing the full visual proposal for her project — encompassing her book design and website — creating a cohesive world that reflects her artistic voice.<br><br>The visual identity was built to feel intimate and evocative, matching the emotional register of Paulina's work. The book design treated every detail as an extension of her artistic practice, while the website creates a digital space where her audience can enter her world. The result is a visual system that doesn't just represent the project — it becomes part of it.",
-    descEs: "Nos Vemos de Noche es el proyecto artístico de la artista chilena Paulina Silva Hauyon. El trabajo implicó desarrollar la propuesta visual completa de su proyecto — abarcando el diseño de su libro y su sitio web — creando un mundo cohesivo que refleja su voz artística.<br><br>La identidad visual fue construida para sentirse íntima y evocadora, a la altura del registro emocional del trabajo de Paulina. El diseño del libro trató cada detalle como una extensión de su práctica artística, mientras el sitio web crea un espacio digital donde su audiencia puede entrar a su mundo. El resultado es un sistema visual que no solo representa el proyecto — se convierte en parte de él.",
-    images: ["images/Frame_157.jpg", "images/Frame_158.jpg", "images/Frame_159.jpg"] },
-
-  { name: "Debajo de un ciruelo", thumbnail: "images/Frame 18.jpg",
-    descEn: "Debajo de un Ciruelo was a real exhibition held at Centro de Diseño, born from a color workshop in Oaxaca exploring natural pigments — cochineal and black bean — and their expressive possibilities.<br><br>The project sits at the intersection of research, craft, and visual experimentation. Developed from an investigation into traditional Mexican dyeing techniques, the work translated material and process into a cohesive exhibition identity that honored both the artisanal origins and the conceptual depth of the exploration. The result is a project that is as much about the act of making as it is about the final image.",
-    descEs: "Debajo de un Ciruelo fue una exposición real presentada en el Centro de Diseño, nacida de un taller de color en Oaxaca que exploró pigmentos naturales — grana cochinilla y frijol negro — y sus posibilidades expresivas.<br><br>El proyecto se sitúa en la intersección de la investigación, el oficio y la experimentación visual. Desarrollado a partir de una exploración de las técnicas de teñido tradicionales mexicanas, el trabajo tradujo material y proceso en una identidad de exposición cohesiva que honra tanto los orígenes artesanales como la profundidad conceptual de la exploración. El resultado es un proyecto que trata tanto del acto de hacer como de la imagen final.",
-    images: ["images/Frame 162.jpg", "images/Frame 163.jpg", "images/Frame 164.jpg"] },
-
-  { name: "Toda Fest", thumbnail: "images/Frame 179.jpg",
-    descEn: "Toda Fest was conceived as a music festival with an entirely female lineup — a celebration of women in music built around the idea that this space was long overdue. Though the event was ultimately not realized, the visual identity was fully developed.<br><br>The brand needed to feel bold and celebratory without being reductive — capturing the energy of a festival while centering the intention behind it. Typography, color, and graphic elements were chosen to feel powerful, joyful, and unmistakably intentional. The identity stands as a complete vision for what the festival would have looked and felt like.",
-    descEs: "Toda Fest fue concebido como un festival de música con un line up completamente femenino — una celebración de las mujeres en la música construida alrededor de la idea de que este espacio era más que necesario. Aunque el evento no se llevó a cabo, la identidad visual fue desarrollada por completo.<br><br>La marca necesitaba sentirse poderosa y celebratoria sin ser reduccionista — capturando la energía de un festival mientras centraba la intención detrás de él. Tipografía, color y elementos gráficos fueron elegidos para sentirse poderosos, alegres e inconfundiblemente intencionales. La identidad queda como una visión completa de cómo se habría visto y sentido el festival.",
-    images: ["images/Frame 179.jpg", "images/Frame 180.jpg", "images/Frame 181.jpg", "images/Frame 182.jpg", "images/Frame 183.jpg", "images/Frame 184.jpg"] },
-
-  { name: "Sunshine Bagels", thumbnail: "images/Frame 20.jpg",
-    descEn: "Sunshine Bagels is a bagel brand based in Los Angeles with the kind of personality that belongs in your feed. The project focused on social media design — building a visual language that translates the brand's warmth and energy into content that connects.<br><br>Every piece was designed to feel consistent with the brand while staying fresh and engaging — using color, typography, and layout to create a scrollable world that makes people hungry and happy in equal measure.",
-    descEs: "Sunshine Bagels es una marca de bagels basada en Los Ángeles con la personalidad que pertenece a tu feed. El proyecto se enfocó en el diseño de redes sociales — construyendo un lenguaje visual que traduce la calidez y energía de la marca en contenido que conecta.<br><br>Cada pieza fue diseñada para sentirse consistente con la marca mientras se mantiene fresca y atractiva — usando color, tipografía y composición para crear un mundo en el scroll que genera hambre y alegría a partes iguales.",
-    images: ["images/Frame 165.jpg", "images/Frame 166.jpg", "images/Frame 167.jpg"] },
-
-  { name: "Garabatos", thumbnail: "images/Frame 189.jpg",
-    descEn: "Garabatos is a beloved Mexican restaurant brand whose positioning had typecast it as a place for older audiences and breakfast only. The redesign transformed uniforms, printed materials, and digital assets for the Querétaro location to reflect the brand's real personality and evoke its versatility — a change set to extend across all locations.<br><br>The project developed a new messaging and visual identity strategy communicating that Garabatos is a space for everyone, at any time of day. The logotype's legibility was refined first, then a fresh palette of whites, creams, browns, and greens was introduced — evoking freshness, cleanliness, and the organic. Classic complementary typefaces reinforce the brand's quality and refinement, while photography showcases delicious food, consumer enjoyment, and the overall Garabatos experience. Graphic elements like frames, rules, and textures using the logo monogram were added to create a memorable impact and consolidate the new positioning.",
-    descEs: "Garabatos es una querida marca de restaurantes mexicana cuyo posicionamiento la había encasillado como un lugar para audiencias de mayor edad y predominantemente para desayunar. El rediseño transformó uniformes, materiales impresos y digitales de la sede de Querétaro para reflejar la personalidad real de la marca y evocar su versatilidad — un cambio que se extenderá al resto de los puntos de venta.<br><br>El proyecto desarrolló una nueva estrategia de mensajes e identidad visual que comunica que Garabatos es un espacio para todos y para cualquier momento del día. Primero se ajustó la legibilidad del logotipo, luego se introdujo una paleta fresca de blancos, cremas, cafés y verdes — evocando frescura, limpieza y lo orgánico. Tipografías clásicas complementarias refuerzan la calidad y refinamiento de la marca, mientras la fotografía muestra lo delicioso de los platillos, el disfrute de los comensales y la experiencia general de visitar Garabatos. Se añadieron elementos gráficos como marcos, plecas y texturas usando el monograma del logo para crear un impacto memorable y consolidar el nuevo posicionamiento.",
-    images: ["images/Frame 189.jpg", "images/Frame 190.jpg", "images/Frame 191.jpg"] },
-
-  { name: "Triangulo de Oro", thumbnail: "images/Frame 22.jpg",
-    descEn: "Triángulo de Oro is a Costa Rican brand looking to bring its product to Mexico — and to adapt its image to compete on Mexican supermarket shelves. The project involved packaging redesign with a clear commercial goal: to resonate with a new market without losing the brand's essence.<br><br>The work required understanding both what makes the brand distinctive and what Mexican consumers expect to see in this category. The resulting packaging adapts the brand's visual identity to meet those expectations — with the shelf presence, clarity, and appeal needed to earn a place in a new market.",
-    descEs: "Triángulo de Oro es una marca costarricense que busca llevar su producto a México — y adaptar su imagen para competir en los supermercados mexicanos. El proyecto implicó el rediseño de packaging con un objetivo comercial claro: resonar con un nuevo mercado sin perder la esencia de la marca.<br><br>El trabajo requirió entender tanto lo que hace distintiva a la marca como lo que los consumidores mexicanos esperan ver en esta categoría. El packaging resultante adapta la identidad visual de la marca para cumplir esas expectativas — con la presencia en anaquel, claridad y atractivo necesarios para ganarse un lugar en un nuevo mercado.",
-    images: ["images/Frame 185.jpg", "images/Frame 186.jpg", "images/Frame 187.jpg", "images/Frame 188.jpg"] },
-
-  { name: "SUMA", thumbnail: "images/Frame 23.jpg",
-    descEn: "SUMA is a collective and community platform built around the vision of José Ramón Ruíz — a space where art, nature, discussion, and the transcendent come together through unique shared experiences.<br><br>The name reflects the project's core idea: a whole made up of distinct parts, always adding something meaningful to the lives of its members through exploration. That adventurous spirit carried into the logotype — a lowercase typeface for approachability, paired with an icon that transforms the \"S\" into a labyrinth of layered lines, evoking the many paths and people that make up the platform.<br><br>The visual system was built from clean, adaptable typography, warm and deep colors, and an emphasis on textures, close-up imagery, and visuals that evoke the creative, spiritual, rich, and diverse universe at SUMA's core.",
-    descEs: "SUMA es una plataforma colectiva y comunitaria construida alrededor de la visión de José Ramón Ruíz — un espacio donde el arte, la naturaleza, la discusión y lo trascendente se encuentran a través de experiencias compartidas únicas.<br><br>El nombre refleja la idea central del proyecto: un todo conformado de distintas partes, que siempre busca sumar algo significativo a la vida de sus integrantes a través de la exploración. Ese espíritu aventurero se llevó al logotipo — una tipografía en minúsculas para mayor cercanía, acompañada de un ícono que transforma la \"S\" en un laberinto de líneas superpuestas, evocando los distintos caminos e integrantes de la plataforma.<br><br>El sistema visual se construyó a partir de tipografías limpias y adaptables, colores cálidos y profundos, con énfasis en texturas, acercamientos e imágenes que evocan el universo creativo, espiritual, rico y diverso que está en el núcleo de SUMA.",
-    images: ["images/Frame 192.jpg", "images/Frame 193.jpg", "images/Frame 194.jpg", "images/Frame 195.jpg"] },
-
-  { name: "Velavita", thumbnail: "images/Frame 24.jpg",
-    descEn: "Velavita is a candle brand built around the idea that a candle can do more than fill a room with scent — it can mark a moment. The project involved developing the brand identity and packaging, creating a visual world as considered and intentional as the product itself.<br><br>The design approach is warm, refined, and sensorial — communicating the quality of the product through every detail. Typography, color, and material choices work together to position Velavita as a brand that belongs in the homes of people who care about the way things feel.",
-    descEs: "Velavita es una marca de velas construida alrededor de la idea de que una vela puede hacer más que llenar un cuarto de aroma — puede marcar un momento. El proyecto implicó desarrollar la identidad de marca y el packaging, creando un mundo visual tan considerado e intencional como el producto mismo.<br><br>El enfoque de diseño es cálido, refinado y sensorial — comunicando la calidad del producto a través de cada detalle. La tipografía, el color y la selección de materiales trabajan juntos para posicionar a Velavita como una marca que pertenece a los hogares de personas que se preocupan por cómo se sienten las cosas.",
-    images: ["images/Frame 196.jpg", "images/Frame 197.jpg", "images/Frame 198.jpg", "images/Frame 199.jpg", "images/Frame 200.jpg", "images/Frame 201.jpg"] },
-
-  { name: "Velavita candles", thumbnail: "images/Frame 25.jpg",
-    descEn: "This collection focuses on Velavita's seasonal and special releases — a curated set of candles designed around specific moments and gifting occasions. Packaging design and print production management were handled end-to-end, ensuring the final product matched the brand's premium standards at every step.<br><br>Each seasonal release required its own visual treatment while remaining unmistakably Velavita — a balance between consistency and freshness that keeps the collection feeling new without losing brand recognition. The result is a line of objects that feel as beautiful to give as they are to own.",
-    descEs: "Esta colección se enfoca en los lanzamientos estacionales y especiales de Velavita — un conjunto curado de velas diseñadas alrededor de momentos específicos y ocasiones de regalo. El diseño de packaging y la gestión de producción impresa se trabajaron de principio a fin, asegurando que el producto final cumpliera con los estándares premium de la marca en cada paso.<br><br>Cada lanzamiento estacional requirió su propio tratamiento visual manteniéndose inconfundiblemente Velavita — un balance entre consistencia y frescura que mantiene la colección sintiéndose nueva sin perder el reconocimiento de marca. El resultado es una línea de objetos que se sienten tan bellos para regalar como para tener.",
-    images: ["images/Frame 217.jpg", "images/Frame 218.jpg", "images/Frame 219.jpg", "images/Frame 220.jpg", "images/Frame 221.jpg", "images/Frame 222.jpg"] },
-
-  { name: "Alpez", thumbnail: "images/Frame 27.jpg",
-    descEn: "Alpez is an energy and gas distribution company operating in Mexico. The project involved developing a visual identity that communicates reliability, efficiency, and professionalism — the qualities that matter most when clients depend on you for something essential.<br><br>The brand was built to feel trustworthy and modern: clear enough to work across vehicles, uniforms, signage, and digital touchpoints, and strong enough to establish Alpez as a serious player in its category.",
-    descEs: "Alpez es una empresa distribuidora de energía y gas que opera en México. El proyecto implicó desarrollar una identidad visual que comunica confiabilidad, eficiencia y profesionalismo — las cualidades que más importan cuando los clientes dependen de ti para algo esencial.<br><br>La marca fue construida para sentirse confiable y moderna: clara para funcionar en vehículos, uniformes, señalética y puntos de contacto digitales, y sólida para establecer a Alpez como un jugador serio en su categoría.",
-    images: ["images/Frame 202.jpg", "images/Frame 203.jpg", "images/Frame 204.jpg"] },
-
-  { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg",
-    descEn: "Oasis Decoraciones is a candle brand with its sights set on expanding into fragrances — a brand at the beginning of something. The project involved developing an identity and visual presence that could grow alongside the product line.<br><br>The design needed to feel evocative and warm, rooted in the sensorial experience the products promise. Every visual decision was made with longevity in mind: a system flexible enough to accommodate new products and categories as the brand evolves, while staying consistent and recognizable from day one.",
-    descEs: "Oasis Decoraciones es una marca de velas con la mira puesta en expandirse a fragancias — una marca al inicio de algo. El proyecto implicó desarrollar una identidad y presencia visual que pudiera crecer junto con la línea de productos.<br><br>El diseño necesitaba sentirse evocador y cálido, enraizado en la experiencia sensorial que prometen los productos. Cada decisión visual se tomó pensando en la longevidad: un sistema lo suficientemente flexible para acomodar nuevos productos y categorías a medida que la marca evoluciona, manteniéndose consistente y reconocible desde el primer día.",
-    images: ["images/Frame 59.jpg", "images/Frame 60.jpg", "images/Frame 61.jpg", "images/Frame 62.jpg", "images/Frame 63.jpg", "images/Frame 64.jpg"] }
-];
-
-    var currentProject = 0;
-    var lang = 'en';
-
-    // OBJETO DE TRADUCCIONES COMPLETO
-    var texts = {
-      en: {
-        topbar: "Let's work together!",
-        eyebrow: "Creative & Strategic",
-        heroTitle: "Your story, beautifully told",
-        tagline: "Every beautiful story begins with understanding. Design is how I bring yours to life.",
-        col1: "I help brands elevate their visual presence through cohesive identity, packaging and digital systems.",
-        col2: "Each project is developed with precision and long-term vision, ensuring consistent performance.",
-        valuesTitle: "My Values",
-        value1Title: "Designed to endure",
-        value1Text: "Every pixel, every color, every curve has a reason. We obsess over longevity because good design should work as hard as you do without needing a refresh every season.",
-        value2Title: "Beyond trends",
-        value2Text: "The moment something becomes cool, it's already becoming old. We work with timeless principles, strategic thinking, and real intention not aesthetics.",
-        value3Title: "Built to last",
-        value3Text: "Your brand isn't a one-hit wonder. We create systems that scale, evolve, and grow with you, design that's solid enough to carry your business forward for years.",
-        value4Title: "Strategy first",
-        value4Text: "Beautiful is only half the battle. Every design decision is rooted in strategy, research, and real business objectives making sure form follows function, always.",
-        seeMore: "See all projects",
-        howWork: "How do I work? →",
-        aboutQuote: "I love creating spaces where ideas find direction, where structure meets exploration, and where design becomes its own language",
-        aboutCaption: "Nice to meet you, I'm Ana Laura",
-        aboutPinkTitle: "AUTHENTIC design",
-        aboutPinkSub: "A passion for creating beautiful things",
-        aboutBodyText: "I'm a graphic designer based in Mexico City with 5+ years of experience building visual systems across brand identity, packaging, print, and digital — from campaign key visuals to social assets, web content, and e-commerce materials. I've worked across industries and formats, always leading the creative process end-to-end: briefing, concept, execution, and supplier coordination. What I bring beyond craft is translation — the ability to take a strategic brief and turn it into visuals that actually communicate. I work closely with marketing and product teams, adapt quickly to fast-paced environments, and obsess over the details that make a brand system scalable and consistent across markets. I stay sharp by integrating emerging tools — including AI for 3D rendering — into my workflow where they add real value. Not as a shortcut, but as part of how I keep delivering at a high level. Outside design I box, do ceramics, eat everything, and fiercely protect time with the people I love. I find inspiration in everyday discoveries — that's what keeps my imagination alive. I believe design has the power to connect messages with people, and that's why every project is a chance to make something I'm truly proud of. I'm a firm believer that the brands that really connect are built with love, and I love what I do.",
-        aboutBeyondTitle: "Beyond Design",
-        contactBtn: "Contact me",
-        servicesTitle: "Design everything/ for everyone",
-        service1Title: "Copywriting",
-        service1Item1: "Naming systems",
-        service1Item2: "Branding slogan",
-        service1Item3: "Copywriting",
-        service1Item4: "Storytelling",
-        service2Title: "Graphic Design",
-        service2Item1: "Visual identity",
-        service2Item2: "Logotype",
-        service2Item3: "Brand applications",
-        service2Item4: "Packaging",
-        service2Item5: "Signage",
-        service2Item6: "Printed material",
-        service3Title: "UI/UX design",
-        service3Item1: "User interface",
-        service3Item2: "User experience",
-        service3Item3: "Digital material",
-        service3Item4: "App development",
-        service3Item5: "Web Design",
-        additionalTitle: "Additional Skills",
-        skill1: "Books & magazine design",
-        skill2: "Typography design",
-        skill3: "Brochures",
-        skill4: "Illustration",
-        skill5: "Poster design",
-        skill6: "Infographics",
-        skill7: "Icon design",
-        skill8: "Pattern design",
-        skill9: "Decorative Illustration",
-        skill10: "Research and investigation",
-        projectsTitle: "All the good stuff",
-        footerTitle: "Thank You!",
-        footerSub: "Looking forward to connect with you!",
-        email: "Email",
-        phone: "Phone number",
-        navHome: "Home",
-        navServices: "Services",
-        navAbout: "About",
-        prevProject: "← PREV PROJECT",
-        nextProject: "NEXT PROJECT →"
-      },
-      es: {
-        topbar: "¡Hagamos algo increíble juntos!",
-        eyebrow: "Creativa & Estratégica",
-        heroTitle: "Tu historia lista para contarse",
-        tagline: "Toda historia que vale la pena contar comienza por entenderla.",
-        col1: "Creo identidades visuales, sistemas de marca, packaging y experiencias digitales que traducen la esencia de cada negocio en un lenguaje visual claro, memorable y funcional.",
-        col2: "Entiendo que una marca es mucho más que un logotipo o una paleta de color: es la forma en la que las personas la perciben, la recuerdan y se relacionan con ella.",
-        valuesTitle: "Mis Valores",
-        value1Title: "Diseñado para trascender",
-        value1Text: "El buen diseño no debe depender de tendencias pasajeras, sino convertirse en un activo que conserve su relevancia con el paso del tiempo y acompañe el crecimiento de tu marca.",
-        value2Title: "Más allá de las tendencias",
-        value2Text: "Las tendencias cambian; los principios permanecen. En lugar de diseñar para el momento, construyo sobre estrategia, claridad e intención, creando identidades que mantienen su fuerza mucho después de que la estética del momento haya desaparecido.",
-        value3Title: "Sistemas que evolucionan",
-        value3Text: "Una marca no es un proyecto de un solo lanzamiento, sino un sistema vivo. Diseño identidades, sistemas digitales y recursos visuales preparados para adaptarse, crecer y responder a nuevas oportunidades sin perder coherencia en el camino.",
-        value4Title: "La estrategia guía el diseño",
-        value4Text: "La estética es el resultado, no el punto de partida. Cada decisión visual nace de comprender el negocio, sus objetivos y las personas a las que se dirige. Cuando la estrategia lidera el proceso, el diseño deja de ser solo atractivo para convertirse en una herramienta que genera valor.",
-        seeMore: "Ver más proyectos",
-        howWork: "¿Cómo trabajo? →",
-        aboutQuote: "Siempre me ha gustado encontrar claridad en medio del caos. Explorar ideas, conectar puntos y descubrir cómo los pequeños detalles pueden transformar por completo una experiencia. Me apasiona crear sistemas donde cada decisión tiene un propósito y todo se siente conectado de forma natural. Porque cuando el diseño está bien pensado, no necesita explicarse: simplemente funciona, comunica y se siente correcto.",
-        aboutCaption: "Mucho gusto, soy Ana Laura",
-        aboutPinkTitle: "Diseño AUTÉNTICO",
-        aboutPinkSub: "Una pasión por crear cosas bellas",
-        aboutBodyText: "¡Hola! Soy Ana Laura. Gracias por tomarte el tiempo de pasar por aquí :) Soy diseñadora gráfica con más de cinco años de experiencia y una gran pasión por el diseño de interfaces. Me encanta transformar ideas en experiencias digitales claras, intuitivas y visualmente atractivas. Disfruto formar parte de todo el proceso: entender el problema, crear wireframes y user flows, construir sistemas de diseño y convertirlos en interfaces que sean funcionales, consistentes y fáciles de usar. Creo que el mejor diseño no solo se ve bien, también hace que las cosas se sientan simples. Además de UI, mi experiencia en branding y packaging me permite crear productos digitales con una identidad sólida y una visión más integral. En los últimos años también he incorporado herramientas de inteligencia artificial y visualización 3D para explorar ideas, agilizar procesos y enriquecer cada proyecto. Cuando no estoy diseñando, probablemente estoy en una clase de box, haciendo cerámica o descubriendo una cafetería nueva. Me gusta encontrar inspiración en los pequeños detalles, porque muchas veces ahí empiezan las mejores ideas.",
-        aboutBeyondTitle: "Más Allá del Diseño",
-        contactBtn: "Contáctame",
-        servicesTitle: "Diseño para todo y para todos",
-        service1Title: "Copywriting",
-        service1Item1: "Sistemas de naming",
-        service1Item2: "Eslóganes",
-        service1Item3: "Copywriting",
-        service1Item4: "Storytelling",
-        service2Title: "Diseño Gráfico",
-        service2Item1: "Identidad visual",
-        service2Item2: "Logotipo",
-        service2Item3: "Aplicaciones de marca",
-        service2Item4: "Packaging",
-        service2Item5: "Señalética",
-        service2Item6: "Materiales impresos",
-        service3Title: "Diseño UI/UX",
-        service3Item1: "Interfaz de usuario",
-        service3Item2: "Experiencia de usuario",
-        service3Item3: "Material digital",
-        service3Item4: "Desarrollo de apps",
-        service3Item5: "Diseño web",
-        additionalTitle: "Habilidades Adicionales",
-        skill1: "Diseño de libros y revistas",
-        skill2: "Diseño tipográfico",
-        skill3: "Brochures",
-        skill4: "Ilustración",
-        skill5: "Diseño de posters",
-        skill6: "Infografías",
-        skill7: "Diseño de iconos",
-        skill8: "Diseño de patrones",
-        skill9: "Ilustración decorativa",
-        skill10: "Investigación y análisis",
-        projectsTitle: "Lo mejor del portafolio",
-        footerTitle: "¡Gracias!",
-        footerSub: "¡Trabajemos juntos!",
-        email: "Correo",
-        phone: "Teléfono",
-        navHome: "Inicio",
-        navServices: "Servicios",
-        navAbout: "Info",
-        prevProject: "← PROYECTO ANTERIOR",
-        nextProject: "SIGUIENTE PROYECTO →"
-      }
-    };
-
-    function applyTranslations() {
-      var t = texts[lang];
-      document.querySelectorAll('[data-tr]').forEach(function(el) {
-        var key = el.getAttribute('data-tr');
-        if (t[key]) {
-          el.textContent = t[key];
+            sequence.forEach((project, idx) => {
+                const item = document.createElement('article');
+                item.className = 'portfolio-item';
+                item.innerHTML = `
+                    <img src="${project.thumbnail}" alt="${project.name}" class="portfolio-image" style="background: linear-gradient(135deg, #E0E7FF 0%, #F3E7FF 100%);">
+                    <span class="portfolio-tag">${project.name.toUpperCase()}</span>
+                `;
+                item.onclick = () => openProject(idx % projects.length);
+                carousel.appendChild(item);
+            });
         }
-      });
-      
-      // Especial para tagline que tiene salto de línea
-      var taglineEl = document.querySelector('[data-tr="tagline"]');
-      if (taglineEl) {
-        var text = lang === 'es' ? texts.es.tagline : texts.en.tagline;
-        taglineEl.innerHTML = text;
-      }
-      
-      // Actualizar descripción del proyecto si uno está abierto
-      if (document.getElementById('project-detail').classList.contains('active')) {
-        var p = projects[currentProject];
-        var desc = p['desc' + (lang === 'es' ? 'Es' : 'En')] || '';
-        document.getElementById('detail-title').innerHTML = '<h2 style="font-family:\'Bricolage Grotesque\',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--brown);font-weight:700;margin-bottom:24px;">' + p.name + '</h2>' + (desc ? '<p style="font-size:0.92rem;line-height:1.9;color:var(--muted);margin-top:8px;">' + desc + '</p>' : '');
-      }
-    }
 
-    function toggleLang() {
-      lang = (lang === 'en') ? 'es' : 'en';
-      var btn = document.getElementById('lang-btn');
-      btn.innerText = lang === 'en' ? 'Español | English' : 'English | Español';
-      applyTranslations();
-    }
-
-    function initCarousel() {
-      const track = document.getElementById('marqueeTrack');
-      const sequence = [...projects, ...projects, ...projects];
-      sequence.forEach((p, i) => {
-        const img = document.createElement('img');
-        img.className = 'marquee-card';
-        img.src = p.thumbnail || p.images[0];
-        img.alt = p.name;
-        img.onclick = () => openProject(i % projects.length);
-        track.appendChild(img);
-      });
-    }
-
-    var grid = document.getElementById('projects-grid');
-    projects.forEach(function(p, i) {
-      var div = document.createElement('div');
-      div.className = 'proj-thumb';
-      div.onclick = function() { openProject(i); };
-      div.innerHTML = '<img src="' + (p.thumbnail || p.images[0]) + '" alt="' + p.name + '"><div class="proj-thumb-label">' + p.name + '</div>';
-      grid.appendChild(div);
-    });
-
-    function openProject(index) {
-      currentProject = index;
-      var p = projects[index];
-      var desc = p['desc' + (lang === 'es' ? 'Es' : 'En')] || '';
-      document.getElementById('detail-title').innerHTML = '<h2 style="font-family:\'Bricolage Grotesque\',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--brown);font-weight:700;margin-bottom:24px;">' + p.name + '</h2>' + (desc ? '<p style="font-size:0.92rem;line-height:1.9;color:var(--muted);margin-top:8px;">' + desc + '</p>' : '');
-      var imgs = document.getElementById('detail-images');
-      imgs.innerHTML = '';
-      p.images.forEach(function(src) {
-        if(src.endsWith('.mp4')) {
-          var video = document.createElement('video');
-          video.autoplay = true;
-          video.muted = true;
-          video.loop = true;
-          video.playsInline = true;
-          video.controls = true;
-          video.style.width = '100%';
-          var source = document.createElement('source');
-          source.src = src;
-          source.type = 'video/mp4';
-          video.appendChild(source);
-          imgs.appendChild(video);
-        } else {
-          var img = document.createElement('img');
-          img.src = src;
-          img.alt = p.name;
-          imgs.appendChild(img);
+        function openProject(index) {
+            currentProjectIndex = index;
+            const project = projects[index];
+            
+            // Ocultar home
+            document.querySelectorAll('main, .hero').forEach(el => el.classList.add('hidden'));
+            
+            // Mostrar proyecto
+            let projectSection = document.getElementById(`project-${index}`);
+            if (!projectSection) {
+                projectSection = document.createElement('section');
+                projectSection.id = `project-${index}`;
+                projectSection.className = 'project-detail';
+                projectSection.innerHTML = `
+                    <h2 class="project-detail-title">${project.name}</h2>
+                    <div class="project-detail-description">${project.desc}</div>
+                    <div class="project-detail-images">
+                        ${project.images.map(img => `<img src="${img}" alt="${project.name}">`).join('')}
+                    </div>
+                `;
+                document.getElementById('projects-container').appendChild(projectSection);
+            }
+            projectSection.classList.remove('hidden');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-      });
-      
-      document.getElementById('btn-prev').disabled = (index === 0);
-      document.getElementById('btn-next').disabled = (index === projects.length - 1);
-      document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
-      document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
-      document.getElementById('project-detail').classList.add('active');
-      applyTranslations();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
 
-    function navigateProject(dir) {
-      var next = currentProject + dir;
-      if (next >= 0 && next < projects.length) openProject(next);
-    }
-
-    window.showSection = function(id) {
-      document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
-      document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
-      document.getElementById(id).classList.add('active');
-      var navEl = document.getElementById('nav-' + id);
-      if (navEl) navEl.classList.add('active');
-      applyTranslations();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      history.pushState({ section: id }, '', '#' + id);
-      return false;
-    }
-
-    window.addEventListener('popstate', function(e) {
-      var id = (e.state && e.state.section) ? e.state.section : 'home';
-      document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
-      document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
-      document.getElementById(id).classList.add('active');
-      var navEl = document.getElementById('nav-' + id);
-      if (navEl) navEl.classList.add('active');
-      applyTranslations();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Inicializar
-    initCarousel();
-    applyTranslations();
-  </script>
-
-  <!-- DEVICE INDICATOR -->
-  <div id="device-indicator" style="position: fixed; top: 16px; left: 16px; background: var(--brown); color: var(--cream); padding: 6px 12px; border-radius: 20px; font-size: 0.6rem; letter-spacing: 0.1em; z-index: 1000; display: none; font-weight: 500;">
-    📱 MOBILE
-  </div>
-
-  <!-- LANGUAGE TOGGLE -->
-  <button id="lang-btn" onclick="toggleLang()" style="position: fixed; bottom: 15px; right: 28px; z-index: 999; background: var(--brown); color: var(--cream); border: none; border-radius: 40px; padding: 11px 22px; font-family: 'Bricolage Grotesque', monospace; font-size: 0.8rem; letter-spacing: 0.14em; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.18); transition: opacity 0.2s;">Español | English</button>
-
-  <script>
-    // Responsive device indicator
-    function updateDeviceIndicator() {
-      const indicator = document.getElementById('device-indicator');
-      const width = window.innerWidth;
-      
-      if (width <= 480) {
-        indicator.innerText = '📱 MOBILE';
-        indicator.style.display = 'block';
-      } else if (width <= 768) {
-        indicator.innerText = '📱 TABLET';
-        indicator.style.display = 'block';
-      } else {
-        indicator.style.display = 'none';
-      }
-    }
-
-    window.addEventListener('resize', updateDeviceIndicator);
-    updateDeviceIndicator();
-
-    // Intersection Observer para animar el highlighter cuando llegas a My Values
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
+        function goHome() {
+            // Mostrar home
+            document.querySelectorAll('main, .hero').forEach(el => el.classList.remove('hidden'));
+            
+            // Ocultar todos los proyectos
+            document.querySelectorAll('.project-detail').forEach(el => el.classList.add('hidden'));
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-      });
-    }, { threshold: 0.3 });
 
-    const valuesTitle = document.querySelector('.values-title');
-    if (valuesTitle) {
-      observer.observe(valuesTitle);
-    }
-  </script>
-  
+        // Inicializar carrusel
+        initCarousel();
+    </script>
 </body>
 </html>
