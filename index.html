@@ -90,25 +90,29 @@
         }
 
         /* ========== HERO SECTION ========== */
-        .hero {
-            position: relative;
-            width: 100%;
-            min-height: 80vh;
-            height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            background: linear-gradient(var(--gradient-angle, 180deg), 
-                var(--grad-color-1, #374ef7) 25%, 
-                var(--grad-color-2, #d38fff) 50%, 
-                var(--grad-color-3, #f1addf) 75%, 
-                var(--grad-color-4, #ff3b62) 100%);
-            background-size: 200% 200%;
-            margin-top: 0;
-            padding: 4rem 2rem;
-        }
+            .hero {
+    position: relative;
+    width: 100vw;
+    min-height: 80vh;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background: linear-gradient(var(--gradient-angle, 180deg), 
+        var(--grad-color-1, #374ef7) 25%, 
+        var(--grad-color-2, #d38fff) 50%, 
+        var(--grad-color-3, #f1addf) 75%, 
+        var(--grad-color-4, #ff3b62) 100%);
+    background-size: 200% 200%;
+    margin-top: 0;
+    padding: 4rem 2rem;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
 
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
