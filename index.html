@@ -399,10 +399,23 @@
 
         /* ========== PROJECT DETAIL SECTION ========== */
         .project-detail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: var(--primary-beige);
+            z-index: 2000;
             padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-top: 100px;
+            margin: 0;
+            display: none;
+        }
+
+        .project-detail:not(.hidden) {
+            display: block;
         }
 
         .project-detail.hidden {
@@ -781,12 +794,6 @@
         function openProject(index) {
             const project = projects[index];
             
-            // Ocultar todo lo demás
-            document.querySelector('header').classList.add('hidden');
-            document.querySelector('.hero').classList.add('hidden');
-            document.querySelector('main').classList.add('hidden');
-            document.querySelector('footer').classList.add('hidden');
-            
             let projectSection = document.getElementById(`project-${index}`);
             if (!projectSection) {
                 projectSection = document.createElement('section');
@@ -804,21 +811,13 @@
                 `;
                 document.body.appendChild(projectSection);
             }
-            projectSection.classList.remove('hidden');
             
+            projectSection.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
         function goHome() {
-            // Mostrar todo lo demás
-            document.querySelector('header').classList.remove('hidden');
-            document.querySelector('.hero').classList.remove('hidden');
-            document.querySelector('main').classList.remove('hidden');
-            document.querySelector('footer').classList.remove('hidden');
-            
-            // Ocultar proyectos
             document.querySelectorAll('.project-detail').forEach(el => el.classList.add('hidden'));
-            
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
