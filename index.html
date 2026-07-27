@@ -780,27 +780,18 @@
 
         function openProject(index) {
             const project = projects[index];
-            document.body.style.overflow = 'hidden';
-            document.documentElement.style.overflow = 'hidden';
+            
+            // Ocultar todo lo demás
+            document.querySelector('header').classList.add('hidden');
+            document.querySelector('.hero').classList.add('hidden');
+            document.querySelector('main').classList.add('hidden');
+            document.querySelector('footer').classList.add('hidden');
             
             let projectSection = document.getElementById(`project-${index}`);
             if (!projectSection) {
                 projectSection = document.createElement('section');
                 projectSection.id = `project-${index}`;
                 projectSection.className = 'project-detail';
-                projectSection.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    width: 100%;
-                    height: 100vh;
-                    overflow-y: auto;
-                    background-color: var(--primary-beige);
-                    z-index: 2000;
-                    padding: 6rem 2rem 6rem 2rem;
-                `;
                 projectSection.innerHTML = `
                     <button onclick="goHome()" style="position: fixed; top: 2rem; left: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); z-index: 2001;">←</button>
                     <div style="max-width: 1200px; margin: 0 auto;">
@@ -812,17 +803,21 @@
                     </div>
                 `;
                 document.body.appendChild(projectSection);
-            } else {
-                projectSection.style.display = 'block';
             }
+            projectSection.classList.remove('hidden');
             
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
         function goHome() {
-            document.body.style.overflow = 'auto';
-            document.documentElement.style.overflow = 'auto';
-            document.querySelectorAll('.project-detail').forEach(el => el.style.display = 'none');
+            // Mostrar todo lo demás
+            document.querySelector('header').classList.remove('hidden');
+            document.querySelector('.hero').classList.remove('hidden');
+            document.querySelector('main').classList.remove('hidden');
+            document.querySelector('footer').classList.remove('hidden');
+            
+            // Ocultar proyectos
+            document.querySelectorAll('.project-detail').forEach(el => el.classList.add('hidden'));
             
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
