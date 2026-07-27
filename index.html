@@ -106,9 +106,10 @@
                 var(--grad-color-4, #ff3b62) 100%);
             background-size: 200% 200%;
             background-attachment: fixed;
-            /* Expandir a full width sin padding */
-            margin: 0 calc(-50vw + 50%);
-            padding: 4rem calc(2rem + (50vw - 50%));
+            /* Expandir a full width SIN max-width */
+            max-width: none !important;
+            margin: 0 calc(-50vw + 50%) !important;
+            padding: 4rem calc(2rem + (50vw - 50%)) !important;
         }
 
         @keyframes gradientShift {
