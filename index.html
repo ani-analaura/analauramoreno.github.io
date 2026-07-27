@@ -399,18 +399,10 @@
 
         /* ========== PROJECT DETAIL SECTION ========== */
         .project-detail {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100vh;
-            overflow-y: auto;
-            background-color: var(--primary-beige);
-            z-index: 2000;
-            padding: 6rem 2rem;
-            margin: 0;
+            padding: 6rem 2rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 100px;
             display: none;
         }
 
@@ -420,6 +412,58 @@
 
         .project-detail.hidden {
             display: none !important;
+        }
+
+        /* ========== PROJECT NAVIGATION ========== */
+        .project-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            margin: 6rem 0;
+            gap: 2rem;
+        }
+
+        .project-nav-link {
+            flex: 1;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--dark-text);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-nav-link:hover {
+            border-color: var(--dark-text);
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .project-nav-link.prev {
+            text-align: left;
+        }
+
+        .project-nav-link.next {
+            text-align: right;
+        }
+
+        .project-nav-label {
+            font-size: 0.8rem;
+            font-family: 'Instrument Sans', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-nav-title {
+            font-size: 1.2rem;
+            font-family: 'Spectral', serif;
+            font-weight: 400;
         }
 
         .project-detail-title {
@@ -794,30 +838,66 @@
         function openProject(index) {
             const project = projects[index];
             
+            // Ocultar hero y main completamente con display: none
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('main').style.display = 'none';
+            
             let projectSection = document.getElementById(`project-${index}`);
             if (!projectSection) {
                 projectSection = document.createElement('section');
                 projectSection.id = `project-${index}`;
                 projectSection.className = 'project-detail';
+                
+                // Calcular índices anteriores y siguientes (circular)
+                const prevIndex = (index - 1 + projects.length) % projects.length;
+                const nextIndex = (index + 1) % projects.length;
+                const prevProject = projects[prevIndex];
+                const nextProject = projects[nextIndex];
+                
                 projectSection.innerHTML = `
-                    <button onclick="goHome()" style="position: fixed; top: 2rem; left: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); z-index: 2001;">←</button>
-                    <div style="max-width: 1200px; margin: 0 auto;">
+                    <button onclick="goHome()" style="position: fixed; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); z-index: 1001; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">✕</button>
+                    <div>
                         <h2 class="project-detail-title">${project.name}</h2>
                         <div class="project-detail-description">${project.desc}</div>
                         <div class="project-detail-images">
                             ${project.images.map(img => `<img src="${img}" alt="${project.name}" style="width: 100%; border-radius: 15px;">`).join('')}
                         </div>
                     </div>
+                    
+                    <div class="project-navigation">
+                        <a onclick="openProject(${prevIndex})" class="project-nav-link prev">
+                            <div class="project-nav-label">← Previous Project</div>
+                            <div class="project-nav-title">${prevProject.name}</div>
+                        </a>
+                        <a onclick="openProject(${nextIndex})" class="project-nav-link next">
+                            <div class="project-nav-label">Next Project →</div>
+                            <div class="project-nav-title">${nextProject.name}</div>
+                        </a>
+                    </div>
                 `;
-                document.body.appendChild(projectSection);
+                document.getElementById('projects-container').appendChild(projectSection);
             }
             
-            projectSection.classList.remove('hidden');
+            projectSection.style.display = 'block';
+            
+            // Ocultar otros proyectos
+            document.querySelectorAll('.project-detail').forEach((el) => {
+                if (el.id !== `project-${index}`) {
+                    el.style.display = 'none';
+                }
+            });
+            
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
         function goHome() {
-            document.querySelectorAll('.project-detail').forEach(el => el.classList.add('hidden'));
+            // Mostrar hero y main
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('main').style.display = 'block';
+            
+            // Ocultar proyectos
+            document.querySelectorAll('.project-detail').forEach(el => el.style.display = 'none');
+            
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
