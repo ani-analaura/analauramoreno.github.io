@@ -106,7 +106,6 @@
                 var(--grad-color-4, #ff3b62) 100%);
             background-size: 200% 200%;
             background-attachment: fixed;
-            /* Expandir a full width SIN max-width */
             max-width: none !important;
             margin: 0 calc(-50vw + 50%) !important;
             padding: 4rem calc(2rem + (50vw - 50%)) !important;
@@ -781,36 +780,51 @@
 
         function openProject(index) {
             const project = projects[index];
-            document.querySelectorAll('main, .hero').forEach(el => el.classList.add('hidden'));
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
             
             let projectSection = document.getElementById(`project-${index}`);
             if (!projectSection) {
                 projectSection = document.createElement('section');
                 projectSection.id = `project-${index}`;
                 projectSection.className = 'project-detail';
+                projectSection.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 100vh;
+                    overflow-y: auto;
+                    background-color: var(--primary-beige);
+                    z-index: 2000;
+                    padding: 6rem 2rem 6rem 2rem;
+                `;
                 projectSection.innerHTML = `
-                    <h2 class="project-detail-title">${project.name}</h2>
-                    <div class="project-detail-description">${project.desc}</div>
-                    <div class="project-detail-images">
-                        ${project.images.map(img => `<img src="${img}" alt="${project.name}" style="width: 100%; border-radius: 15px;">`).join('')}
+                    <button onclick="goHome()" style="position: fixed; top: 2rem; left: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); z-index: 2001;">←</button>
+                    <div style="max-width: 1200px; margin: 0 auto;">
+                        <h2 class="project-detail-title">${project.name}</h2>
+                        <div class="project-detail-description">${project.desc}</div>
+                        <div class="project-detail-images">
+                            ${project.images.map(img => `<img src="${img}" alt="${project.name}" style="width: 100%; border-radius: 15px;">`).join('')}
+                        </div>
                     </div>
                 `;
-                document.getElementById('projects-container').appendChild(projectSection);
+                document.body.appendChild(projectSection);
+            } else {
+                projectSection.style.display = 'block';
             }
-            projectSection.classList.remove('hidden');
             
-            setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 100);
+            window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
         function goHome() {
-            document.querySelectorAll('main, .hero').forEach(el => el.classList.remove('hidden'));
-            document.querySelectorAll('.project-detail').forEach(el => el.classList.add('hidden'));
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+            document.querySelectorAll('.project-detail').forEach(el => el.style.display = 'none');
             
-            setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 100);
+            window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
         // Hero con gradiente que sigue al cursor
