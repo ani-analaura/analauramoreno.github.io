@@ -188,11 +188,44 @@
             display: flex;
             gap: 3rem;
             margin-bottom: 2rem;
-            overflow-x: visible;
+            overflow-x: hidden;
             width: 200%;
             padding: 0;
-            animation: slideCarousel 25s linear infinite;
+            animation: slideCarousel 15s linear infinite;
             will-change: transform;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-grid:hover {
+            animation-play-state: paused;
+        }
+
+        .portfolio-carousel-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .carousel-btn {
+            background: none;
+            border: 1px solid var(--dark-text);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--dark-text);
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--dark-text);
+            color: white;
         }
 
         .portfolio-grid:hover {
@@ -632,11 +665,12 @@
             }
 
             .portfolio-grid {
-                animation: slideCarousel 25s linear infinite;
+                animation: slideCarousel 15s linear infinite;
                 overflow-x: hidden;
                 padding: 0 1.5rem;
                 margin: 0;
-                width: auto;
+                width: 200%;
+                transition: transform 0.5s ease;
             }
 
             .portfolio-item {
@@ -704,6 +738,10 @@
         <section class="portfolio" id="work">
             <h2 class="portfolio-title">Some of my recent work:</h2>
             <div class="portfolio-grid" id="carousel-projects"></div>
+            <div class="portfolio-carousel-controls">
+                <button class="carousel-btn" onclick="carouselPrev()">←</button>
+                <button class="carousel-btn" onclick="carouselNext()">→</button>
+            </div>
         </section>
 
         <!-- VALUES SECTION -->
@@ -817,6 +855,41 @@
             { name: "Alpez", thumbnail: "images/Frame 27.jpg", shortDesc: "Energy and gas distribution company branding.", desc: "Alpez is an energy and gas distribution company operating in Mexico. The project involved developing a visual identity that communicates reliability, efficiency, and professionalism — the qualities that matter most when clients depend on you for something essential.<br><br>The brand was built to feel trustworthy and modern: clear enough to work across vehicles, uniforms, signage, and digital touchpoints, and strong enough to establish Alpez as a serious player in its category.", images: ["images/Frame 202.jpg", "images/Frame 203.jpg", "images/Frame 204.jpg"] },
             { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg", shortDesc: "Candle brand identity for expansion into fragrances.", desc: "Oasis Decoraciones is a candle brand with its sights set on expanding into fragrances — a brand at the beginning of something. The project involved developing an identity and visual presence that could grow alongside the product line.<br><br>The design needed to feel evocative and warm, rooted in the sensorial experience the products promise. Every visual decision was made with longevity in mind: a system flexible enough to accommodate new products and categories as the brand evolves, while staying consistent and recognizable from day one.", images: ["images/Frame 59.jpg", "images/Frame 60.jpg", "images/Frame 61.jpg", "images/Frame 62.jpg", "images/Frame 63.jpg", "images/Frame 64.jpg"] }
         ];
+        let currentCarouselPosition = 0;
+
+        function carouselNext() {
+            const carousel = document.getElementById('carousel-projects');
+            carousel.style.animationPlayState = 'paused';
+            
+            const item = carousel.querySelector('.portfolio-item');
+            if (!item) return;
+            
+            const itemWidth = item.offsetWidth + 48; // width + gap
+            currentCarouselPosition -= itemWidth;
+            carousel.style.transform = `translateX(${currentCarouselPosition}px)`;
+            
+            // Reanudar después de 2 segundos
+            setTimeout(() => {
+                carousel.style.animationPlayState = 'running';
+            }, 2000);
+        }
+
+        function carouselPrev() {
+            const carousel = document.getElementById('carousel-projects');
+            carousel.style.animationPlayState = 'paused';
+            
+            const item = carousel.querySelector('.portfolio-item');
+            if (!item) return;
+            
+            const itemWidth = item.offsetWidth + 48; // width + gap
+            currentCarouselPosition += itemWidth;
+            carousel.style.transform = `translateX(${currentCarouselPosition}px)`;
+            
+            // Reanudar después de 2 segundos
+            setTimeout(() => {
+                carousel.style.animationPlayState = 'running';
+            }, 2000);
+        }
 
         function initCarousel() {
             const carousel = document.getElementById('carousel-projects');
