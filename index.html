@@ -191,7 +191,8 @@
             align-items: center;
             width: 100%;
             margin-top: 3rem;
-            padding: 0 2rem;
+            margin-bottom: 0;
+            padding: 0;
         }
 
         .portfolio-grid {
@@ -681,7 +682,8 @@
                 align-items: center;
                 width: 100%;
                 margin-top: 2rem;
-                padding: 0 1.5rem;
+                margin-bottom: 0;
+                padding: 0;
             }
 
             .project-detail {
@@ -901,9 +903,13 @@
         function openProject(index) {
             const project = projects[index];
             
-            // Ocultar hero y main completamente
+            // Ocultar hero, main y galería
             document.querySelector('.hero').style.display = 'none';
             document.querySelector('main').style.display = 'none';
+            const gallery = document.getElementById('gallery-section');
+            if (gallery) {
+                gallery.style.display = 'none';
+            }
             
             let projectSection = document.getElementById(`project-${index}`);
             if (!projectSection) {
