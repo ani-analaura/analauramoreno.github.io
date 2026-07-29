@@ -188,6 +188,8 @@
         .view-all-section {
             display: flex;
             justify-content: center;
+            align-items: center;
+            width: 100%;
             margin-top: 3rem;
             padding: 0 2rem;
         }
@@ -420,6 +422,13 @@
 
         .project-detail.hidden {
             display: none !important;
+        }
+
+        .gallery-detail {
+            padding: 7rem 2rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
         }
 
         /* ========== PROJECT NAVIGATION ========== */
@@ -667,12 +676,20 @@
             }
 
             .view-all-section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
                 margin-top: 2rem;
                 padding: 0 1.5rem;
             }
 
             .project-detail {
                 padding: 7rem 1.5rem;
+            }
+
+            .gallery-detail {
+                padding: 5rem 1.5rem;
             }
 
             .project-detail-images {
@@ -834,35 +851,30 @@
             { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg", shortDesc: "Candle brand identity for expansion into fragrances.", desc: "Oasis Decoraciones is a candle brand with its sights set on expanding into fragrances — a brand at the beginning of something. The project involved developing an identity and visual presence that could grow alongside the product line.<br><br>The design needed to feel evocative and warm, rooted in the sensorial experience the products promise. Every visual decision was made with longevity in mind: a system flexible enough to accommodate new products and categories as the brand evolves, while staying consistent and recognizable from day one.", images: ["images/Frame 59.jpg", "images/Frame 60.jpg", "images/Frame 61.jpg", "images/Frame 62.jpg", "images/Frame 63.jpg", "images/Frame 64.jpg"] }
         ];
         function showGallery() {
-            // Ocultar con visibility en lugar de display para no romper layouts
-            document.querySelector('.hero').style.visibility = 'hidden';
-            document.querySelector('.hero').style.height = '0';
-            document.querySelector('main').style.visibility = 'hidden';
-            document.querySelector('main').style.height = '0';
-            document.querySelector('footer').style.visibility = 'hidden';
-            document.querySelector('footer').style.height = '0';
+            // Ocultar hero, main y footer completamente
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('main').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
             
             let gallerySection = document.getElementById('gallery-section');
             if (!gallerySection) {
                 gallerySection = document.createElement('section');
                 gallerySection.id = 'gallery-section';
-                gallerySection.className = 'project-detail';
+                gallerySection.className = 'gallery-detail';
                 gallerySection.innerHTML = `
                     <button onclick="goHome()" style="position: fixed; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); z-index: 1001; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">✕</button>
-                    <div>
-                        <h2 class="project-detail-title">All Projects</h2>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                            ${projects.map((project, idx) => `
-                                <div style="cursor: pointer;" onclick="openProject(${idx})">
-                                    <img src="${project.thumbnail}" alt="${project.name}" style="width: 100%; aspect-ratio: 1/0.8; border-radius: 15px; object-fit: cover; margin-bottom: 1rem;">
-                                    <span style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--dark-text); border-radius: 20px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 1rem; font-family: 'Instrument Sans', sans-serif; text-transform: uppercase;">${project.name.toUpperCase()}</span>
-                                    <p style="font-size: 1.15rem; color: rgba(26, 28, 44, 0.7); margin-top: 1rem; line-height: 1.5; font-family: 'Spectral', serif;">${project.shortDesc}</p>
-                                </div>
-                            `).join('')}
-                        </div>
+                    <h2 class="project-detail-title">All Projects</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                        ${projects.map((project, idx) => `
+                            <div style="cursor: pointer;" onclick="openProject(${idx})">
+                                <img src="${project.thumbnail}" alt="${project.name}" style="width: 100%; aspect-ratio: 1/0.8; border-radius: 15px; object-fit: cover; margin-bottom: 1rem;">
+                                <span style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--dark-text); border-radius: 20px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 1rem; font-family: 'Instrument Sans', sans-serif; text-transform: uppercase;">${project.name.toUpperCase()}</span>
+                                <p style="font-size: 1.15rem; color: rgba(26, 28, 44, 0.7); margin-top: 1rem; line-height: 1.5; font-family: 'Spectral', serif;">${project.shortDesc}</p>
+                            </div>
+                        `).join('')}
                     </div>
                 `;
-                document.body.appendChild(gallerySection);
+                document.getElementById('projects-container').appendChild(gallerySection);
             }
             
             gallerySection.style.display = 'block';
@@ -940,20 +952,19 @@
         }
 
         function goHome() {
-            // Restaurar visibilidad y altura
-            const hero = document.querySelector('.hero');
-            const main = document.querySelector('main');
-            const footer = document.querySelector('footer');
+            // Mostrar hero, main y footer
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('main').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
             
-            hero.style.visibility = 'visible';
-            hero.style.height = 'auto';
-            main.style.visibility = 'visible';
-            main.style.height = 'auto';
-            footer.style.visibility = 'visible';
-            footer.style.height = 'auto';
-            
-            // Ocultar proyectos y galería
+            // Ocultar proyectos individuales
             document.querySelectorAll('.project-detail').forEach(el => el.style.display = 'none');
+            
+            // Ocultar galería
+            const gallery = document.getElementById('gallery-section');
+            if (gallery) {
+                gallery.style.display = 'none';
+            }
             
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
