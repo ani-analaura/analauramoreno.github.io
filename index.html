@@ -403,8 +403,8 @@
             padding: 6rem 2rem 2rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            margin-top: 100px;
             display: none;
+            scroll-margin-top: 90px;
         }
 
         .project-detail:not(.hidden) {
@@ -660,7 +660,7 @@
 
             .project-detail {
                 padding: 4rem 1.5rem;
-                margin-top: 80px;
+                scroll-margin-top: 80px;
             }
 
             .project-detail-images {
@@ -705,7 +705,7 @@
         <section class="portfolio" id="work">
             <h2 class="portfolio-title">Some of my recent work:</h2>
             <div class="portfolio-grid" id="carousel-projects"></div>
-            <div style="text-align: center; margin-top: 3rem; padding: 0 2rem;">
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 3rem; margin-left: -2rem; margin-right: -2rem; padding: 0 2rem;">
                 <a href="javascript:void(0)" onclick="showGallery()" style="display: inline-block; padding: 1rem 2rem; border: 1px solid var(--dark-text); border-radius: 10px; text-decoration: none; color: var(--dark-text); font-family: 'Instrument Sans', sans-serif; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='var(--dark-text)'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--dark-text)';">View All Projects</a>
             </div>
         </section>
@@ -854,7 +854,7 @@
             }
             
             gallerySection.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'auto' });
+            gallerySection.scrollIntoView({ behavior: 'auto', block: 'start' });
         }
 
         function initCarousel() {
@@ -928,7 +928,8 @@
                 }
             });
             
-            window.scrollTo({ top: 0, behavior: 'auto' });
+            // Scroll al elemento específico con margen desde el header
+            projectSection.scrollIntoView({ behavior: 'auto', block: 'start' });
         }
 
         function goHome() {
@@ -947,7 +948,8 @@
             // Ocultar proyectos y galería
             document.querySelectorAll('.project-detail').forEach(el => el.style.display = 'none');
             
-            window.scrollTo({ top: 0, behavior: 'auto' });
+            // Scroll al hero
+            hero.scrollIntoView({ behavior: 'auto', block: 'start' });
         }
 
         // Hero con gradiente que sigue al cursor
