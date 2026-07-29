@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +30,7 @@
             color: var(--dark-text);
             line-height: 1.6;
             font-weight: 300;
+            overflow-x: hidden;
         }
 
         /* ========== HEADER ========== */
@@ -191,12 +193,8 @@
             overflow-x: hidden;
             width: 200%;
             padding: 0;
-            animation: slideCarousel 8s linear infinite;
+            animation: slideCarousel 20s linear infinite;
             will-change: transform;
-        }
-
-        .portfolio-grid:hover {
-            animation-play-state: paused;
         }
 
         .portfolio-grid:hover {
@@ -636,7 +634,7 @@
             }
 
             .portfolio-grid {
-                animation: slideCarousel 8s linear infinite;
+                animation: slideCarousel 20s linear infinite;
                 overflow-x: hidden;
                 padding: 0 1.5rem;
                 margin: 0;
@@ -708,8 +706,8 @@
         <section class="portfolio" id="work">
             <h2 class="portfolio-title">Some of my recent work:</h2>
             <div class="portfolio-grid" id="carousel-projects"></div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="javascript:void(0)" onclick="showGallery()" style="display: inline-block; padding: 1rem 2rem; border: 1px solid var(--dark-text); border-radius: 10px; text-decoration: none; color: var(--dark-text); font-family: 'Instrument Sans', sans-serif; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='var(--dark-text)'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--dark-text)';">View All Projects</a>
+            <div style="text-align: center; margin-top: 3rem; padding: 0 2rem;">
+                <a href="javascript:void(0)" onclick="showGallery()" style="display: inline-block; padding: 1rem 2rem; border: 1px solid var(--dark-text); border-radius: 10px; text-decoration: none; color: var(--dark-text); font-family: 'Instrument Sans', sans-serif; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='var(--dark-text)'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--dark-text)';">View All Projects</a>
             </div>
         </section>
 
