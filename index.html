@@ -185,24 +185,14 @@
             padding: 0 2rem;
         }
 
-        .view-all-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            margin-top: 3rem;
-            margin-bottom: 0;
-            padding: 0;
-        }
-
         .portfolio-grid {
             display: flex;
             gap: 3rem;
             margin-bottom: 2rem;
             overflow-x: hidden;
-            width: 300%;
+            width: 200%;
             padding: 0;
-            animation: slideCarousel 30s linear infinite;
+            animation: slideCarousel 20s linear infinite;
             will-change: transform;
         }
 
@@ -215,7 +205,7 @@
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(calc(-66.666%));
+                transform: translateX(calc(-50%));
             }
         }
 
@@ -410,11 +400,11 @@
 
         /* ========== PROJECT DETAIL SECTION ========== */
         .project-detail {
-            padding: 10rem 2rem 2rem 2rem;
+            padding: 6rem 2rem 2rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            margin-top: 100px;
             display: none;
-            margin-top: 0;
         }
 
         .project-detail:not(.hidden) {
@@ -423,13 +413,6 @@
 
         .project-detail.hidden {
             display: none !important;
-        }
-
-        .gallery-detail {
-            padding: 7rem 2rem 2rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: none;
         }
 
         /* ========== PROJECT NAVIGATION ========== */
@@ -488,7 +471,6 @@
             font-family: 'Spectral', serif;
             font-size: clamp(2rem, 4vw, 3rem);
             color: var(--dark-text);
-            margin-top: 0;
             margin-bottom: 2rem;
             font-weight: 400;
         }
@@ -638,7 +620,7 @@
             }
 
             .hero-text {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
             }
 
             .portfolio {
@@ -651,11 +633,11 @@
             }
 
             .portfolio-grid {
-                animation: slideCarousel 30s linear infinite;
+                animation: slideCarousel 20s linear infinite;
                 overflow-x: hidden;
                 padding: 0 1.5rem;
                 margin: 0;
-                width: 300%;
+                width: 200%;
             }
 
             .portfolio-item {
@@ -676,22 +658,9 @@
                 text-align: left;
             }
 
-            .view-all-section {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                margin-top: 2rem;
-                margin-bottom: 0;
-                padding: 0;
-            }
-
             .project-detail {
-                padding: 7rem 1.5rem;
-            }
-
-            .gallery-detail {
-                padding: 5rem 1.5rem;
+                padding: 4rem 1.5rem;
+                margin-top: 80px;
             }
 
             .project-detail-images {
@@ -736,7 +705,7 @@
         <section class="portfolio" id="work">
             <h2 class="portfolio-title">Some of my recent work:</h2>
             <div class="portfolio-grid" id="carousel-projects"></div>
-            <div class="view-all-section">
+            <div style="text-align: center; margin-top: 3rem; padding: 0 2rem;">
                 <a href="javascript:void(0)" onclick="showGallery()" style="display: inline-block; padding: 1rem 2rem; border: 1px solid var(--dark-text); border-radius: 10px; text-decoration: none; color: var(--dark-text); font-family: 'Instrument Sans', sans-serif; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='var(--dark-text)'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--dark-text)';">View All Projects</a>
             </div>
         </section>
@@ -853,30 +822,35 @@
             { name: "Oasis Decoraciones", thumbnail: "images/Frame 28.jpg", shortDesc: "Candle brand identity for expansion into fragrances.", desc: "Oasis Decoraciones is a candle brand with its sights set on expanding into fragrances — a brand at the beginning of something. The project involved developing an identity and visual presence that could grow alongside the product line.<br><br>The design needed to feel evocative and warm, rooted in the sensorial experience the products promise. Every visual decision was made with longevity in mind: a system flexible enough to accommodate new products and categories as the brand evolves, while staying consistent and recognizable from day one.", images: ["images/Frame 59.jpg", "images/Frame 60.jpg", "images/Frame 61.jpg", "images/Frame 62.jpg", "images/Frame 63.jpg", "images/Frame 64.jpg"] }
         ];
         function showGallery() {
-            // Ocultar hero, main y footer completamente
-            document.querySelector('.hero').style.display = 'none';
-            document.querySelector('main').style.display = 'none';
-            document.querySelector('footer').style.display = 'none';
+            // Ocultar con visibility en lugar de display para no romper layouts
+            document.querySelector('.hero').style.visibility = 'hidden';
+            document.querySelector('.hero').style.height = '0';
+            document.querySelector('main').style.visibility = 'hidden';
+            document.querySelector('main').style.height = '0';
+            document.querySelector('footer').style.visibility = 'hidden';
+            document.querySelector('footer').style.height = '0';
             
             let gallerySection = document.getElementById('gallery-section');
             if (!gallerySection) {
                 gallerySection = document.createElement('section');
                 gallerySection.id = 'gallery-section';
-                gallerySection.className = 'gallery-detail';
+                gallerySection.className = 'project-detail';
                 gallerySection.innerHTML = `
                     <button onclick="goHome()" style="position: fixed; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); z-index: 1001; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">✕</button>
-                    <h2 class="project-detail-title">All Projects</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                        ${projects.map((project, idx) => `
-                            <div style="cursor: pointer;" onclick="openProject(${idx})">
-                                <img src="${project.thumbnail}" alt="${project.name}" style="width: 100%; aspect-ratio: 1/0.8; border-radius: 15px; object-fit: cover; margin-bottom: 1rem;">
-                                <span style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--dark-text); border-radius: 20px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 1rem; font-family: 'Instrument Sans', sans-serif; text-transform: uppercase;">${project.name.toUpperCase()}</span>
-                                <p style="font-size: 1.15rem; color: rgba(26, 28, 44, 0.7); margin-top: 1rem; line-height: 1.5; font-family: 'Spectral', serif;">${project.shortDesc}</p>
-                            </div>
-                        `).join('')}
+                    <div>
+                        <h2 class="project-detail-title">All Projects</h2>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                            ${projects.map((project, idx) => `
+                                <div style="cursor: pointer;" onclick="openProject(${idx})">
+                                    <img src="${project.thumbnail}" alt="${project.name}" style="width: 100%; aspect-ratio: 1/0.8; border-radius: 15px; object-fit: cover; margin-bottom: 1rem;">
+                                    <span style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--dark-text); border-radius: 20px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 1rem; font-family: 'Instrument Sans', sans-serif; text-transform: uppercase;">${project.name.toUpperCase()}</span>
+                                    <p style="font-size: 1.15rem; color: rgba(26, 28, 44, 0.7); margin-top: 1rem; line-height: 1.5; font-family: 'Spectral', serif;">${project.shortDesc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                 `;
-                document.getElementById('projects-container').appendChild(gallerySection);
+                document.body.appendChild(gallerySection);
             }
             
             gallerySection.style.display = 'block';
@@ -885,7 +859,7 @@
 
         function initCarousel() {
             const carousel = document.getElementById('carousel-projects');
-            const sequence = [...projects, ...projects, ...projects];
+            const sequence = [...projects, ...projects];
 
             sequence.forEach((project, idx) => {
                 const item = document.createElement('article');
@@ -903,13 +877,11 @@
         function openProject(index) {
             const project = projects[index];
             
-            // Ocultar hero, main y galería
-            document.querySelector('.hero').style.display = 'none';
-            document.querySelector('main').style.display = 'none';
-            const gallery = document.getElementById('gallery-section');
-            if (gallery) {
-                gallery.style.display = 'none';
-            }
+            // Ocultar hero y main con visibility para no romper layouts
+            document.querySelector('.hero').style.visibility = 'hidden';
+            document.querySelector('.hero').style.height = '0';
+            document.querySelector('main').style.visibility = 'hidden';
+            document.querySelector('main').style.height = '0';
             
             let projectSection = document.getElementById(`project-${index}`);
             if (!projectSection) {
@@ -925,10 +897,12 @@
                 
                 projectSection.innerHTML = `
                     <button onclick="goHome()" style="position: fixed; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); z-index: 1001; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">✕</button>
-                    <h2 class="project-detail-title">${project.name}</h2>
-                    <div class="project-detail-description">${project.desc}</div>
-                    <div class="project-detail-images">
-                        ${project.images.map(img => `<img src="${img}" alt="${project.name}" style="width: 100%; border-radius: 15px;">`).join('')}
+                    <div>
+                        <h2 class="project-detail-title">${project.name}</h2>
+                        <div class="project-detail-description">${project.desc}</div>
+                        <div class="project-detail-images">
+                            ${project.images.map(img => `<img src="${img}" alt="${project.name}" style="width: 100%; border-radius: 15px;">`).join('')}
+                        </div>
                     </div>
                     
                     <div class="project-navigation">
@@ -958,19 +932,20 @@
         }
 
         function goHome() {
-            // Mostrar hero, main y footer
-            document.querySelector('.hero').style.display = 'block';
-            document.querySelector('main').style.display = 'block';
-            document.querySelector('footer').style.display = 'block';
+            // Restaurar visibilidad y altura
+            const hero = document.querySelector('.hero');
+            const main = document.querySelector('main');
+            const footer = document.querySelector('footer');
             
-            // Ocultar proyectos individuales
+            hero.style.visibility = 'visible';
+            hero.style.height = 'auto';
+            main.style.visibility = 'visible';
+            main.style.height = 'auto';
+            footer.style.visibility = 'visible';
+            footer.style.height = 'auto';
+            
+            // Ocultar proyectos y galería
             document.querySelectorAll('.project-detail').forEach(el => el.style.display = 'none');
-            
-            // Ocultar galería
-            const gallery = document.getElementById('gallery-section');
-            if (gallery) {
-                gallery.style.display = 'none';
-            }
             
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
