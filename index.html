@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,14 +185,21 @@
             padding: 0 2rem;
         }
 
+        .view-all-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            padding: 0 2rem;
+        }
+
         .portfolio-grid {
             display: flex;
             gap: 3rem;
             margin-bottom: 2rem;
             overflow-x: hidden;
-            width: 200%;
+            width: 300%;
             padding: 0;
-            animation: slideCarousel 20s linear infinite;
+            animation: slideCarousel 30s linear infinite;
             will-change: transform;
         }
 
@@ -206,7 +212,7 @@
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(calc(-50%));
+                transform: translateX(calc(-66.666%));
             }
         }
 
@@ -401,11 +407,11 @@
 
         /* ========== PROJECT DETAIL SECTION ========== */
         .project-detail {
-            padding: 6rem 2rem 2rem 2rem;
+            padding: 10rem 2rem 2rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            margin-top: 100px;
             display: none;
+            margin-top: 0;
         }
 
         .project-detail:not(.hidden) {
@@ -472,6 +478,7 @@
             font-family: 'Spectral', serif;
             font-size: clamp(2rem, 4vw, 3rem);
             color: var(--dark-text);
+            margin-top: 0;
             margin-bottom: 2rem;
             font-weight: 400;
         }
@@ -634,11 +641,11 @@
             }
 
             .portfolio-grid {
-                animation: slideCarousel 20s linear infinite;
+                animation: slideCarousel 30s linear infinite;
                 overflow-x: hidden;
                 padding: 0 1.5rem;
                 margin: 0;
-                width: 200%;
+                width: 300%;
             }
 
             .portfolio-item {
@@ -659,9 +666,13 @@
                 text-align: left;
             }
 
+            .view-all-section {
+                margin-top: 2rem;
+                padding: 0 1.5rem;
+            }
+
             .project-detail {
-                padding: 4rem 1.5rem;
-                margin-top: 80px;
+                padding: 7rem 1.5rem;
             }
 
             .project-detail-images {
@@ -706,8 +717,8 @@
         <section class="portfolio" id="work">
             <h2 class="portfolio-title">Some of my recent work:</h2>
             <div class="portfolio-grid" id="carousel-projects"></div>
-            <div style="text-align: center; margin-top: 3rem; padding: 0 2rem;">
-                <a href="javascript:void(0)" onclick="showGallery()" style="display: inline-block; padding: 1rem 2rem; border: 1px solid var(--dark-text); border-radius: 10px; text-decoration: none; color: var(--dark-text); font-family: 'Instrument Sans', sans-serif; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='var(--dark-text)'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--dark-text)';">View All Projects</a>
+            <div class="view-all-section">
+                <a href="javascript:void(0)" onclick="showGallery()" style="padding: 1rem 2rem; border: 1px solid var(--dark-text); border-radius: 10px; text-decoration: none; color: var(--dark-text); font-family: 'Instrument Sans', sans-serif; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='var(--dark-text)'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--dark-text)';">View All Projects</a>
             </div>
         </section>
 
@@ -860,7 +871,7 @@
 
         function initCarousel() {
             const carousel = document.getElementById('carousel-projects');
-            const sequence = [...projects, ...projects];
+            const sequence = [...projects, ...projects, ...projects];
 
             sequence.forEach((project, idx) => {
                 const item = document.createElement('article');
@@ -878,11 +889,9 @@
         function openProject(index) {
             const project = projects[index];
             
-            // Ocultar hero y main con visibility para no romper layouts
-            document.querySelector('.hero').style.visibility = 'hidden';
-            document.querySelector('.hero').style.height = '0';
-            document.querySelector('main').style.visibility = 'hidden';
-            document.querySelector('main').style.height = '0';
+            // Ocultar hero y main completamente
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('main').style.display = 'none';
             
             let projectSection = document.getElementById(`project-${index}`);
             if (!projectSection) {
@@ -898,12 +907,10 @@
                 
                 projectSection.innerHTML = `
                     <button onclick="goHome()" style="position: fixed; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); z-index: 1001; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">✕</button>
-                    <div>
-                        <h2 class="project-detail-title">${project.name}</h2>
-                        <div class="project-detail-description">${project.desc}</div>
-                        <div class="project-detail-images">
-                            ${project.images.map(img => `<img src="${img}" alt="${project.name}" style="width: 100%; border-radius: 15px;">`).join('')}
-                        </div>
+                    <h2 class="project-detail-title">${project.name}</h2>
+                    <div class="project-detail-description">${project.desc}</div>
+                    <div class="project-detail-images">
+                        ${project.images.map(img => `<img src="${img}" alt="${project.name}" style="width: 100%; border-radius: 15px;">`).join('')}
                     </div>
                     
                     <div class="project-navigation">
