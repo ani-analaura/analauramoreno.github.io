@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ani — Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<script>
+  // Strip any URL fragment before the browser can act on it. Native
+  // fragment-scroll on this site can land in the wrong place: every
+  // page's content lives inside a `transform: scale()`'d .stage inside
+  // a `.stage-frame` (overflow: hidden, for the height-compensation fix
+  // — see styles.css) — and per spec, fragment navigation also scrolls
+  // *any* scrollable ancestor, including overflow:hidden ones, not just
+  // the window. That shifts .stage-frame's own internal scroll instead
+  // of (or in addition to) the page, breaking the layout. Stashing the
+  // hash and clearing the URL here — before body content even parses —
+  // prevents that native jump; script.js reads window.__pendingHash and
+  // scrolls the real window to the right place by hand instead.
+  if (location.hash) {
+    window.__pendingHash = location.hash;
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+</script>
+</head>
+<body class="page-dark">
+
+  <!-- ============ Gallery ============
+       Header/theme-flip are the literal Figma "Gallery" frame (nodeId
+       130:593) — the only light-theme page on the site, flipped to
+       black-on-white by re-scoping --bg/--fg on #galleryStage itself
+       (see styles.css), which is enough to flip the shared header/
+       footer automatically since they're already built off those
+       variables. No heading text on this page (removed per feedback —
+       the grid starts right under the header). A real CSS masonry grid
+       (4 columns, native `columns` layout so it packs tiles by actual
+       height), now carrying your 29 real projects (same order as
+       script.js's PROJECT_COPY, so each tile's ?p= index opens the
+       matching case study) — Unsplash placeholder photos still stand
+       in for real project images on the plain tiles, same placeholder
+       convention as every other photo on the site, until real project
+       photography is ready. Every tile is now a plain photo tile — the
+       old "feature" card (which carried made-up "99 Problems" copy,
+       not a real client) was converted to a normal photo tile for
+       Blockbuster App, and the "wordmark" card (name in giant type,
+       no photo) that briefly stood in for Mordisko/SUMA was retired
+       too since every real project needs an actual photo, not text-
+       only. (.gallery-tile-wordmark / .gallery-wordmark-word are still
+       in styles.css, unused, in case a future project without a photo
+       wants that treatment again.) Location captions were pulled from
+       your project texts where you mentioned
+       one; everywhere else defaults to "Mexico" (your base) or
+       "Concept" for the 2 projects that were never physically
+       realized (Blockbuster App, Toda Fest) — correct any that are
+       wrong. The grid's real height varies with content, so it's
+       measured once and the stage/footer offsets below are set from
+       that measurement — same technique used for the About page's
+       bio-driven layout. -->
+  <!-- is-on-dark: gallery is now permanently dark (--bg/--fg flipped
+       to black/white on #galleryStage below) — since the fixed header
+       lives outside that stage, it can't inherit the flip through the
+       DOM, so this modifier class gives it white logo/menu text (same
+       class Home's script.js toggles dynamically on scroll). -->
+  <div class="header-fixed is-on-dark">
+    <div class="stage" id="headerStage">
+      <header class="site-header">
+        <a href="index.html" class="logo"><img src="images/header/ani-badge.png" alt="ani" class="logo-img"></a>
+        <a href="#" class="menu-link" id="menuToggle" aria-haspopup="true" aria-expanded="false" aria-controls="menuOverlay"><img src="images/header/menu-badge.png" alt="Menu" class="menu-link-img"></a>
+      </header>
+    </div>
+  </div>
+
+  <div class="stage-frame">
+  <div class="stage" id="galleryStage">
+
+    <!-- Masonry grid — ported from the reference prototype, see the
+         comment above. -->
+    <div class="gallery-grid-wrap">
+      <div class="gallery-grid">
+      <a href="project.html?p=0" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 5 / 4;">
+          <img src="images/gallery/level-home-investment.jpg" alt="Level Home Investment" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Level Home Investment</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=1" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 5;">
+          <img src="images/gallery/blockbuster-app.jpg" alt="Blockbuster App" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Blockbuster App</span><span class="gallery-tile-location">Concept</span></div>
+      </a>
+      <a href="project.html?p=2" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 4 / 5;">
+          <img src="images/gallery/nopalogy.jpg" alt="Nopalogy" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Nopalogy</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=3" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 4 / 5;">
+          <img src="images/gallery/raina-kattelson.jpg" alt="Raina Kattelson" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Raina Kattelson</span><span class="gallery-tile-location">New York, USA</span></div>
+      </a>
+      <a href="project.html?p=4" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 4;">
+          <img src="images/gallery/astro-cold-brew.jpg" alt="Astro Cold Brew" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Astro Cold Brew</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=5" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 4 / 5;">
+          <img src="images/gallery/mordisko.jpg" alt="Mordisko" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Mordisko</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=6" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 5;">
+          <img src="images/gallery/siete-machos.jpg" alt="Siete Machos" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Siete Machos</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=7" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 1 / 1;">
+          <img src="images/gallery/aromandia-scented-candles.jpg" alt="Aromandia - Scented Candles" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Aromandia - Scented Candles</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=8" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 4;">
+          <img src="images/gallery/shelter-studios.jpg" alt="Shelter Studios" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Shelter Studios</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=9" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 5;">
+          <img src="images/gallery/tom-kubik.jpg" alt="Tom Kubik Photography" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Tom Kubik Photography</span><span class="gallery-tile-location">Los Angeles, USA</span></div>
+      </a>
+      <a href="project.html?p=10" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 4 / 5;">
+          <img src="images/gallery/effecty.jpg" alt="Effecty" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Effecty</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=11" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 5 / 4;">
+          <img src="images/gallery/paws.jpg" alt="Paws" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Paws</span><span class="gallery-tile-location">United States</span></div>
+      </a>
+      <a href="project.html?p=12" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 1 / 1;">
+          <img src="images/gallery/usg.jpg" alt="USG" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>USG</span><span class="gallery-tile-location">LATAM</span></div>
+      </a>
+      <a href="project.html?p=13" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 4 / 5;">
+          <img src="images/gallery/senor-mango.jpg" alt="Señor Mango" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Señor Mango</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=14" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 4;">
+          <img src="images/gallery/grace-sepulveda.jpg" alt="Grace Sepulveda" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Grace Sepulveda</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=15" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 5 / 4;">
+          <img src="images/gallery/aer-by-armella.jpg" alt="Aer by Armella" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Aer by Armella</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=16" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 4;">
+          <img src="images/gallery/vita-blip.jpg" alt="Vita Blip" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Vita Blip</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=17" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 5 / 4;">
+          <img src="images/gallery/english-sprint.jpg" alt="English Sprint" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>English Sprint</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=18" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 5;">
+          <img src="images/gallery/nos-vemos-de-noche.jpg" alt="Nos Vemos de Noche" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Nos Vemos de Noche</span><span class="gallery-tile-location">Chile</span></div>
+      </a>
+      <a href="project.html?p=19" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 4 / 5;">
+          <img src="images/gallery/debajo-de-un-ciruelo.jpg" alt="Debajo de un ciruelo" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Debajo de un ciruelo</span><span class="gallery-tile-location">Oaxaca, Mexico</span></div>
+      </a>
+      <a href="project.html?p=20" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 4;">
+          <img src="images/gallery/toda-fest.jpg" alt="Toda Fest" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Toda Fest</span><span class="gallery-tile-location">Concept</span></div>
+      </a>
+      <a href="project.html?p=21" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 5 / 4;">
+          <img src="images/gallery/garabatos.jpg" alt="Garabatos" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Garabatos</span><span class="gallery-tile-location">Querétaro, Mexico</span></div>
+      </a>
+      <a href="project.html?p=22" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 4;">
+          <img src="images/gallery/triangulo-de-oro.jpg" alt="Triangulo de Oro" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Triangulo de Oro</span><span class="gallery-tile-location">Costa Rica</span></div>
+      </a>
+      <a href="project.html?p=23" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 4;">
+          <img src="images/gallery/suma.jpg" alt="SUMA" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>SUMA</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=24" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 4 / 5;">
+          <img src="images/gallery/velavita.jpg" alt="Velavita" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Velavita</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=25" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 3 / 4;">
+          <img src="images/gallery/alpez.jpg" alt="Alpez" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Alpez</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=26" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 5 / 4;">
+          <img src="images/gallery/oasis-decoraciones.jpg" alt="Oasis Decoraciones" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Oasis Decoraciones</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=27" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 5 / 4;">
+          <img src="images/gallery/aromandia-seasonalities.jpg" alt="Aromandia - Seasonalities" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Aromandia - Seasonalities</span><span class="gallery-tile-location">Mexico</span></div>
+      </a>
+      <a href="project.html?p=28" class="gallery-tile">
+        <div class="gallery-tile-media" style="aspect-ratio: 1 / 1;">
+          <img src="images/gallery/sunshine-bagels.jpg" alt="Sunshine Bagels" loading="lazy">
+        </div>
+        <div class="gallery-tile-caption"><span>Sunshine Bagels</span><span class="gallery-tile-location">Los Angeles, USA</span></div>
+      </a>
+      </div>
+    </div>
+
+    <!-- Footer — same shared markup as every other page, sitting on
+         its own white-to-orange gradient band (Figma's own footer
+         background just for this page). -->
+    <div class="gallery-footer-bg" aria-hidden="true"></div>
+    <footer class="site-footer">
+      <p class="footer-col-title footer-col-title-education" data-reveal>Education</p>
+      <p class="footer-col-title footer-col-title-location" data-reveal>Location and Mail Address</p>
+      <p class="footer-col-title footer-col-title-services" data-reveal>Services</p>
+
+      <span class="footer-divider-h" aria-hidden="true"></span>
+      <span class="footer-divider-v footer-divider-v1" aria-hidden="true"></span>
+      <span class="footer-divider-v footer-divider-v2" aria-hidden="true"></span>
+
+      <div class="footer-education" data-reveal>
+        <p class="footer-education-school">Centro de Diseño, Cine y Televisión</p>
+        <p>Bachelor's Degree in Visual Communication</p>
+        <p>Diploma in UI/UX Design (User Experience &amp; User Interface Design)</p>
+      </div>
+
+      <div class="footer-address" data-reveal>
+        <p>MEXICO CITY</p>
+        <p>Del valle norte, C.P 03103</p>
+      </div>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=analauralga21@gmail.com" class="footer-email" data-reveal target="_blank" rel="noopener">analauralga21@gmail.com</a>
+
+      <div class="footer-services" id="services" data-reveal>
+        <div class="footer-services-list">
+          <span>Brand Strategy</span>
+          <span>Brand Identity</span>
+          <span>Pitch Deck</span>
+          <span>Product Design</span>
+          <span>Web Design</span>
+          <span>Editorial Design</span>
+          <span>Data</span>
+          <span>Packaging</span>
+        </div>
+      </div>
+
+      <span class="footer-divider-h2" aria-hidden="true"></span>
+
+      <div class="footer-marquee" aria-hidden="true">
+        <div class="footer-marquee-track">
+          <div class="footer-marquee-group">
+            <span class="footer-marquee-item">DISCOVER NEW POSSIBILITIES</span>
+            <span class="footer-marquee-item">DISCOVER NEW POSSIBILITIES</span>
+            <span class="footer-marquee-item">DISCOVER NEW POSSIBILITIES</span>
+          </div>
+          <div class="footer-marquee-group">
+            <span class="footer-marquee-item">DISCOVER NEW POSSIBILITIES</span>
+            <span class="footer-marquee-item">DISCOVER NEW POSSIBILITIES</span>
+            <span class="footer-marquee-item">DISCOVER NEW POSSIBILITIES</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  </div>
+
+  <!-- ============ Menu — half-screen slide-in overlay ============
+       Same reusable component as on every other page — see index.html
+       for the full explanation. -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <div class="menu-backdrop-fill" id="menuBackdrop"></div>
+    <div class="menu-reveal" id="menuReveal">
+      <div class="menu-panel-fill"></div>
+      <div class="stage menu-stage">
+        <button type="button" class="menu-close" id="menuClose" aria-label="Cerrar menú">
+          <svg viewBox="0 0 31 29" width="31" height="29" fill="none" aria-hidden="true">
+            <line x1="2" y1="2" x2="29" y2="27" stroke="#f0e7d4" stroke-width="3.4" stroke-linecap="round"/>
+            <line x1="29" y1="2" x2="2" y2="27" stroke="#f0e7d4" stroke-width="3.4" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <nav class="menu-nav" aria-label="Menú principal">
+          <a href="gallery.html" class="menu-nav-item menu-nav-work">Work</a>
+          <a href="about.html" class="menu-nav-item menu-nav-about">About</a>
+          <a href="proyects.html#servicesTop" class="menu-nav-item menu-nav-services">Services</a>
+          <a href="contact.html" class="menu-nav-item menu-nav-contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
